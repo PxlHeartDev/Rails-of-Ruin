@@ -1,0 +1,50 @@
+[gd_scene load_steps=4 format=3 uid="uid://1phvjvw2x3n3"]
+
+[ext_resource type="Script" path="res://globals/main.gd" id="1_52jw2"]
+[ext_resource type="PackedScene" uid="uid://hrn80kjjh30a" path="res://scenes/ui/ui.tscn" id="2_ynlqn"]
+[ext_resource type="PackedScene" uid="uid://cvkgrcljhxs0s" path="res://scenes/ui/mainMenu.tscn" id="3_r0s5u"]
+
+[node name="Main" type="Node2D" node_paths=PackedStringArray("ui", "fade", "screen")]
+script = ExtResource("1_52jw2")
+ui = NodePath("UI")
+fade = NodePath("Fade")
+screen = NodePath("ScreenShader")
+
+[node name="UI" parent="." node_paths=PackedStringArray("mainMenu") instance=ExtResource("2_ynlqn")]
+custom_minimum_size = Vector2(960, 540)
+offset_right = 960.0
+offset_bottom = 540.0
+mainMenu = NodePath("MainMenu")
+metadata/_edit_use_anchors_ = true
+
+[node name="MainMenu" parent="UI" instance=ExtResource("3_r0s5u")]
+layout_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Fade" type="ColorRect" parent="."]
+visible = false
+z_index = 1
+custom_minimum_size = Vector2(960, 540)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 960.0
+offset_bottom = 540.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="ScreenShader" type="ColorRect" parent="."]
+visible = false
+z_index = 1
+custom_minimum_size = Vector2(960, 540)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 960.0
+offset_bottom = 540.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)

@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=3 uid="uid://hrn80kjjh30a"]
+
+[ext_resource type="Script" path="res://scenes/ui/ui.gd" id="1_s5oq1"]
+[ext_resource type="Texture2D" uid="uid://be3tnseukl1a0" path="res://assets/images/backgrounds/neptuneTriton.jpg" id="2_eicgv"]
+
+[node name="UI" type="Control" node_paths=PackedStringArray("bg", "fade")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_s5oq1")
+bg = NodePath("BG")
+fade = NodePath("Fade")
+
+[node name="BG" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_eicgv")
+expand_mode = 1
+
+[node name="Fade" type="ColorRect" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
