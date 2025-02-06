@@ -1,68 +1,75 @@
 extends MarginContainer
 
-
 signal play
+signal settings
+signal quit
 
-@onready var playButton: Button = $"H/1/Play"
-@onready var settingsButton: Button = $"H/1/Settings"
-@onready var quitButton: Button = $"H/1/Quit"
+@onready var playButton: 		Button = $"H/1/Play"
+@onready var settingsButton: 	Button = $"H/1/Settings"
+@onready var quitButton: 		Button = $"H/1/Quit"
 
-@onready var anim: AnimationPlayer = $AnimationPlayer
+@onready var bip: 				AudioStreamPlayer = $"H/1/Bip"
+@onready var bip2: 				AudioStreamPlayer = $"H/1/Bip2"
+
+@onready var music: 			AudioStreamPlayer = $Music
+
+@onready var anim: 				AnimationPlayer = $AnimationPlayer
 
 func _on_play_pressed() -> void:
-	play.emit()
-	lockButtons()
+	if !locked:
+		play.emit()
+		_on_any_pressed()
 
 func _on_settings_pressed() -> void:
-	lockButtons()
-
+	if !locked:
+		settings.emit()
+		_on_any_pressed()
 
 func _on_quit_pressed() -> void:
-	
-	lockButtons()
+	if !locked:
+		quit.emit()
+		_on_any_pressed()
+		fadeMusic(-60.0, 3.0)
+		
+		await anim.animation_finished
+		get_tree().quit()
 
-var locked: bool = false
+func settings_back() -> void:
+	showButtons()
 
-func lockButtons() -> void:
+var locked: bool = false:
+	set(val):
+		locked = val
+		playButton.locked = val
+		settingsButton.locked = val
+		quitButton.locked = val
+
+func _on_any_pressed() -> void:
+	bip2.play()
+	hideButtons()
+	locked = true
+
+func hideButtons() -> void:
 	playButton.disabled = true
 	settingsButton.disabled = true
 	quitButton.disabled = true
-	locked = true
+	
+	anim.play("hide")
 
+func showButtons() -> void:
+	playButton.disabled = false
+	settingsButton.disabled = false
+	quitButton.disabled = false
+	
+	anim.play("show")
+	
+	await anim.animation_finished
+	locked = false
 
-var playTween: 		Tween
-var settingsTween: 	Tween
-var quitTween: 		Tween
+var musicTween: Tween
 
-func _on_play_mouse_entered() -> void:
-	if !locked:
-		buttonHover(playButton, playTween)
-func _on_play_mouse_exited() -> void:
-	if !locked:
-		buttonUnhover(playButton, playTween)
-
-func _on_settings_mouse_entered() -> void:
-	if !locked:
-		buttonHover(settingsButton, settingsTween)
-func _on_settings_mouse_exited() -> void:
-	if !locked:
-		buttonUnhover(settingsButton, settingsTween)
-
-func _on_quit_mouse_entered() -> void:
-	if !locked:
-		buttonHover(quitButton, quitTween)
-func _on_quit_mouse_exited() -> void:
-	if !locked:
-		buttonUnhover(quitButton, quitTween)
-
-func buttonHover(button: Button, tween: Tween) -> void:
-	if tween and tween.is_running():
-		tween.stop()
-	tween = create_tween()
-	tween.tween_property(button, "position:x", 38, 0.2)
-
-func buttonUnhover(button: Button, tween: Tween) -> void:
-	if tween and tween.is_running():
-		tween.stop()
-	tween = create_tween()
-	tween.tween_property(button, "position:x", 0, 0.2)
+func fadeMusic(vol: float, time: float) -> void:
+	if musicTween and musicTween.is_running():
+		musicTween.stop()
+	musicTween = create_tween()
+	musicTween.tween_property(music, "volume_db", vol, time)

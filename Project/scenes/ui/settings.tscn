@@ -1,0 +1,345 @@
+[gd_scene load_steps=10 format=3 uid="uid://bn0ral7va1m3p"]
+
+[ext_resource type="Theme" uid="uid://cj37hx64v4578" path="res://assets/materialsThemes/menu.tres" id="1_6j5on"]
+[ext_resource type="PackedScene" uid="uid://baajq84gj2rpv" path="res://scenes/ui/leftMenuButton.tscn" id="2_l1802"]
+[ext_resource type="Script" path="res://scenes/ui/settings.gd" id="2_lsviy"]
+[ext_resource type="AudioStream" uid="uid://bih47sqls24lg" path="res://assets/sfx/bip.wav" id="4_w6fix"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ul24q"]
+bg_color = Color(0.466667, 0.466667, 0.466667, 0.376471)
+skew = Vector2(0.5, 0)
+border_width_left = 160
+expand_margin_left = 110.0
+
+[sub_resource type="Animation" id="Animation_axuvk"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("H/1/Title:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-900, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("H/1/Audio:position:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-900, -0.0005, 0, 0.0005, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("H/1/Video:position:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-900, -0.0005, 0, 0.0005, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("H/1/Controls:position:x")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-900, -0.0005, 0, 0.0005, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("H/1/Accessibility:position:x")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-900, -0.0005, 0, 0.0005, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("H/1/Back:position:x")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-900, -0.0005, 0, 0.0005, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_05db1"]
+resource_name = "show"
+length = 0.55
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("H/1/Title:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(-900, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.5)
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("H/1/Audio")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"showSelf"
+}]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("H/1/Video")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"showSelf"
+}]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("H/1/Controls")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"showSelf"
+}]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("H/1/Accessibility")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"showSelf"
+}]
+}
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("H/1/Back")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.4),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"showSelf"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_ft0x3"]
+resource_name = "hide"
+length = 0.94
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("H/1/Title:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, -900, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.5)
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("H/1/Audio")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.433333),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"hideSelf"
+}]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("H/1/Video")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"hideSelf"
+}]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("H/1/Controls")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"hideSelf"
+}]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("H/1/Accessibility")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"hideSelf"
+}]
+}
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("H/1/Back")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"hideSelf"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dld3b"]
+_data = {
+"RESET": SubResource("Animation_axuvk"),
+"hide": SubResource("Animation_ft0x3"),
+"show": SubResource("Animation_05db1")
+}
+
+[node name="Settings" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_6j5on")
+script = ExtResource("2_lsviy")
+
+[node name="H" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="1" type="VBoxContainer" parent="H"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.2
+theme_override_constants/separation = 16
+
+[node name="Control" type="Control" parent="H/1"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+
+[node name="Title" type="Button" parent="H/1"]
+layout_mode = 2
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 80
+theme_override_styles/disabled = SubResource("StyleBoxFlat_ul24q")
+disabled = true
+text = "SETTINGS  "
+
+[node name="Control2" type="Control" parent="H/1"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+
+[node name="Audio" parent="H/1" node_paths=PackedStringArray("bip") instance=ExtResource("2_l1802")]
+layout_mode = 2
+text = "AUDIO"
+bip = NodePath("../Bip")
+
+[node name="Video" parent="H/1" node_paths=PackedStringArray("bip") instance=ExtResource("2_l1802")]
+layout_mode = 2
+text = "VIDEO"
+bip = NodePath("../Bip")
+
+[node name="Controls" parent="H/1" node_paths=PackedStringArray("bip") instance=ExtResource("2_l1802")]
+layout_mode = 2
+text = "CONTROLS"
+bip = NodePath("../Bip")
+
+[node name="Accessibility" parent="H/1" node_paths=PackedStringArray("bip") instance=ExtResource("2_l1802")]
+layout_mode = 2
+text = "ACCESSIBILITY"
+bip = NodePath("../Bip")
+
+[node name="Control3" type="Control" parent="H/1"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+
+[node name="Back" parent="H/1" node_paths=PackedStringArray("bip") instance=ExtResource("2_l1802")]
+layout_mode = 2
+text = "BACK"
+bip = NodePath("../Bip")
+
+[node name="Bip" type="AudioStreamPlayer" parent="H/1"]
+stream = ExtResource("4_w6fix")
+volume_db = -6.0
+bus = &"Menu SFX"
+
+[node name="2" type="VBoxContainer" parent="H"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="3" type="VBoxContainer" parent="H"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_dld3b")
+}
+
+[connection signal="pressed" from="H/1/Audio" to="." method="_on_audio_pressed"]
+[connection signal="pressed" from="H/1/Video" to="." method="_on_video_pressed"]
+[connection signal="pressed" from="H/1/Controls" to="." method="_on_controls_pressed"]
+[connection signal="pressed" from="H/1/Accessibility" to="." method="_on_accessibility_pressed"]
+[connection signal="pressed" from="H/1/Back" to="." method="_on_back_pressed"]

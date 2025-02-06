@@ -3,7 +3,8 @@ extends Control
 
 @export var bg: TextureRect
 @export var fade: ColorRect
-@export var mainMenu: Control
+@export var mainMenu: MarginContainer
+@export var settings: MarginContainer
 
 var tween: Tween
 

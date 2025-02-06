@@ -1,163 +1,147 @@
-[gd_scene load_steps=10 format=3 uid="uid://cvkgrcljhxs0s"]
+[gd_scene load_steps=13 format=3 uid="uid://cvkgrcljhxs0s"]
 
 [ext_resource type="Script" path="res://scenes/ui/mainMenu.gd" id="1_a7jkm"]
 [ext_resource type="Theme" uid="uid://cj37hx64v4578" path="res://assets/materialsThemes/menu.tres" id="1_j2jlu"]
 [ext_resource type="Texture2D" uid="uid://chpbdqlig4aax" path="res://assets/images/menu/title.png" id="2_djqdx"]
 [ext_resource type="Texture2D" uid="uid://c4n3qxjfxtj4p" path="res://assets/images/menu/cover.png" id="2_ixxa4"]
+[ext_resource type="AudioStream" uid="uid://bih47sqls24lg" path="res://assets/sfx/bip.wav" id="5_6ipnm"]
+[ext_resource type="PackedScene" uid="uid://baajq84gj2rpv" path="res://scenes/ui/leftMenuButton.tscn" id="5_i2wgw"]
+[ext_resource type="AudioStream" uid="uid://cu2s6t4wdb4so" path="res://assets/music/MainMenu.mp3" id="5_j6p0o"]
+[ext_resource type="AudioStream" uid="uid://dlr22vboknoka" path="res://assets/sfx/bip2.wav" id="6_5qh5h"]
 
-[sub_resource type="Animation" id="Animation_m0f3m"]
-resource_name = "playHover"
-length = 0.4
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("H/1/Play:position:x")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 38, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 0.4)
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("H/1/Play:position:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(264, -0.25, 0, 0.25, 0, 264, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 0.4)
-}
-
-[sub_resource type="Animation" id="Animation_soefv"]
-resource_name = "settingsHover"
-length = 0.4
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("H/1/Settings:position:x")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 38, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 0.4)
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("H/1/Settings:position:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(308, -0.25, 0, 0.25, 0, 308, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 0.4)
-}
-
-[sub_resource type="Animation" id="Animation_rnuwn"]
-resource_name = "quitHover"
-length = 0.4
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("H/1/Quit:position:x")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 38, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 0.4)
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("H/1/Quit:position:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(352, -0.25, 0, 0.25, 0, 352, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 0.4)
-}
-
-[sub_resource type="Animation" id="Animation_rs0wi"]
+[sub_resource type="Animation" id="Animation_i1ijx"]
 length = 0.001
 tracks/0/type = "bezier"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("H/1/Play:position:x")
+tracks/0/path = NodePath("H/1/Title:position:x")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("H/1/Play:position:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(264, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/2/type = "bezier"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("H/1/Settings:position:x")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/3/type = "bezier"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("H/1/Settings:position:y")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(308, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/4/type = "bezier"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("H/1/Quit:position:x")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/5/type = "bezier"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("H/1/Quit:position:y")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(352, -0.25, 0, 0.25, 0),
+"points": PackedFloat32Array(158, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0)
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_8ors7"]
+[sub_resource type="Animation" id="Animation_xj1g1"]
+resource_name = "hide"
+length = 0.9
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("H/1/Title:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(158, -0.25, 0, 0.25, 0, 250, -0.25, 0, 0.25, 0, -600, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.366667, 0.9)
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("H/1/Play")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.4),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"hideSelf"
+}]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("H/1/Settings")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"hideSelf"
+}]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("H/1/Quit")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"hideSelf"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_rjk8p"]
+resource_name = "show"
+length = 0.9
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("H/1/Title:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(-600, -0.25, 0, 0.25, 0, 250, -0.25, 0, 0.25, 0, 158, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.366667, 0.9)
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("H/1/Play")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"showSelf"
+}]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("H/1/Settings")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"showSelf"
+}]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("H/1/Quit")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.4),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"showSelf"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yrqgl"]
 _data = {
-"RESET": SubResource("Animation_rs0wi"),
-"playHover": SubResource("Animation_m0f3m"),
-"quitHover": SubResource("Animation_rnuwn"),
-"settingsHover": SubResource("Animation_soefv")
+"RESET": SubResource("Animation_i1ijx"),
+"hide": SubResource("Animation_xj1g1"),
+"show": SubResource("Animation_rjk8p")
 }
 
 [node name="MainMenu" type="MarginContainer"]
@@ -177,36 +161,54 @@ texture = ExtResource("2_ixxa4")
 layout_mode = 2
 
 [node name="1" type="VBoxContainer" parent="H"]
+z_index = 1
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/separation = 8
+size_flags_stretch_ratio = 1.2
+theme_override_constants/separation = 16
 
 [node name="Title" type="TextureRect" parent="H/1"]
-custom_minimum_size = Vector2(0, 200)
+custom_minimum_size = Vector2(400, 400)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("2_djqdx")
-stretch_mode = 2
+stretch_mode = 4
 
-[node name="Play" type="Button" parent="H/1"]
-texture_filter = 2
+[node name="Control" type="Control" parent="H/1"]
+custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
-text = "PLAY"
 
-[node name="Settings" type="Button" parent="H/1"]
+[node name="Play" parent="H/1" node_paths=PackedStringArray("bip") instance=ExtResource("5_i2wgw")]
+layout_mode = 2
+bip = NodePath("../Bip")
+
+[node name="Settings" parent="H/1" node_paths=PackedStringArray("bip") instance=ExtResource("5_i2wgw")]
 layout_mode = 2
 text = "SETTINGS"
+bip = NodePath("../Bip")
 
-[node name="Quit" type="Button" parent="H/1"]
+[node name="Quit" parent="H/1" node_paths=PackedStringArray("bip") instance=ExtResource("5_i2wgw")]
 layout_mode = 2
 text = "QUIT"
+bip = NodePath("../Bip")
 
 [node name="Credit" type="Label" parent="H/1"]
 layout_mode = 2
 size_flags_vertical = 10
-theme_override_font_sizes/font_size = 10
+theme_override_font_sizes/font_size = 30
 text = " Rian Young, Nerve Centre GDA 2025"
+
+[node name="Bip" type="AudioStreamPlayer" parent="H/1"]
+stream = ExtResource("5_6ipnm")
+volume_db = -6.0
+max_polyphony = 16
+
+[node name="Bip2" type="AudioStreamPlayer" parent="H/1"]
+stream = ExtResource("6_5qh5h")
+volume_db = -6.0
+max_polyphony = 4
+bus = &"Menu SFX"
 
 [node name="2" type="VBoxContainer" parent="H"]
 layout_mode = 2
@@ -216,17 +218,16 @@ size_flags_horizontal = 3
 layout_mode = 2
 size_flags_horizontal = 3
 
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_j6p0o")
+autoplay = true
+bus = &"Music"
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_8ors7")
+"": SubResource("AnimationLibrary_yrqgl")
 }
 
-[connection signal="mouse_entered" from="H/1/Play" to="." method="_on_play_mouse_entered"]
-[connection signal="mouse_exited" from="H/1/Play" to="." method="_on_play_mouse_exited"]
 [connection signal="pressed" from="H/1/Play" to="." method="_on_play_pressed"]
-[connection signal="mouse_entered" from="H/1/Settings" to="." method="_on_settings_mouse_entered"]
-[connection signal="mouse_exited" from="H/1/Settings" to="." method="_on_settings_mouse_exited"]
 [connection signal="pressed" from="H/1/Settings" to="." method="_on_settings_pressed"]
-[connection signal="mouse_entered" from="H/1/Quit" to="." method="_on_quit_mouse_entered"]
-[connection signal="mouse_exited" from="H/1/Quit" to="." method="_on_quit_mouse_exited"]
 [connection signal="pressed" from="H/1/Quit" to="." method="_on_quit_pressed"]

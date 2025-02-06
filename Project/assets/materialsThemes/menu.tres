@@ -2,46 +2,47 @@
 
 [ext_resource type="FontFile" uid="uid://flcr8xso2u5e" path="res://assets/ui/fonts/Kubasta.otf" id="1_35bf1"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wqu2w"]
-bg_color = Color(0.790289, 0, 0.142383, 0.388235)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5mffe"]
+bg_color = Color(0.621027, 0.388059, 0.453278, 0.376471)
 skew = Vector2(0.5, 0)
-border_width_left = 64
-border_color = Color(0.651669, 0, 0.168588, 1)
-expand_margin_left = 48.0
+border_width_left = 160
+border_color = Color(1, 0.709108, 0.755163, 1)
+expand_margin_left = 110.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6ncgt"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_70ego"]
 bg_color = Color(0.718869, 0.339143, 0.21921, 0.376471)
 skew = Vector2(0.5, 0)
-border_width_left = 64
+border_width_left = 160
 border_color = Color(1, 0.448995, 0.371519, 1)
-expand_margin_left = 48.0
+expand_margin_left = 110.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kk8r3"]
 bg_color = Color(0.277926, 0.534615, 0.310675, 0.376471)
 skew = Vector2(0.5, 0)
-border_width_left = 64
+border_width_left = 160
 border_color = Color(0.396097, 0.734358, 0.431676, 1)
-expand_margin_left = 48.0
+expand_margin_left = 110.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bn7ug"]
 bg_color = Color(0.466667, 0.466667, 0.466667, 0.376471)
 skew = Vector2(0.5, 0)
-border_width_left = 64
-expand_margin_left = 48.0
+border_width_left = 160
+expand_margin_left = 110.0
 
 [resource]
+Button/colors/font_color = Color(1, 1, 1, 1)
 Button/colors/font_hover_color = Color(0.995277, 0.620985, 0.671246, 1)
 Button/colors/font_hover_pressed_color = Color(0.482261, 0.810499, 0.490891, 1)
 Button/colors/font_pressed_color = Color(0.411765, 0.717647, 0.419608, 1)
-Button/font_sizes/font_size = 20
+Button/font_sizes/font_size = 40
 Button/fonts/font = ExtResource("1_35bf1")
-Button/styles/disabled = SubResource("StyleBoxFlat_wqu2w")
+Button/styles/disabled = SubResource("StyleBoxFlat_5mffe")
 Button/styles/focus = SubResource("StyleBoxEmpty_6ncgt")
 Button/styles/hover = SubResource("StyleBoxFlat_70ego")
 Button/styles/hover_pressed = SubResource("StyleBoxFlat_kk8r3")
 Button/styles/normal = SubResource("StyleBoxFlat_bn7ug")
 Button/styles/pressed = SubResource("StyleBoxFlat_kk8r3")
-Label/font_sizes/font_size = 20
+Label/font_sizes/font_size = 40
 Label/fonts/font = ExtResource("1_35bf1")
