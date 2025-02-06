@@ -22,6 +22,11 @@ func _ready() -> void:
 	setButtonsState(false)
 	visible = false
 
+func open() -> void:
+	setButtonsState(true)
+	visible = true
+	anim.play("RESET")
+
 func setButtonsState(state: bool) -> void:
 	audioButton.disabled = !state
 	videoButton.disabled = !state

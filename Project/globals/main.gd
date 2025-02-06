@@ -15,7 +15,6 @@ var state: STATE = STATE.MENU
 
 var fadeTween: Tween
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	fade.show()
 	fadeIn(0.5)
@@ -29,12 +28,10 @@ func _ready() -> void:
 func play() -> void:
 	state = STATE.GAME
 	fadeOut(0.5)
-	ui.updateBG(load("res://assets/images/backgrounds/triton.jpg"))
+	#ui.updateBG(load("res://assets/images/backgrounds/triton.jpg"))
 
 func settings() -> void:
-	ui.settings.setButtonsState(true)
-	ui.settings.visible = true
-	ui.settings.anim.play("RESET")
+	ui.settings.open()
 	await ui.mainMenu.anim.animation_finished
 	ui.settings.anim.play("show")
 

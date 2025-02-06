@@ -222,6 +222,7 @@ size_flags_horizontal = 3
 stream = ExtResource("5_j6p0o")
 autoplay = true
 bus = &"Music"
+parameters/looping = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
