@@ -1,0 +1,8 @@
+﻿key,en_GB,fr_FR,es_ES,de_DE,it_IT,pt_BR,pt_PT,ru_RU,el_GR,tr_TR,da_DK,no_NB,sv_SE,nl_NL,pl_PL,fi_FI,ja_JP,zh_CN,zh_TW,ko_KR,cs_CZ,hu_HU,ro_RO,th_TH,bg_BG,he_IL,ar_SA,bs_BS
+MENU_back,BACK,RETOUR,VOLVER,ZURÜCK,INDIETRO,VOLTAR,ATRÁS,НАЗАД,ΕΠΙΣΤΡΟΦΗ,GERI,TILBAGE,TILBAKE,TILLBAKA,TERUG,WSTECZ,TAKAISIN,戻る,返回,返回,뒤로,ZPĚT,VISSZA,ÎNAPOI,กลับ,НАЗАД,חזרה,الرجوع,NAZAD
+MENU_okay,OK,OK,OK,OK,OK,OK,OK,ОК,ΟΚ,TAMAM,OK,OK,OK,OK,OK,OK,OK,OK,OK,확인,OK,OK,OK,ตกลง,ДОБРЕ,טוב,موافق,OK
+MENU_play,PLAY,JOUER,JUGAR,SPIELEN,GIOCA,JOGAR,JOGAR,ИГРАТЬ,ΠΑΙΞΕ,OYNA,SPIL,SPILL,SPELA,SPELEN,ZAGRAJ,PELAA,プレイ,开始,開始,플레이,HRÁT,JÁTSZÁS,JOACĂ,เล่น,ПУСКАНЕ,התחל,لعب,IGRAJ
+MENU_settings,SETTINGS,OPTIONS,OPCIONES,OPTIONEN,OPZIONI,OPÇÕES,OPÇÕES,НАСТРОЙКИ,ΕΠΙΛΟΓΕΣ,AYARLAR,INDSTILLINGER,INNSTILLINGER,INSTÄLLNINGAR,INSTELLINGEN,USTAWIENIA,ASETUKSET,設定,设置,設置,설정,NASTAVENÍ,BEÁLLÍTÁSOK,PREFERINȚE,ตัวเลือก,НАСТРОЙКИ,אפשרויות,خيارات,OPCIJE
+MENU_quit,QUIT,QUITTER,CERRAR,BEENDEN,ESCI,SAIR,SAIR,ВЫХОД,ΈΞΟΔΟΣ,OYUNU KAPAT,AFSLUT,AVSLUTT,AVSLUTA,STOPPEN,WYJDŹ,LOPETA,終了する,退出,退出,종료,UKONČIT HRU,BEZÁRÁS,ÎNCHIDERE,ออก,ИЗХОД,הפסק,خروج,IZAĆI
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+DIALOGUE_test/conv1/1,This is a test dialogue string,,,,,,,,,,,,,,,,,,,,,,,,,,,

@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="Dialogue_Object" load_steps=6 format=3 uid="uid://33ubm1h1x72v"]
+
+[ext_resource type="Script" path="res://resourceSpec/dia_option.gd" id="1_2c87v"]
+[ext_resource type="Texture2D" uid="uid://c5m53s0pxpvrj" path="res://assets/images/characters/portrait/coomer.png" id="2_l5w0k"]
+[ext_resource type="Script" path="res://resourceSpec/dia_object.gd" id="3_ryjyt"]
+
+[sub_resource type="Resource" id="Resource_fv586"]
+script = ExtResource("1_2c87v")
+text = "Kill"
+icon = ExtResource("2_l5w0k")
+actionSignalName = ""
+
+[sub_resource type="Resource" id="Resource_r2a0p"]
+script = ExtResource("1_2c87v")
+text = "Kiss"
+icon = ExtResource("2_l5w0k")
+actionSignalName = ""
+
+[resource]
+script = ExtResource("3_ryjyt")
+text = "Invalid Dialogue Object"
+portrait = ExtResource("2_l5w0k")
+options = Array[ExtResource("1_2c87v")]([SubResource("Resource_fv586"), SubResource("Resource_r2a0p")])
+actionSignalName = ""

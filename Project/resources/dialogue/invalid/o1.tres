@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="Dialogue_Option" load_steps=2 format=3 uid="uid://cmml3qxjuravp"]
+
+[ext_resource type="Script" path="res://resourceSpec/dia_option.gd" id="1_tksfw"]
+
+[resource]
+script = ExtResource("1_tksfw")
+text = "Invalid Option"
+actionSignalName = ""
