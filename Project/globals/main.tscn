@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://globals/main.gd" id="1_52jw2"]
 [ext_resource type="PackedScene" uid="uid://hrn80kjjh30a" path="res://scenes/ui/ui.tscn" id="2_ynlqn"]
-[ext_resource type="PackedScene" uid="uid://cvkgrcljhxs0s" path="res://scenes/ui/mainMenu.tscn" id="3_r0s5u"]
-[ext_resource type="PackedScene" uid="uid://bn0ral7va1m3p" path="res://scenes/ui/settings.tscn" id="4_302gh"]
+[ext_resource type="PackedScene" uid="uid://cvkgrcljhxs0s" path="res://scenes/ui/mainMenu/mainMenu.tscn" id="3_r0s5u"]
+[ext_resource type="PackedScene" uid="uid://bn0ral7va1m3p" path="res://scenes/ui/settings/settings.tscn" id="4_302gh"]
 
 [node name="Main" type="Node2D" node_paths=PackedStringArray("ui", "fade", "screen")]
 script = ExtResource("1_52jw2")

@@ -26,8 +26,9 @@ func _ready() -> void:
 	ui.settings.back.connect(ui.mainMenu.settings_back)
 
 func play() -> void:
-	state = STATE.GAME
-	fadeOut(0.5)
+	pass
+	#state = STATE.GAME
+	#fadeOut(0.5)
 	#ui.updateBG(load("res://assets/images/backgrounds/triton.jpg"))
 
 func settings() -> void:

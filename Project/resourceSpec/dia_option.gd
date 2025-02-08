@@ -7,13 +7,16 @@ extends Resource
 @export var next: Dialogue_Object
 
 #Optional
-@export var actionSignalName: String
+@export var action: String
+@export var parameters: Array[Variant]
 
 func _init(p_text = "",
-p_icon = preload("res://assets/images/characters/portrait/coomer.png"),
-p_next = load("res://resources/dialogue/invalid/d1.tres"),
-p_action = self.get_script().get_path()):
+p_icon = load("res://assets/images/characters/portrait/coomer.png"),
+p_next = null,
+p_action = "",
+p_parameters = []):
 	text = p_text
 	icon = p_icon
 	next = p_next
-	actionSignalName = p_action
+	action = p_action
+	parameters = p_parameters

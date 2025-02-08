@@ -2,13 +2,14 @@
 
 [ext_resource type="Theme" uid="uid://cqdmvpbwo7ykx" path="res://assets/materialsThemes/dialogue.tres" id="1_cous4"]
 [ext_resource type="Script" path="res://scenes/ui/fpv/dialogue/dialogue_box.gd" id="2_vh83u"]
-[ext_resource type="Texture2D" uid="uid://c5m53s0pxpvrj" path="res://assets/images/characters/portrait/coomer.png" id="3_ag3mm"]
+[ext_resource type="Texture2D" uid="uid://gwu7aa4d0mnl" path="res://assets/ui/icons/Dialogue_Portrait.png" id="3_4xaby"]
 [ext_resource type="AudioStream" uid="uid://b14i88y6wc0om" path="res://assets/sfx/dialogue/s1.wav" id="5_m2uuk"]
 [ext_resource type="AudioStream" uid="uid://bgs6vc2f65fgq" path="res://assets/sfx/dialogue/s2.wav" id="6_mfbid"]
 [ext_resource type="AudioStream" uid="uid://bcoovtr5vmlcn" path="res://assets/sfx/dialogue/s3.wav" id="7_yeb07"]
 [ext_resource type="AudioStream" uid="uid://jpk5c6hg11d3" path="res://assets/sfx/dialogue/s4.wav" id="8_8ucfp"]
 
-[node name="DialogueBox" type="MarginContainer" node_paths=PackedStringArray("text")]
+[node name="DialogueBox" type="MarginContainer" node_paths=PackedStringArray("text", "portrait")]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -17,6 +18,7 @@ grow_vertical = 2
 theme = ExtResource("1_cous4")
 script = ExtResource("2_vh83u")
 text = NodePath("VBoxContainer/DialogueSection/Panel/MarginContainer/HBoxContainer/Text")
+portrait = NodePath("VBoxContainer/DialogueSection/Panel/MarginContainer/HBoxContainer/Portrait")
 metadata/_edit_vertical_guides_ = [960.0]
 metadata/_edit_horizontal_guides_ = [751.0]
 
@@ -86,7 +88,7 @@ theme_override_constants/separation = 50
 [node name="Portrait" type="TextureRect" parent="VBoxContainer/DialogueSection/Panel/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(270, 270)
 layout_mode = 2
-texture = ExtResource("3_ag3mm")
+texture = ExtResource("3_4xaby")
 stretch_mode = 5
 
 [node name="Text" type="Label" parent="VBoxContainer/DialogueSection/Panel/MarginContainer/HBoxContainer"]

@@ -6,7 +6,8 @@
 
 [resource]
 script = ExtResource("2_uecgf")
-text = "What the freak"
+text = ""
 portrait = ExtResource("2_665oa")
 options = Array[ExtResource("1_arjdo")]([])
-actionSignalName = ""
+action = ""
+parameters = []

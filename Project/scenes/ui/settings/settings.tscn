@@ -1,15 +1,22 @@
-[gd_scene load_steps=10 format=3 uid="uid://bn0ral7va1m3p"]
+[gd_scene load_steps=11 format=3 uid="uid://bn0ral7va1m3p"]
 
-[ext_resource type="Theme" uid="uid://cj37hx64v4578" path="res://assets/materialsThemes/menu.tres" id="1_6j5on"]
-[ext_resource type="PackedScene" uid="uid://baajq84gj2rpv" path="res://scenes/ui/leftMenuButton.tscn" id="2_l1802"]
-[ext_resource type="Script" path="res://scenes/ui/settings.gd" id="2_lsviy"]
+[ext_resource type="Theme" uid="uid://dwimkpe573wse" path="res://assets/materialsThemes/menu.tres" id="1_6j5on"]
+[ext_resource type="PackedScene" uid="uid://baajq84gj2rpv" path="res://scenes/ui/mainMenu/leftMenuButton.tscn" id="2_l1802"]
+[ext_resource type="Script" path="res://scenes/ui/settings/settings.gd" id="2_lsviy"]
 [ext_resource type="AudioStream" uid="uid://bih47sqls24lg" path="res://assets/sfx/bip.wav" id="4_w6fix"]
+[ext_resource type="PackedScene" uid="uid://d2fjioylniqmi" path="res://scenes/ui/settings/audio.tscn" id="5_dc6pq"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ul24q"]
-bg_color = Color(0.466667, 0.466667, 0.466667, 0.376471)
-skew = Vector2(0.5, 0)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0jqw5"]
+content_margin_left = 74.0
+bg_color = Color(0.84555, 0.374542, 0.254004, 0.247059)
 border_width_left = 160
+border_width_bottom = 8
+border_color = Color(0.591114, 0.591114, 0.591114, 1)
+corner_radius_top_right = 16
+corner_radius_bottom_left = 16
+corner_detail = 1
 expand_margin_left = 110.0
+anti_aliasing = false
 
 [sub_resource type="Animation" id="Animation_axuvk"]
 length = 0.001
@@ -281,9 +288,9 @@ layout_mode = 2
 
 [node name="Title" type="Button" parent="H/1"]
 layout_mode = 2
-theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
+theme_override_colors/font_disabled_color = Color(0.94902, 0.572549, 0.47451, 1)
 theme_override_font_sizes/font_size = 80
-theme_override_styles/disabled = SubResource("StyleBoxFlat_ul24q")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_0jqw5")
 disabled = true
 text = "SETTINGS  "
 
@@ -338,8 +345,13 @@ libraries = {
 "": SubResource("AnimationLibrary_dld3b")
 }
 
+[node name="Audio" parent="." instance=ExtResource("5_dc6pq")]
+visible = false
+layout_mode = 2
+
 [connection signal="pressed" from="H/1/Audio" to="." method="_on_audio_pressed"]
 [connection signal="pressed" from="H/1/Video" to="." method="_on_video_pressed"]
 [connection signal="pressed" from="H/1/Controls" to="." method="_on_controls_pressed"]
 [connection signal="pressed" from="H/1/Accessibility" to="." method="_on_accessibility_pressed"]
 [connection signal="pressed" from="H/1/Back" to="." method="_on_back_pressed"]
+[connection signal="back" from="Audio" to="." method="_on_any_tab_back_pressed"]

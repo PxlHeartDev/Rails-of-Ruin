@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://dtnefs3450n7y"]
+
+[ext_resource type="Theme" uid="uid://dwimkpe573wse" path="res://assets/materialsThemes/menu.tres" id="1_jkqv4"]
+[ext_resource type="Script" path="res://scenes/ui/mainMenu/game_selection.gd" id="2_y52au"]
+
+[node name="GameSelection" type="MarginContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+theme = ExtResource("1_jkqv4")
+script = ExtResource("2_y52au")

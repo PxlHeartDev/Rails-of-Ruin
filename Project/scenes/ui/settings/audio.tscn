@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=3 uid="uid://d2fjioylniqmi"]
+
+[ext_resource type="PackedScene" uid="uid://dowxtew821cfl" path="res://scenes/ui/settings/settings_tab.tscn" id="1_fi8qt"]
+[ext_resource type="PackedScene" uid="uid://bnsrxoqt4w57u" path="res://scenes/ui/settings/volume_slider.tscn" id="2_7c85j"]
+
+[node name="Audio" instance=ExtResource("1_fi8qt")]
+
+[node name="Button" parent="VBoxContainer/Title" index="0"]
+text = "SETTINGS_audio"
+
+[node name="Icon" parent="VBoxContainer/Title/Button" index="0"]
+offset_left = 8.0
+offset_top = 7.0
+offset_right = 128.0
+offset_bottom = 127.0
+
+[node name="Master" parent="VBoxContainer/Content/MarginContainer/VBoxContainer" index="0" instance=ExtResource("2_7c85j")]
+layout_mode = 2
+
+[node name="Music" parent="VBoxContainer/Content/MarginContainer/VBoxContainer" index="1" instance=ExtResource("2_7c85j")]
+layout_mode = 2
+bus = "Music"
+text = "SETTINGS_audio.music"
+
+[node name="GameSFX" parent="VBoxContainer/Content/MarginContainer/VBoxContainer" index="2" instance=ExtResource("2_7c85j")]
+layout_mode = 2
+bus = "Game SFX"
+text = "SETTINGS_audio.game_sfx"
+
+[node name="MenuSFX" parent="VBoxContainer/Content/MarginContainer/VBoxContainer" index="3" instance=ExtResource("2_7c85j")]
+layout_mode = 2
+bus = "Menu SFX"
+text = "SETTINGS_audio.menu_sfx"

@@ -1,0 +1,188 @@
+[gd_scene load_steps=12 format=3 uid="uid://dowxtew821cfl"]
+
+[ext_resource type="Theme" uid="uid://dwimkpe573wse" path="res://assets/materialsThemes/menu.tres" id="1_f2nvy"]
+[ext_resource type="Script" path="res://scenes/ui/settings/settings_tab.gd" id="2_5e08j"]
+[ext_resource type="Texture2D" uid="uid://cb55ulbhw57oc" path="res://scenes/ui/settings/Dialogue_Icon.png" id="2_otq44"]
+[ext_resource type="Texture2D" uid="uid://dbhgeihq6b5xl" path="res://assets/ui/icons/back/back_normal.png" id="4_5fbtt"]
+[ext_resource type="Texture2D" uid="uid://cffrdm0edks7k" path="res://assets/ui/icons/back/back_hover.png" id="5_m5d42"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pgth2"]
+content_margin_left = 160.0
+bg_color = Color(0.84555, 0.374542, 0.254004, 0.247059)
+border_width_left = 135
+border_width_bottom = 8
+border_color = Color(0.591114, 0.591114, 0.591114, 1)
+corner_radius_top_right = 32
+corner_radius_bottom_left = 24
+corner_detail = 1
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1o6by"]
+bg_color = Color(0.847059, 0.376471, 0.254902, 0.247059)
+border_width_left = 100
+border_width_bottom = 16
+border_color = Color(0.591114, 0.591114, 0.591114, 1)
+corner_radius_top_right = 128
+corner_radius_bottom_left = 64
+corner_detail = 1
+anti_aliasing = false
+
+[sub_resource type="Animation" id="Animation_ldo27"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("VBoxContainer/Title:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-300, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("VBoxContainer/Content:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1200, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_67dn0"]
+resource_name = "hide"
+length = 0.5
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("VBoxContainer/Title:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, -300, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.5)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("VBoxContainer/Content:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(202, -0.25, 0, 0.25, 0, 1200, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.5)
+}
+
+[sub_resource type="Animation" id="Animation_jelis"]
+resource_name = "show"
+length = 0.5
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("VBoxContainer/Title:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(-300, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.5)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("VBoxContainer/Content:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(1200, -0.25, 0, 0.25, 0, 202, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.5)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_h86h0"]
+_data = {
+"RESET": SubResource("Animation_ldo27"),
+"hide": SubResource("Animation_67dn0"),
+"show": SubResource("Animation_jelis")
+}
+
+[node name="SettingsTab" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_f2nvy")
+script = ExtResource("2_5e08j")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Title" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="Button" type="Button" parent="VBoxContainer/Title"]
+layout_mode = 2
+theme_override_colors/font_disabled_color = Color(0.94902, 0.572549, 0.47451, 1)
+theme_override_font_sizes/font_size = 70
+theme_override_styles/disabled = SubResource("StyleBoxFlat_pgth2")
+disabled = true
+text = "Title"
+alignment = 0
+
+[node name="Icon" type="TextureRect" parent="VBoxContainer/Title/Button"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 3.0
+offset_right = 132.0
+offset_bottom = 131.0
+texture = ExtResource("2_otq44")
+
+[node name="Back" type="TextureButton" parent="VBoxContainer/Title/Button"]
+layout_mode = 0
+offset_left = 1736.0
+offset_top = 3.0
+offset_right = 1856.0
+offset_bottom = 123.0
+texture_normal = ExtResource("4_5fbtt")
+texture_pressed = ExtResource("4_5fbtt")
+texture_hover = ExtResource("5_m5d42")
+
+[node name="Content" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 5.0
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 48
+
+[node name="Panel" type="Panel" parent="VBoxContainer/Content"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_1o6by")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/Content"]
+layout_mode = 2
+theme_override_constants/margin_left = 128
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 150
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Content/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_h86h0")
+}
+
+[connection signal="pressed" from="VBoxContainer/Title/Button/Back" to="." method="_on_back_pressed"]

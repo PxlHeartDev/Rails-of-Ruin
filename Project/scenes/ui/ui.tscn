@@ -1,7 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://hrn80kjjh30a"]
+[gd_scene load_steps=7 format=3 uid="uid://hrn80kjjh30a"]
 
 [ext_resource type="Script" path="res://scenes/ui/ui.gd" id="1_s5oq1"]
+[ext_resource type="Theme" uid="uid://dwimkpe573wse" path="res://assets/materialsThemes/menu.tres" id="1_wr7y3"]
 [ext_resource type="Texture2D" uid="uid://be3tnseukl1a0" path="res://assets/images/backgrounds/neptuneTriton.jpg" id="2_eicgv"]
+[ext_resource type="Texture2D" uid="uid://c4n3qxjfxtj4p" path="res://assets/images/menu/cover.png" id="3_aebn4"]
+[ext_resource type="Material" uid="uid://cdvxwyxsp7yhc" path="res://assets/shaders/cover_wobble.tres" id="4_bh0ug"]
+
+[sub_resource type="Gradient" id="Gradient_fuotc"]
+offsets = PackedFloat32Array(0, 0.0715631, 0.896422, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
 
 [node name="UI" type="Control" node_paths=PackedStringArray("bg", "fade")]
 layout_mode = 3
@@ -10,11 +17,13 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_wr7y3")
 script = ExtResource("1_s5oq1")
 bg = NodePath("BG")
 fade = NodePath("Fade")
 
 [node name="BG" type="TextureRect" parent="."]
+z_index = -2
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -33,3 +42,54 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
+
+[node name="Cover" type="TextureRect" parent="."]
+z_index = -1
+material = ExtResource("4_bh0ug")
+layout_mode = 0
+offset_top = 1.0
+offset_right = 1920.0
+offset_bottom = 1081.0
+texture = ExtResource("3_aebn4")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2(960, 540)
+amount = 64
+lifetime = 8.0
+preprocess = 8.0
+fixed_fps = 30
+emission_shape = 3
+emission_rect_extents = Vector2(960, 540)
+direction = Vector2(0, 0)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 20.0
+initial_velocity_max = 50.0
+angular_velocity_min = -40.0
+angular_velocity_max = 40.0
+linear_accel_max = 2.0
+radial_accel_min = -1.0
+radial_accel_max = 1.0
+damping_min = 3.0
+damping_max = 5.0
+angle_min = -720.0
+angle_max = 720.0
+scale_amount_min = 2.0
+scale_amount_max = 6.0
+color = Color(0.834614, 0.834614, 0.834614, 1)
+color_ramp = SubResource("Gradient_fuotc")
+
+[node name="Credit" type="Label" parent="."]
+layout_mode = 0
+offset_top = 1026.0
+offset_right = 612.0
+offset_bottom = 1080.0
+size_flags_vertical = 10
+theme_override_font_sizes/font_size = 30
+text = " Rian Young, Nerve Centre GDA 2025"
+
+[node name="BGCycling" type="Timer" parent="."]
+wait_time = 30.0
+autostart = true
+
+[connection signal="timeout" from="BGCycling" to="." method="_on_bg_cycling_timeout"]

@@ -28,18 +28,36 @@ func _ready() -> void:
 		o.queue_free()
 	repopulate(preload("res://resources/dialogue/test/conv1/d1.tres"))
 
+func optionSelected(option_object: Dialogue_Option) -> void:
+	if option_object.next:
+		repopulate(option_object.next)
+	if !option_object.next and option_object.action != "end":
+		print("Dialogue object for %s not set or invalid" % [option_object.text])
+	callv(option_object.action, option_object.parameters)
+
+func testFunction(p1: String) -> void:
+	print(p1)
+
+func end() -> void:
+	hide()
+
 func repopulate(dialogueObject: Dialogue_Object) -> void:
+	dialogueObject._ready()
 	speaking = false
 	text.text = dialogueObject.text
+	portrait.texture = dialogueObject.portrait
 	for o in options.get_children():
 		o.queue_free()
 	for o in dialogueObject.options:
 		var optionNode = preload("res://scenes/ui/fpv/dialogue/dialogue_option.tscn").instantiate()
 		optionNode.text = o.text
+		optionNode.option_object = o
+		optionNode.selected.connect(optionSelected)
 		options.add_child(optionNode)
 		optionNode.optionIcon.texture = o.icon
 	for o in options.get_children():
 		o.hide()
+	show()
 	startDialogue()
 
 func startDialogue() -> void:

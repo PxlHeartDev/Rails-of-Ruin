@@ -7,6 +7,8 @@ extends MarginContainer
 @onready var accessibilityButton: 	Button = $"H/1/Accessibility"
 @onready var backButton: 			Button = $"H/1/Back"
 
+@onready var audioTab: 				MarginContainer = $Audio
+
 var locked: bool = false:
 	set(val):
 		locked = val
@@ -24,7 +26,7 @@ func _ready() -> void:
 
 func open() -> void:
 	setButtonsState(true)
-	visible = true
+	show()
 	anim.play("RESET")
 
 func setButtonsState(state: bool) -> void:
@@ -42,7 +44,11 @@ func setButtonsState(state: bool) -> void:
 signal back
 
 func _on_audio_pressed() -> void:
-	pass # Replace with function body.
+	anim.play("hide")
+	setButtonsState(false)
+	await anim.animation_finished
+	audioTab.appear()
+	_on_any_pressed()
 
 func _on_video_pressed() -> void:
 	pass # Replace with function body.
@@ -53,9 +59,16 @@ func _on_controls_pressed() -> void:
 func _on_accessibility_pressed() -> void:
 	pass # Replace with function body.
 
+func _on_any_pressed() -> void:
+	locked = true
+
 func _on_back_pressed() -> void:
 	anim.play("hide")
 	setButtonsState(false)
 	await anim.animation_finished
-	visible = false
+	hide()
 	back.emit()
+
+func _on_any_tab_back_pressed() -> void:
+	open()
+	anim.play("show")

@@ -1,6 +1,8 @@
 extends Button
 
-var locked: bool = false
+var locked: bool = false:
+	set(val):
+		locked = val
 
 @onready var anim: AnimationPlayer = $AnimationPlayer
 
@@ -14,12 +16,9 @@ func _on_mouse_exited() -> void:
 	if !locked:
 		doTween(0)
 
-func doTween(xPos: int) -> Tween:
-	var tween: Tween
-	if tween and tween.is_running():
-		tween.stop()
-	tween = create_tween()
-	tween.tween_property(self, "position:x", xPos, 0.2)
+func doTween(xPos: int, time: float = 0.2) -> Tween:
+	var tween: Tween = create_tween()
+	tween.tween_property(self, "position:x", xPos, time)
 	return tween
 
 func hideSelf() -> void:
@@ -27,3 +26,7 @@ func hideSelf() -> void:
 
 func showSelf() -> void:
 	anim.play("show")
+
+
+func _on_pressed() -> void:
+	doTween(0, 0.15)

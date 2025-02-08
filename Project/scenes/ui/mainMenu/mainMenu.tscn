@@ -1,11 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://cvkgrcljhxs0s"]
+[gd_scene load_steps=12 format=3 uid="uid://cvkgrcljhxs0s"]
 
-[ext_resource type="Script" path="res://scenes/ui/mainMenu.gd" id="1_a7jkm"]
-[ext_resource type="Theme" uid="uid://cj37hx64v4578" path="res://assets/materialsThemes/menu.tres" id="1_j2jlu"]
+[ext_resource type="Script" path="res://scenes/ui/mainMenu/mainMenu.gd" id="1_a7jkm"]
+[ext_resource type="Theme" uid="uid://dwimkpe573wse" path="res://assets/materialsThemes/menu.tres" id="1_j2jlu"]
 [ext_resource type="Texture2D" uid="uid://chpbdqlig4aax" path="res://assets/images/menu/title.png" id="2_djqdx"]
-[ext_resource type="Texture2D" uid="uid://c4n3qxjfxtj4p" path="res://assets/images/menu/cover.png" id="2_ixxa4"]
 [ext_resource type="AudioStream" uid="uid://bih47sqls24lg" path="res://assets/sfx/bip.wav" id="5_6ipnm"]
-[ext_resource type="PackedScene" uid="uid://baajq84gj2rpv" path="res://scenes/ui/leftMenuButton.tscn" id="5_i2wgw"]
+[ext_resource type="PackedScene" uid="uid://baajq84gj2rpv" path="res://scenes/ui/mainMenu/leftMenuButton.tscn" id="5_i2wgw"]
 [ext_resource type="AudioStream" uid="uid://cu2s6t4wdb4so" path="res://assets/music/MainMenu.mp3" id="5_j6p0o"]
 [ext_resource type="AudioStream" uid="uid://dlr22vboknoka" path="res://assets/sfx/bip2.wav" id="6_5qh5h"]
 
@@ -153,10 +152,6 @@ grow_vertical = 2
 theme = ExtResource("1_j2jlu")
 script = ExtResource("1_a7jkm")
 
-[node name="Cover" type="TextureRect" parent="."]
-layout_mode = 2
-texture = ExtResource("2_ixxa4")
-
 [node name="H" type="HBoxContainer" parent="."]
 layout_mode = 2
 
@@ -192,12 +187,6 @@ bip = NodePath("../Bip")
 layout_mode = 2
 text = "QUIT"
 bip = NodePath("../Bip")
-
-[node name="Credit" type="Label" parent="H/1"]
-layout_mode = 2
-size_flags_vertical = 10
-theme_override_font_sizes/font_size = 30
-text = " Rian Young, Nerve Centre GDA 2025"
 
 [node name="Bip" type="AudioStreamPlayer" parent="H/1"]
 stream = ExtResource("5_6ipnm")
