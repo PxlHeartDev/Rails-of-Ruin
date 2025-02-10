@@ -4,8 +4,10 @@ MENU_okay,OK,OK,OK,OK,OK,OK,OK,ОК,ΟΚ,TAMAM,OK,OK,OK,OK,OK,OK,OK,OK,OK,확인
 MENU_play,PLAY,JOUER,JUGAR,SPIELEN,GIOCA,JOGAR,JOGAR,ИГРАТЬ,ΠΑΙΞΕ,OYNA,SPIL,SPILL,SPELA,SPELEN,ZAGRAJ,PELAA,プレイ,开始,開始,플레이,HRÁT,JÁTSZÁS,JOACĂ,เล่น,ПУСКАНЕ,התחל,لعب,IGRAJ
 MENU_settings,SETTINGS,OPTIONS,OPCIONES,OPTIONEN,OPZIONI,OPÇÕES,OPÇÕES,НАСТРОЙКИ,ΕΠΙΛΟΓΕΣ,AYARLAR,INDSTILLINGER,INNSTILLINGER,INSTÄLLNINGAR,INSTELLINGEN,USTAWIENIA,ASETUKSET,設定,设置,設置,설정,NASTAVENÍ,BEÁLLÍTÁSOK,PREFERINȚE,ตัวเลือก,НАСТРОЙКИ,אפשרויות,خيارات,OPCIJE
 MENU_quit,QUIT,QUITTER,CERRAR,BEENDEN,ESCI,SAIR,SAIR,ВЫХОД,ΈΞΟΔΟΣ,OYUNU KAPAT,AFSLUT,AVSLUTT,AVSLUTA,STOPPEN,WYJDŹ,LOPETA,終了する,退出,退出,종료,UKONČIT HRU,BEZÁRÁS,ÎNCHIDERE,ออก,ИЗХОД,הפסק,خروج,IZAĆI
+MENU_saveSelect,SAVE SELECT,Sauvegarder les données,Guardar partida,Spiel speichern,Salva dati,Salvar progresso,Guardar progresso,Сохранения,Αποθήκευση δεδομένων,Kaydet,Spildata,Spilldata,Spardata,Waarden opslaan,Zapisz dane,Tallenna tiedot,セーブデータ,保存数据,保存數據,저장된 데이터,Uložit nastavení,Adatok mentése,Salvează datele,บันทึกข้อมูล,Записване на данните,שמור נתונים,حفظ البيانات,Spremiti Podatke
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-SETTINGS_audio,Audio Settings,,,,,,,,,,,,,,,,,,,,,,,,,,,
+SETTINGS_audio,Audio Settings,Options sonores,Opciones de sonido,Audioeinstellungen,Opzioni audio,Opções de Som,Opções de Som,Настройки звука,Επιλογές ήχου,Ses Ayarları,Lydinstillinger,Lydinnstillinger,Ljudinställningar,Geluidsinstellingen,Ustawienia Dźwieku,Ääniasetukset,サウンド設定,声音设置,聲音設置,소리 설정,Nastavení zvuku,Hangbeállítások,Preferințe sunet,ปรับเสียง,Настройки на звука,אפשרויות קול,خيارات الصوت,Postavke Zvuka
+SETTINGS_audioButton,AUDIO,Son,Sonido,Audio,Audio,Som,Som,Звук,Ήχος,Ses,Lyd,Lyd,Ljud,Geluid,Dźwiek,Ääni,サウンド,声音,聲音,음향,Zvuk,Hang,Sunet,เสียง,Звук,קול,صوت,Zvuk
 SETTINGS_audio.master,Master Volume,,,,,,,,,,,,,,,,,,,,,,,,,,,
 SETTINGS_audio.music,Music Volume,,,,,,,,,,,,,,,,,,,,,,,,,,,
 SETTINGS_audio.menu_sfx,Menu SFX Volume,,,,,,,,,,,,,,,,,,,,,,,,,,,
@@ -16,15 +18,14 @@ SETTINGS_audio.reduceHigh.desc,Applies a low-pass filter to all audio to reduce 
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+SETTINGS_video,Video Settings,Options vidéo,Opciones de vídeo,Videoeinstellungen,Opzioni video,Opções de Vídeo,Opções de Vídeo,Настройки видео,Επιλογές εικόνας,Video Ayarları,Video Indstillinger,Videoinnstillinger,Videoinställningar,Videoinstellingen,Ustawienia Wideo,Videoasetukset,ビデオ設定,视频设置,視頻設置,영상 설정,Nastavení obrazu,Videobeállítások,Preferințe video,ปรับค่าวีดิโอ,Настройки на видеото,אפשרויות וידאו,خيارات الفيديو,Video Postavke
+SETTINGS_videoButton,VIDEO,Vidéo,Vídeo,Video,Video,Vídeo,Vídeo,Видео,Εικόνα,Video,Video,Video,Video,Video,Jakość Wideo,Video,ビデオクオリティ,视频设置,視頻設置,영상,Kvalita obrazu,Video,Video,วีดิโอ,Видео,וידאו,فيديو,Video
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+SETTINGS_controls,Control Bindings,Contrôles,Controles,Tastenbelegung,Comandi,Controles,Controlos,Управление,Χειρισμός,Kontroller,Tastindstillinger,Kontroller,Kontroller,Besturing,Sterowanie,Ohjausasetukset,操作方法,操作模式,操作模式,조작 방식,Ovládání,Irányítás,Controale,การบังคับ,Управление,מקשים,مفاتيح التحكم,kontrole
+SETTINGS_controlsButton,CONTROLS,Contrôles,Controles,Tastenbelegung,Comandi,Controles,Controlos,Управление,Χειρισμός,Kontroller,Tastindstillinger,Kontroller,Kontroller,Besturing,Sterowanie,Ohjausasetukset,操作方法,操作模式,操作模式,조작 방식,Ovládání,Irányítás,Controale,การบังคับ,Управление,מקשים,مفاتيح التحكم,kontrole
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-SETTINGS_video,Video,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-SETTINGS_controls,Controls,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-SETTINGS_accessibility,Accessibility,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+SETTINGS_accessibility,Accessibility,Aide,Ayuda,Hilfe,Aiuto,Ajuda,Ajuda,Помощь,Βοήθεια,Yardım,Hjælp,Hjelp,Hjälp,Help,Pomoc,Ohje,ヘルプ,帮助,幫助,도움말,Nápověda,Súgó,Ajutor,ช่วยเหลือ,Помощ,עזרה,مساعدة,Pomoć
+SETTINGS_accessibilityButton,ACCESSIBILITY,Aide,Ayuda,Hilfe,Aiuto,Ajuda,Ajuda,Помощь,Βοήθεια,Yardım,Hjælp,Hjelp,Hjälp,Help,Pomoc,Ohje,ヘルプ,帮助,幫助,도움말,Nápověda,Súgó,Ajutor,ช่วยเหลือ,Помощ,עזרה,مساعدة,Pomoć
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 DIALOGUE_test/conv1/d1,This is a test dialogue string,,,,,,,,,,,,,,,,,,,,,,,,,,,
 DIALOGUE_test/conv1/d2,What the freak,,,,,,,,,,,,,,,,,,,,,,,,,,,

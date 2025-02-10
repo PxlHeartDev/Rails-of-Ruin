@@ -4,7 +4,10 @@ extends Control
 @export var bg: TextureRect
 @export var fade: ColorRect
 @export var mainMenu: MarginContainer
+@export var saveSelect: MarginContainer
 @export var settings: MarginContainer
+
+@onready var p_layer: ParallaxLayer = $ParallaxBackground/ParallaxLayer
 
 var tween: Tween
 
@@ -15,6 +18,10 @@ func _ready() -> void:
 	for f in dir.get_files():
 		if !f.contains(".import"):
 			bgImages.append(f)
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventMouseMotion:
+		p_layer.motion_offset = (event.position - Vector2(960, 540))*-0.04
 
 func updateBG(img: Texture2D) -> void:
 	if tween and tween.is_running():

@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://d01scwxgvarh6"]
+
+[ext_resource type="PackedScene" uid="uid://dowxtew821cfl" path="res://scenes/ui/settings/settings_tab.tscn" id="1_si6cl"]
+[ext_resource type="Script" path="res://scenes/ui/settings/controls.gd" id="2_730fj"]
+[ext_resource type="Texture2D" uid="uid://buuhuxc1sx335" path="res://assets/ui/icons/controls.png" id="2_iem0e"]
+
+[node name="Controls" instance=ExtResource("1_si6cl")]
+offset_top = -4.0
+offset_bottom = -4.0
+script = ExtResource("2_730fj")
+
+[node name="Button" parent="VBoxContainer/Title" index="0"]
+text = "SETTINGS_controls"
+
+[node name="Icon" parent="VBoxContainer/Title/Button" index="0"]
+offset_left = 1.0
+offset_top = 0.0
+offset_right = 129.0
+offset_bottom = 128.0
+texture = ExtResource("2_iem0e")
+
+[node name="Back" parent="VBoxContainer/Title/Button" index="1"]
+layout_mode = 0
+offset_left = 1704.0
+offset_top = 3.0
+offset_right = 1816.0
+offset_bottom = 115.0

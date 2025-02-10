@@ -5,8 +5,8 @@
 [ext_resource type="Texture2D" uid="uid://chpbdqlig4aax" path="res://assets/images/menu/title.png" id="2_djqdx"]
 [ext_resource type="AudioStream" uid="uid://bih47sqls24lg" path="res://assets/sfx/bip.wav" id="5_6ipnm"]
 [ext_resource type="PackedScene" uid="uid://baajq84gj2rpv" path="res://scenes/ui/mainMenu/leftMenuButton.tscn" id="5_i2wgw"]
-[ext_resource type="AudioStream" uid="uid://cu2s6t4wdb4so" path="res://assets/music/MainMenu.mp3" id="5_j6p0o"]
 [ext_resource type="AudioStream" uid="uid://dlr22vboknoka" path="res://assets/sfx/bip2.wav" id="6_5qh5h"]
+[ext_resource type="AudioStream" uid="uid://dm3eqs4bkokin" path="res://assets/music/MainMenu.wav" id="7_q0q0r"]
 
 [sub_resource type="Animation" id="Animation_i1ijx"]
 length = 0.001
@@ -176,28 +176,18 @@ layout_mode = 2
 
 [node name="Play" parent="H/1" node_paths=PackedStringArray("bip") instance=ExtResource("5_i2wgw")]
 layout_mode = 2
-bip = NodePath("../Bip")
+text = "MENU_play"
+bip = NodePath("../../../Bip")
 
 [node name="Settings" parent="H/1" node_paths=PackedStringArray("bip") instance=ExtResource("5_i2wgw")]
 layout_mode = 2
-text = "SETTINGS"
-bip = NodePath("../Bip")
+text = "MENU_settings"
+bip = NodePath("../../../Bip")
 
 [node name="Quit" parent="H/1" node_paths=PackedStringArray("bip") instance=ExtResource("5_i2wgw")]
 layout_mode = 2
-text = "QUIT"
-bip = NodePath("../Bip")
-
-[node name="Bip" type="AudioStreamPlayer" parent="H/1"]
-stream = ExtResource("5_6ipnm")
-volume_db = -6.0
-max_polyphony = 16
-
-[node name="Bip2" type="AudioStreamPlayer" parent="H/1"]
-stream = ExtResource("6_5qh5h")
-volume_db = -6.0
-max_polyphony = 4
-bus = &"Menu SFX"
+text = "MENU_quit"
+bip = NodePath("../../../Bip")
 
 [node name="2" type="VBoxContainer" parent="H"]
 layout_mode = 2
@@ -207,11 +197,22 @@ size_flags_horizontal = 3
 layout_mode = 2
 size_flags_horizontal = 3
 
+[node name="Bip" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_6ipnm")
+volume_db = -6.0
+max_polyphony = 16
+bus = &"Menu SFX"
+
+[node name="Bip2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_5qh5h")
+volume_db = -6.0
+max_polyphony = 4
+bus = &"Menu SFX"
+
 [node name="Music" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("5_j6p0o")
+stream = ExtResource("7_q0q0r")
 autoplay = true
 bus = &"Music"
-parameters/looping = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

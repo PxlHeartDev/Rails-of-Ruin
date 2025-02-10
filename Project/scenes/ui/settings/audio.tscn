@@ -1,9 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://d2fjioylniqmi"]
+[gd_scene load_steps=5 format=3 uid="uid://d2fjioylniqmi"]
 
 [ext_resource type="PackedScene" uid="uid://dowxtew821cfl" path="res://scenes/ui/settings/settings_tab.tscn" id="1_fi8qt"]
+[ext_resource type="Script" path="res://scenes/ui/settings/audio.gd" id="2_1wdfy"]
 [ext_resource type="PackedScene" uid="uid://bnsrxoqt4w57u" path="res://scenes/ui/settings/volume_slider.tscn" id="2_7c85j"]
+[ext_resource type="Texture2D" uid="uid://byse7t6kh80ic" path="res://assets/ui/icons/audio.png" id="2_8d8te"]
 
 [node name="Audio" instance=ExtResource("1_fi8qt")]
+script = ExtResource("2_1wdfy")
 
 [node name="Button" parent="VBoxContainer/Title" index="0"]
 text = "SETTINGS_audio"
@@ -13,6 +16,14 @@ offset_left = 8.0
 offset_top = 7.0
 offset_right = 128.0
 offset_bottom = 127.0
+texture = ExtResource("2_8d8te")
+
+[node name="Back" parent="VBoxContainer/Title/Button" index="1"]
+layout_mode = 0
+offset_left = 760.0
+offset_top = 119.0
+offset_right = 872.0
+offset_bottom = 231.0
 
 [node name="Master" parent="VBoxContainer/Content/MarginContainer/VBoxContainer" index="0" instance=ExtResource("2_7c85j")]
 layout_mode = 2

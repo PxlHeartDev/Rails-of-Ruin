@@ -8,6 +8,8 @@ var locked: bool = false:
 
 @export var bip: AudioStreamPlayer
 
+var curTween: Tween
+
 func _on_mouse_entered() -> void:
 	if !locked:
 		doTween(90)
@@ -19,14 +21,18 @@ func _on_mouse_exited() -> void:
 func doTween(xPos: int, time: float = 0.2) -> Tween:
 	var tween: Tween = create_tween()
 	tween.tween_property(self, "position:x", xPos, time)
+	curTween = tween
 	return tween
 
 func hideSelf() -> void:
-	anim.play("hide")
+	if position.x > 89:
+		anim.play("hidePressed")
+	else:
+		anim.play("hide")
 
 func showSelf() -> void:
 	anim.play("show")
 
 
-func _on_pressed() -> void:
-	doTween(0, 0.15)
+#func _on_pressed() -> void:
+	#doTween(0, 0.15)

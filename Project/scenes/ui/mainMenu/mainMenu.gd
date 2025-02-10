@@ -8,8 +8,7 @@ signal quit
 @onready var settingsButton: 	Button = $"H/1/Settings"
 @onready var quitButton: 		Button = $"H/1/Quit"
 
-@onready var bip: 				AudioStreamPlayer = $"H/1/Bip"
-@onready var bip2: 				AudioStreamPlayer = $"H/1/Bip2"
+@onready var bip2: AudioStreamPlayer = $Bip2
 
 @onready var music: 			AudioStreamPlayer = $Music
 
@@ -28,14 +27,19 @@ func _on_settings_pressed() -> void:
 func _on_quit_pressed() -> void:
 	if !locked:
 		quit.emit()
+		#await quitButton.curTween.finished
 		_on_any_pressed()
 		fadeMusic(-60.0, 3.0)
 		
 		await anim.animation_finished
 		get_tree().quit()
 
+func play_back() -> void:
+	showButtons()
+
 func settings_back() -> void:
 	showButtons()
+
 
 var locked: bool = false:
 	set(val):

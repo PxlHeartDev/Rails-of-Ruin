@@ -24,16 +24,20 @@ func _ready() -> void:
 	ui.mainMenu.quit.connect(quit)
 	
 	ui.settings.back.connect(ui.mainMenu.settings_back)
+	ui.saveSelect.back.connect(ui.mainMenu.play_back)
 
 func play() -> void:
-	pass
+	ui.saveSelect.open()
+	await ui.mainMenu.anim.animation_finished
+	ui.saveSelect.anim.play("show")
 	#state = STATE.GAME
 	#fadeOut(0.5)
 	#ui.updateBG(load("res://assets/images/backgrounds/triton.jpg"))
 
 func settings() -> void:
 	ui.settings.open()
-	await ui.mainMenu.anim.animation_finished
+	if state == STATE.MENU:
+		await ui.mainMenu.anim.animation_finished
 	ui.settings.anim.play("show")
 
 func quit() -> void:

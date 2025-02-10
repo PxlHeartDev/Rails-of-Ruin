@@ -19,17 +19,26 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_wr7y3")
 script = ExtResource("1_s5oq1")
-bg = NodePath("BG")
+bg = NodePath("ParallaxBackground/ParallaxLayer/BG")
 fade = NodePath("Fade")
 
-[node name="BG" type="TextureRect" parent="."]
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(1.1, 1.1)
+
+[node name="BG" type="TextureRect" parent="ParallaxBackground/ParallaxLayer"]
 z_index = -2
-layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -96.0
+offset_top = -54.0
+offset_right = 2016.0
+offset_bottom = 1134.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 texture = ExtResource("2_eicgv")
 expand_mode = 1
 
@@ -41,6 +50,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
 [node name="Cover" type="TextureRect" parent="."]
@@ -50,6 +60,7 @@ layout_mode = 0
 offset_top = 1.0
 offset_right = 1920.0
 offset_bottom = 1081.0
+mouse_filter = 2
 texture = ExtResource("3_aebn4")
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]

@@ -141,6 +141,7 @@ text = "Title"
 alignment = 0
 
 [node name="Icon" type="TextureRect" parent="VBoxContainer/Title/Button"]
+texture_filter = 1
 layout_mode = 0
 offset_left = 4.0
 offset_top = 3.0
@@ -149,14 +150,15 @@ offset_bottom = 131.0
 texture = ExtResource("2_otq44")
 
 [node name="Back" type="TextureButton" parent="VBoxContainer/Title/Button"]
-layout_mode = 0
+texture_filter = 1
 offset_left = 1736.0
-offset_top = 3.0
-offset_right = 1856.0
-offset_bottom = 123.0
+offset_top = 7.0
+offset_right = 1848.0
+offset_bottom = 119.0
 texture_normal = ExtResource("4_5fbtt")
 texture_pressed = ExtResource("4_5fbtt")
 texture_hover = ExtResource("5_m5d42")
+stretch_mode = 0
 
 [node name="Content" type="MarginContainer" parent="VBoxContainer"]
 layout_mode = 2

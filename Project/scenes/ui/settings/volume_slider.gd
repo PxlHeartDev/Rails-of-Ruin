@@ -21,5 +21,6 @@ func _on_h_slider_value_changed(value: float) -> void:
 	AudioServer.set_bus_volume_db(busID, value)
 
 func _on_h_slider_drag_ended(value_changed: bool) -> void:
-	feedback.play()
-	Config.updateSetting("audio/%s" % bus.replace(" ", "_"), slider.value)
+	if value_changed:
+		feedback.play()
+		Config.updateSetting("audio/%s" % bus.replace(" ", "_"), slider.value)

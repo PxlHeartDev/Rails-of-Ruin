@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="Roche Limit"
+config/tags=PackedStringArray("2d", "big_project")
 run/main_scene="res://globals/main.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 run/max_fps=60
@@ -24,6 +25,7 @@ Config="*res://globals/config.tscn"
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
+window/size/resizable=false
 window/stretch/mode="canvas_items"
 
 [input]

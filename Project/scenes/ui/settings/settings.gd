@@ -1,13 +1,19 @@
 extends MarginContainer
 
 @onready var anim: 					AnimationPlayer = $AnimationPlayer
+
 @onready var audioButton: 			Button = $"H/1/Audio"
 @onready var videoButton: 			Button = $"H/1/Video"
 @onready var controlsButton: 		Button = $"H/1/Controls"
 @onready var accessibilityButton: 	Button = $"H/1/Accessibility"
 @onready var backButton: 			Button = $"H/1/Back"
 
-@onready var audioTab: 				MarginContainer = $Audio
+@onready var bip2: 					AudioStreamPlayer = $Bip2
+
+@export var audioTab: 				MarginContainer
+@export var videoTab: 				MarginContainer
+@export var controlsTab: 			MarginContainer
+@export var accessibilityTab: 		MarginContainer
 
 var locked: bool = false:
 	set(val):
@@ -44,27 +50,33 @@ func setButtonsState(state: bool) -> void:
 signal back
 
 func _on_audio_pressed() -> void:
-	anim.play("hide")
-	setButtonsState(false)
+	_on_any_pressed()
 	await anim.animation_finished
 	audioTab.appear()
-	_on_any_pressed()
 
 func _on_video_pressed() -> void:
-	pass # Replace with function body.
+	_on_any_pressed()
+	await anim.animation_finished
+	videoTab.appear()
 
 func _on_controls_pressed() -> void:
-	pass # Replace with function body.
+	_on_any_pressed()
+	await anim.animation_finished
+	controlsTab.appear()
 
 func _on_accessibility_pressed() -> void:
-	pass # Replace with function body.
+	_on_any_pressed()
+	await anim.animation_finished
+	accessibilityTab.appear()
 
 func _on_any_pressed() -> void:
-	locked = true
-
-func _on_back_pressed() -> void:
 	anim.play("hide")
 	setButtonsState(false)
+	locked = true
+	bip2.play()
+
+func _on_back_pressed() -> void:
+	_on_any_pressed()
 	await anim.animation_finished
 	hide()
 	back.emit()

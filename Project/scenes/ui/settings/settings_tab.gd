@@ -1,8 +1,15 @@
+class_name Settings_Tab
 extends MarginContainer
 
+@export var bip2: AudioStreamPlayer
+
+@onready var backButton: TextureButton = $VBoxContainer/Title/Button/Back
 @onready var anim: AnimationPlayer = $AnimationPlayer
 
 signal back
+
+func _ready() -> void:
+	backButton.position = Vector2(1736, 7)
 
 func appear() -> void:
 	anim.play("RESET")
@@ -16,6 +23,7 @@ func disappear() -> void:
 	hide()
 
 func _on_back_pressed() -> void:
+	bip2.play()
 	disappear()
 	await anim.animation_finished
 	back.emit()

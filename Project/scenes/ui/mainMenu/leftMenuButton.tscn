@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://baajq84gj2rpv"]
+[gd_scene load_steps=10 format=3 uid="uid://baajq84gj2rpv"]
 
 [ext_resource type="Script" path="res://scenes/ui/mainMenu/left_menu_button.gd" id="1_nynly"]
 [ext_resource type="Theme" uid="uid://dwimkpe573wse" path="res://assets/materialsThemes/menu.tres" id="1_rfmrf"]
@@ -47,10 +47,26 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.5)
 }
 
+[sub_resource type="Animation" id="Animation_w2cg8"]
+resource_name = "hidePressed"
+length = 0.5
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(90, -0.25, 0, 0.633333, 43.7589, -900, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.5)
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1hlc0"]
 _data = {
 "RESET": SubResource("Animation_tfk7i"),
 "hide": SubResource("Animation_celvx"),
+"hidePressed": SubResource("Animation_w2cg8"),
 "show": SubResource("Animation_d032b")
 }
 
@@ -65,7 +81,8 @@ width = 140
 [node name="LeftMenuButton" type="Button"]
 texture_filter = 2
 custom_minimum_size = Vector2(0, 64)
-offset_right = 296.0
+offset_left = 90.0
+offset_right = 386.0
 offset_bottom = 64.0
 theme = ExtResource("1_rfmrf")
 text = "PLAY"
