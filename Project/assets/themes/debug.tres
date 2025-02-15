@@ -1,0 +1,16 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://bsbo2358o1a7l"]
+
+[ext_resource type="FontFile" uid="uid://flcr8xso2u5e" path="res://assets/ui/fonts/Kubasta.otf" id="1_2p7ts"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_50c8c"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_detail = 1
+
+[resource]
+Label/font_sizes/font_size = 40
+Label/fonts/font = ExtResource("1_2p7ts")
+Panel/styles/panel = SubResource("StyleBoxFlat_50c8c")

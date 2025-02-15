@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://bnsrxoqt4w57u"]
 
-[ext_resource type="Theme" uid="uid://dwimkpe573wse" path="res://assets/materialsThemes/menu.tres" id="1_u64dc"]
+[ext_resource type="Theme" uid="uid://dwimkpe573wse" path="res://assets/themes/menu.tres" id="1_u64dc"]
 [ext_resource type="Script" path="res://scenes/ui/settings/volume_slider.gd" id="2_jygwm"]
 [ext_resource type="AudioStream" uid="uid://dlr22vboknoka" path="res://assets/sfx/bip2.wav" id="3_we1tx"]
 

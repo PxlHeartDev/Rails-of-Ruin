@@ -19,9 +19,16 @@ func _ready() -> void:
 		if !f.contains(".import"):
 			bgImages.append(f)
 
+func _process(delta: float) -> void:
+	if p_layer.motion_offset != targetParaPos:
+		p_layer.motion_offset.x = move_toward(p_layer.motion_offset.x, targetParaPos.x, 4)
+		p_layer.motion_offset.y = move_toward(p_layer.motion_offset.y, targetParaPos.y, 2.25)
+
+var targetParaPos: Vector2 = Vector2.ZERO
+
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
-		p_layer.motion_offset = (event.position - Vector2(960, 540))*-0.04
+		targetParaPos = (event.position - Vector2(960,540))*-0.04
 
 func updateBG(img: Texture2D) -> void:
 	if tween and tween.is_running():

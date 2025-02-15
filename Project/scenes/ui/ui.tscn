@@ -1,10 +1,10 @@
 [gd_scene load_steps=7 format=3 uid="uid://hrn80kjjh30a"]
 
 [ext_resource type="Script" path="res://scenes/ui/ui.gd" id="1_s5oq1"]
-[ext_resource type="Theme" uid="uid://dwimkpe573wse" path="res://assets/materialsThemes/menu.tres" id="1_wr7y3"]
+[ext_resource type="Theme" uid="uid://dwimkpe573wse" path="res://assets/themes/menu.tres" id="1_wr7y3"]
 [ext_resource type="Texture2D" uid="uid://be3tnseukl1a0" path="res://assets/images/backgrounds/neptuneTriton.jpg" id="2_eicgv"]
 [ext_resource type="Texture2D" uid="uid://c4n3qxjfxtj4p" path="res://assets/images/menu/cover.png" id="3_aebn4"]
-[ext_resource type="Material" uid="uid://cdvxwyxsp7yhc" path="res://assets/shaders/cover_wobble.tres" id="4_bh0ug"]
+[ext_resource type="Material" uid="uid://cdvxwyxsp7yhc" path="res://assets/materials/cover_wobble.tres" id="4_bh0ug"]
 
 [sub_resource type="Gradient" id="Gradient_fuotc"]
 offsets = PackedFloat32Array(0, 0.0715631, 0.896422, 1)

@@ -8,10 +8,8 @@ signal quit
 @onready var settingsButton: 	Button = $"H/1/Settings"
 @onready var quitButton: 		Button = $"H/1/Quit"
 
-@onready var bip2: AudioStreamPlayer = $Bip2
-
+@onready var bip2: 				AudioStreamPlayer = $Bip2
 @onready var music: 			AudioStreamPlayer = $Music
-
 @onready var anim: 				AnimationPlayer = $AnimationPlayer
 
 func _on_play_pressed() -> void:
