@@ -12,13 +12,13 @@ void vertex() {
 }
 
 void fragment() {
-	float tileSize = 1024.0;
+	float tileSize = 2048.0;
 	vec2 tileSizeVec = vec2(1.0/tileSize, 1.0/tileSize);
-	
+
 	vec2 newUV = worldPos*tileSizeVec;
-	
+
 	vec4 noiseTexture = texture(noise, newUV);
-	
+
 	COLOR.rgb = blendVec3(noiseTexture.xyz, COLOR.xyz*0.6);
 	COLOR.rgb = blendVec3(COLOR.xyz, colour.xyz);
 }

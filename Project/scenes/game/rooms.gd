@@ -52,3 +52,9 @@ func keyToCoord(key: String) -> Vector2i:
 
 func isValidPlacement(room: Room) -> bool:
 	return false
+
+func saveSelf() -> void:
+	pass
+
+func loadSelf() -> void:
+	pass

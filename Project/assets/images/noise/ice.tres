@@ -10,6 +10,8 @@ domain_warp_enabled = true
 domain_warp_amplitude = 15.0
 
 [resource]
+width = 1024
+height = 1024
 seamless = true
 seamless_blend_skirt = 0.6
 noise = SubResource("FastNoiseLite_ya628")

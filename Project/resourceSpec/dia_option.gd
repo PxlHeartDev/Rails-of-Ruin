@@ -10,11 +10,12 @@ extends Resource
 @export var action: String
 @export var parameters: Array[Variant]
 
-func _init(p_text = "",
-p_icon = load("res://assets/images/characters/portrait/coomer.png"),
-p_next = null,
-p_action = "",
-p_parameters = []):
+func _init(
+		p_text = "",
+		p_icon = load("res://assets/images/characters/portrait/coomer.png"),
+		p_next = null,
+		p_action = "",
+		p_parameters = []):
 	text = p_text
 	icon = p_icon
 	next = p_next

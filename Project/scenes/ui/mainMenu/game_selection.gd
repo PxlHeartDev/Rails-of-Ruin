@@ -38,19 +38,19 @@ func open() -> void:
 	anim.play("RESET")
 
 func _on_1_pressed() -> void:
-	pass # Replace with function body.
+	loadGame(1)
 
 
 func _on_2_pressed() -> void:
-	pass # Replace with function body.
+	loadGame(2)
 
 
 func _on_3_pressed() -> void:
-	pass # Replace with function body.
+	loadGame(3)
 
 
 func _on_4_pressed() -> void:
-	pass # Replace with function body.
+	loadGame(4)
 
 
 func _on_back_pressed() -> void:
@@ -59,3 +59,6 @@ func _on_back_pressed() -> void:
 	await anim.animation_finished
 	hide()
 	back.emit()
+
+func loadGame(saveGame: int) -> void:
+	pass

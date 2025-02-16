@@ -42,3 +42,14 @@ text = "SETTINGS_audio.game_sfx"
 layout_mode = 2
 bus = "Menu SFX"
 text = "SETTINGS_audio.menu_sfx"
+
+[node name="Label" type="Label" parent="VBoxContainer/Content/MarginContainer/VBoxContainer" index="4"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "SETTINGS_audio.output"
+
+[node name="Output" type="OptionButton" parent="VBoxContainer/Content/MarginContainer/VBoxContainer" index="5"]
+layout_mode = 2
+theme_override_constants/arrow_margin = 1515
+
+[connection signal="item_selected" from="VBoxContainer/Content/MarginContainer/VBoxContainer/Output" to="." method="_on_output_item_selected"]

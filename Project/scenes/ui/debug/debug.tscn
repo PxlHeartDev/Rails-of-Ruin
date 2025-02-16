@@ -3,18 +3,20 @@
 [ext_resource type="Theme" uid="uid://bsbo2358o1a7l" path="res://assets/themes/debug.tres" id="1_8kfyy"]
 [ext_resource type="Script" path="res://scenes/ui/debug/debug.gd" id="2_7sids"]
 
-[node name="Debug" type="CanvasLayer"]
-
-[node name="Debug" type="MarginContainer" parent="." node_paths=PackedStringArray("fps")]
+[node name="Debug" type="CanvasLayer" node_paths=PackedStringArray("fps", "coordinates", "seed")]
 visible = false
+script = ExtResource("2_7sids")
+fps = NodePath("Debug/HBoxContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/FPS")
+coordinates = NodePath("Debug/HBoxContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/Position")
+seed = NodePath("Debug/HBoxContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/Seed")
+
+[node name="Debug" type="MarginContainer" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_8kfyy")
-script = ExtResource("2_7sids")
-fps = NodePath("HBoxContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/FPS")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Debug"]
 layout_mode = 2
@@ -47,7 +49,11 @@ text = "FPS:"
 
 [node name="Position" type="Label" parent="Debug/HBoxContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "Position:"
+text = "Position: "
+
+[node name="Seed" type="Label" parent="Debug/HBoxContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Seed: "
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="Debug/HBoxContainer"]
 layout_mode = 2
