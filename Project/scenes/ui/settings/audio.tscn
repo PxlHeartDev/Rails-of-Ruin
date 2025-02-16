@@ -12,18 +12,10 @@ script = ExtResource("2_1wdfy")
 text = "SETTINGS_audio"
 
 [node name="Icon" parent="VBoxContainer/Title/Button" index="0"]
-offset_left = 8.0
-offset_top = 7.0
-offset_right = 128.0
-offset_bottom = 127.0
 texture = ExtResource("2_8d8te")
 
-[node name="Back" parent="VBoxContainer/Title/Button" index="1"]
-layout_mode = 0
-offset_left = 760.0
-offset_top = 119.0
-offset_right = 872.0
-offset_bottom = 231.0
+[node name="VBoxContainer" parent="VBoxContainer/Content/MarginContainer" index="0"]
+theme_override_constants/separation = 6
 
 [node name="Master" parent="VBoxContainer/Content/MarginContainer/VBoxContainer" index="0" instance=ExtResource("2_7c85j")]
 layout_mode = 2
@@ -45,11 +37,12 @@ text = "SETTINGS_audio.menu_sfx"
 
 [node name="Label" type="Label" parent="VBoxContainer/Content/MarginContainer/VBoxContainer" index="4"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 20
 text = "SETTINGS_audio.output"
 
 [node name="Output" type="OptionButton" parent="VBoxContainer/Content/MarginContainer/VBoxContainer" index="5"]
 layout_mode = 2
-theme_override_constants/arrow_margin = 1515
+theme_override_font_sizes/font_size = 20
+theme_override_constants/arrow_margin = 740
 
 [connection signal="item_selected" from="VBoxContainer/Content/MarginContainer/VBoxContainer/Output" to="." method="_on_output_item_selected"]

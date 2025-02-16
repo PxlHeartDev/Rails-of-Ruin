@@ -2,7 +2,7 @@ extends CanvasLayer
 
 @export var fps: Label
 @export var coordinates: Label
-@export var seed: Label
+@export var seedLabel: Label
 
 var shown: bool = false
 
@@ -28,4 +28,4 @@ func _process(_delta: float) -> void:
 	fps.text = "FPS: %s" % str(times.size())
 
 func seedChanged(newSeed: int) -> void:
-	seed.text = "Seed: %s" % newSeed
+	seedLabel.text = "Seed: %s" % newSeed

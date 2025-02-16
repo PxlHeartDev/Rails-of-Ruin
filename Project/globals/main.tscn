@@ -22,30 +22,32 @@ settings = NodePath("Settings")
 metadata/_edit_use_anchors_ = true
 
 [node name="MainMenu" parent="UI" instance=ExtResource("3_r0s5u")]
-custom_minimum_size = Vector2(1920, 1080)
+custom_minimum_size = Vector2(960, 540)
 layout_mode = 1
+offset_right = -960.0
+offset_bottom = -540.0
 
 [node name="Settings" parent="UI" instance=ExtResource("4_302gh")]
 visible = false
-custom_minimum_size = Vector2(1920, 1080)
+custom_minimum_size = Vector2(960, 540)
 layout_mode = 0
 anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
-offset_right = 1920.0
-offset_bottom = 1080.0
+offset_right = 960.0
+offset_bottom = 540.0
 grow_horizontal = 1
 grow_vertical = 1
 
 [node name="GameSelection" parent="UI" instance=ExtResource("4_4huwg")]
 visible = false
-custom_minimum_size = Vector2(1920, 1080)
+custom_minimum_size = Vector2(960, 540)
 layout_mode = 0
 anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
-offset_right = 1920.0
-offset_bottom = 1080.0
+offset_right = 960.0
+offset_bottom = 540.0
 grow_horizontal = 1
 grow_vertical = 1
 

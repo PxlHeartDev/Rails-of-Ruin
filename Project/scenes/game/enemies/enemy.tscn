@@ -1,0 +1,20 @@
+[gd_scene load_steps=6 format=3 uid="uid://d31tdxejqy8es"]
+
+[ext_resource type="Script" path="res://scenes/game/enemies/enemy.gd" id="1_ucjyy"]
+[ext_resource type="PackedScene" uid="uid://d3o31trh0j3gs" path="res://scenes/components/manager.tscn" id="2_ugf3t"]
+[ext_resource type="PackedScene" uid="uid://codttjer4sp0s" path="res://scenes/components/attack.tscn" id="3_ikv1w"]
+[ext_resource type="PackedScene" uid="uid://cid3fdyllr67t" path="res://scenes/components/health.tscn" id="4_bbo1y"]
+[ext_resource type="PackedScene" uid="uid://cfmxx0q28naxb" path="res://scenes/components/hitBox.tscn" id="5_ee4dy"]
+
+[node name="Enemy" type="CharacterBody2D"]
+script = ExtResource("1_ucjyy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="ComponentManager" parent="." instance=ExtResource("2_ugf3t")]
+
+[node name="AttackComponent" parent="ComponentManager" instance=ExtResource("3_ikv1w")]
+
+[node name="Health_Component" parent="ComponentManager" instance=ExtResource("4_bbo1y")]
+
+[node name="HitBox_Component" parent="ComponentManager" instance=ExtResource("5_ee4dy")]

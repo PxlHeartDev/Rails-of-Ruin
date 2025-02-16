@@ -13,15 +13,4 @@ script = ExtResource("2_730fj")
 text = "SETTINGS_controls"
 
 [node name="Icon" parent="VBoxContainer/Title/Button" index="0"]
-offset_left = 1.0
-offset_top = 0.0
-offset_right = 129.0
-offset_bottom = 128.0
 texture = ExtResource("2_iem0e")
-
-[node name="Back" parent="VBoxContainer/Title/Button" index="1"]
-layout_mode = 0
-offset_left = 1704.0
-offset_top = 3.0
-offset_right = 1816.0
-offset_bottom = 115.0

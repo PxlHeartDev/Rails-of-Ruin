@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://dyo27ei5sytnt"]
+
+[ext_resource type="Script" path="res://scenes/game/weapons/bullet.gd" id="1_28ddo"]
+[ext_resource type="PackedScene" uid="uid://d3o31trh0j3gs" path="res://scenes/components/manager.tscn" id="2_x1jn4"]
+[ext_resource type="PackedScene" uid="uid://codttjer4sp0s" path="res://scenes/components/attack.tscn" id="3_a26uu"]
+[ext_resource type="PackedScene" uid="uid://cfmxx0q28naxb" path="res://scenes/components/hitBox.tscn" id="4_12lln"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1iyug"]
+
+[node name="Bullet" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_28ddo")
+
+[node name="Decay" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_1iyug")
+
+[node name="ComponentManager" parent="." instance=ExtResource("2_x1jn4")]
+
+[node name="AttackComponent" parent="ComponentManager" instance=ExtResource("3_a26uu")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ComponentManager/AttackComponent"]
+shape = SubResource("CircleShape2D_1iyug")
+
+[node name="HitBox_Component" parent="ComponentManager" instance=ExtResource("4_12lln")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ComponentManager/HitBox_Component"]
+shape = SubResource("CircleShape2D_1iyug")
+
+[connection signal="timeout" from="Decay" to="." method="_on_decay_timeout"]

@@ -1,34 +1,11 @@
 extends Node2D
 
+
 @export var cam: Camera2D
 @export var saveNum: int
-@onready var overlay: Node2D = $Overlay
-@onready var exploration: Node2D = $Exploration
-@onready var player: CharacterBody2D = $PlayerExplorer
+@onready var player: CharacterBody2D = $Player
 
-func _ready() -> void:
-	playerToSurface(exploration.get_child(1).getReliefAt(0))
-
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("enable_overlay"):
-		overlay.active = !overlay.active
-	elif event.is_action_pressed("cam_zoomIn"):
-		cam.zoom += Vector2(0.1, 0.1)
-	elif event.is_action_pressed("cam_zoomOut"):
-		cam.zoom -= Vector2(0.051, 0.051)
-	cam.zoom = clamp(cam.zoom, Vector2(0.05, 0.05), Vector2(3.0, 3.0))
-
-#func _process(delta: float) -> void:
-	#var cameraMotion = Input.get_vector("cam_left", "cam_right", "cam_up", "cam_down")
-	#if Input.is_action_pressed("cam_fast"):
-		#cameraMotion *= 2.0
-	#cam.position += cameraMotion * 50
-
-func playerToSurface(surfaceLevel: int) -> void:
-	player.position.y = surfaceLevel
-
-func enterExploration() -> void:
-	pass
+var isGravityFlipped: bool = false
 
 func saveGame() -> void:
 	var saveFile = FileAccess.open("user://save%s.save" % saveNum, FileAccess.WRITE)

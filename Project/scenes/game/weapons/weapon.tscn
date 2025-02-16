@@ -1,0 +1,12 @@
+[gd_scene load_steps=4 format=3 uid="uid://ccsdpsgfovixi"]
+
+[ext_resource type="Script" path="res://scenes/game/weapons/weapon.gd" id="1_jmhhu"]
+[ext_resource type="Texture2D" uid="uid://sxywjylvskiw" path="res://assets/sprites/weapons/pistol.png" id="2_5xi5u"]
+[ext_resource type="PackedScene" uid="uid://dyo27ei5sytnt" path="res://scenes/game/weapons/bullet.tscn" id="2_aapvd"]
+
+[node name="Weapon" type="Node2D"]
+script = ExtResource("1_jmhhu")
+bullet = ExtResource("2_aapvd")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_5xi5u")

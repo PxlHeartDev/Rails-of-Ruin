@@ -8,12 +8,13 @@
 offset_right = 40.0
 offset_bottom = 40.0
 theme = ExtResource("1_u64dc")
+theme_override_constants/separation = -4
 script = ExtResource("2_jygwm")
 text = "SETTINGS_audio.master"
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 2
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 20
 text = "SETTINGS_audio.master"
 
 [node name="HSlider" type="HSlider" parent="."]

@@ -282,20 +282,20 @@ size_flags_stretch_ratio = 1.2
 theme_override_constants/separation = 16
 
 [node name="Control" type="Control" parent="H/1"]
-custom_minimum_size = Vector2(0, 80)
+custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 
 [node name="Title" type="Button" parent="H/1"]
 layout_mode = 2
 theme_override_colors/font_disabled_color = Color(0.94902, 0.572549, 0.47451, 1)
-theme_override_font_sizes/font_size = 80
+theme_override_font_sizes/font_size = 40
 theme_override_styles/disabled = SubResource("StyleBoxFlat_xppvd")
 disabled = true
 text = "MENU_saveSelect"
 alignment = 0
 
 [node name="Control2" type="Control" parent="H/1"]
-custom_minimum_size = Vector2(0, 80)
+custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 
 [node name="1" parent="H/1" node_paths=PackedStringArray("bip") instance=ExtResource("3_e2xxp")]
@@ -319,7 +319,7 @@ text = "Save 4 - Empty"
 bip = NodePath("../../../Bip")
 
 [node name="Control3" type="Control" parent="H/1"]
-custom_minimum_size = Vector2(0, 80)
+custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 
 [node name="Back" parent="H/1" node_paths=PackedStringArray("bip") instance=ExtResource("3_e2xxp")]

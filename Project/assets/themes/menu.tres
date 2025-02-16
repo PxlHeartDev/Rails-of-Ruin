@@ -8,13 +8,13 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u1nma"]
 content_margin_left = 74.0
 bg_color = Color(0.378269, 0.134637, 0.0718036, 0.247059)
-border_width_left = 180
-border_width_bottom = 8
+border_width_left = 90
+border_width_bottom = 4
 border_color = Color(0.591114, 0.591114, 0.591114, 1)
-corner_radius_top_right = 16
-corner_radius_bottom_left = 13
+corner_radius_top_right = 8
+corner_radius_bottom_left = 7
 corner_detail = 1
-expand_margin_left = 130.0
+expand_margin_left = 65.0
 anti_aliasing = false
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tjpes"]
@@ -22,37 +22,37 @@ anti_aliasing = false
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4643b"]
 content_margin_left = 74.0
 bg_color = Color(0.660343, 0.263294, 0.161142, 0.247059)
-border_width_left = 180
-border_width_bottom = 8
+border_width_left = 90
+border_width_bottom = 4
 border_color = Color(0.591114, 0.591114, 0.591114, 1)
-corner_radius_top_right = 16
-corner_radius_bottom_left = 13
+corner_radius_top_right = 8
+corner_radius_bottom_left = 7
 corner_detail = 1
-expand_margin_left = 130.0
+expand_margin_left = 65.0
 anti_aliasing = false
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4t0ti"]
 content_margin_left = 74.0
 bg_color = Color(0.355409, 0.688042, 0.390019, 0.247059)
-border_width_left = 180
-border_width_bottom = 8
+border_width_left = 90
+border_width_bottom = 4
 border_color = Color(0.591114, 0.591114, 0.591114, 1)
-corner_radius_top_right = 16
-corner_radius_bottom_left = 13
+corner_radius_top_right = 6
+corner_radius_bottom_left = 7
 corner_detail = 1
-expand_margin_left = 130.0
+expand_margin_left = 65.0
 anti_aliasing = false
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s2k61"]
 content_margin_left = 74.0
 bg_color = Color(0.84555, 0.374542, 0.254004, 0.247059)
-border_width_left = 180
-border_width_bottom = 8
+border_width_left = 90
+border_width_bottom = 4
 border_color = Color(0.591114, 0.591114, 0.591114, 1)
-corner_radius_top_right = 16
-corner_radius_bottom_left = 16
+corner_radius_top_right = 8
+corner_radius_bottom_left = 8
 corner_detail = 1
-expand_margin_left = 130.0
+expand_margin_left = 65.0
 anti_aliasing = false
 
 [sub_resource type="Gradient" id="Gradient_1qe0u"]
@@ -95,10 +95,10 @@ corner_detail = 1
 bg_color = Color(0.94902, 0.572549, 0.47451, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2cc7i"]
-content_margin_left = 8.0
-content_margin_top = 8.0
-content_margin_right = 8.0
-content_margin_bottom = 8.0
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
 bg_color = Color(0.473574, 0.177654, 0.101715, 1)
 corner_radius_top_right = 4
 corner_radius_bottom_left = 4
@@ -153,7 +153,7 @@ Button/colors/font_focus_color = Color(0.976471, 0.745098, 0.686275, 1)
 Button/colors/font_hover_color = Color(0.97472, 0.745588, 0.684503, 1)
 Button/colors/font_hover_pressed_color = Color(0.529412, 0.909804, 0.560784, 1)
 Button/colors/font_pressed_color = Color(0.528928, 0.909198, 0.560073, 1)
-Button/font_sizes/font_size = 30
+Button/font_sizes/font_size = 20
 Button/fonts/font = ExtResource("1_35bf1")
 Button/styles/disabled = SubResource("StyleBoxFlat_u1nma")
 Button/styles/focus = SubResource("StyleBoxEmpty_tjpes")
@@ -170,7 +170,7 @@ Label/colors/font_color = Color(0.9501, 0.572479, 0.473868, 1)
 Label/constants/line_spacing = -10
 Label/font_sizes/font_size = 30
 Label/fonts/font = ExtResource("1_35bf1")
-OptionButton/font_sizes/font_size = 30
+OptionButton/font_sizes/font_size = 20
 OptionButton/fonts/font = ExtResource("1_35bf1")
 OptionButton/icons/arrow = ExtResource("2_pxbj7")
 OptionButton/styles/hover = SubResource("StyleBoxFlat_vay2y")
@@ -179,7 +179,7 @@ OptionButton/styles/normal = SubResource("StyleBoxFlat_vay2y")
 OptionButton/styles/pressed = SubResource("StyleBoxFlat_jillx")
 Panel/styles/panel = SubResource("StyleBoxFlat_4xvx4")
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_5o77p")
-PopupMenu/font_sizes/font_size = 30
+PopupMenu/font_sizes/font_size = 20
 PopupMenu/fonts/font = ExtResource("1_35bf1")
 PopupMenu/icons/radio_checked = ExtResource("3_yq2wk")
 PopupMenu/icons/radio_checked_disabled = ExtResource("3_yq2wk")

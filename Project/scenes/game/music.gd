@@ -18,4 +18,5 @@ func _on_timer_timeout() -> void:
 	var newSong = musicList.pick_random()
 	var songFile = load(newSong.file)
 	volume_db = newSong.volume
+	stream = songFile
 	play()

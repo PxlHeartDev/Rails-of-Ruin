@@ -11,13 +11,4 @@ script = ExtResource("2_pu4q4")
 text = "SETTINGS_accessibility"
 
 [node name="Icon" parent="VBoxContainer/Title/Button" index="0"]
-offset_left = 3.0
-offset_top = 2.0
-offset_right = 131.0
-offset_bottom = 130.0
 texture = ExtResource("2_lpukf")
-
-[node name="Back" parent="VBoxContainer/Title/Button" index="1"]
-layout_mode = 0
-offset_left = 147.0
-offset_right = 259.0

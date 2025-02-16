@@ -9,7 +9,7 @@ extends MarginContainer
 signal back
 
 func _ready() -> void:
-	backButton.position = Vector2(1736, 7)
+	backButton.position = Vector2(868, 7)
 
 func appear() -> void:
 	anim.play("RESET")

@@ -1,9 +1,0 @@
-[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://decb8klp2b0fl"]
-
-[ext_resource type="Shader" path="res://assets/shaders/ice.gdshader" id="1_oqdk2"]
-[ext_resource type="Texture2D" uid="uid://cohw3i5ooaw1x" path="res://assets/images/noise/ice.tres" id="2_jilng"]
-
-[resource]
-shader = ExtResource("1_oqdk2")
-shader_parameter/colour = Color(0.607843, 0.960784, 0.960784, 1)
-shader_parameter/noise = ExtResource("2_jilng")

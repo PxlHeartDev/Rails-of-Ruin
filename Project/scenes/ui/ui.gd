@@ -45,7 +45,7 @@ func _on_bg_cycling_timeout() -> void:
 	while newBGIndex == curBG:
 		newBGIndex = randi_range(0, len(bgImages)-1)
 	curBG = newBGIndex
-	updateBG(load("res://assets/images/backgrounds/%s" % bgImages[curBG]))
+	#updateBG(load("res://assets/images/backgrounds/%s" % bgImages[curBG]))
 
 func enterGame() -> void:
 	mainMenu.hide()

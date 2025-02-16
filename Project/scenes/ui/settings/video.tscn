@@ -11,13 +11,4 @@ script = ExtResource("2_viwtg")
 text = "SETTINGS_video"
 
 [node name="Icon" parent="VBoxContainer/Title/Button" index="0"]
-offset_left = 2.0
-offset_right = 130.0
 texture = ExtResource("3_5bkf7")
-
-[node name="Back" parent="VBoxContainer/Title/Button" index="1"]
-layout_mode = 0
-offset_left = 437.0
-offset_top = 100.0
-offset_right = 549.0
-offset_bottom = 212.0

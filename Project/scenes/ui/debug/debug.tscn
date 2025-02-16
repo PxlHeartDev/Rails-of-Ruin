@@ -3,12 +3,11 @@
 [ext_resource type="Theme" uid="uid://bsbo2358o1a7l" path="res://assets/themes/debug.tres" id="1_8kfyy"]
 [ext_resource type="Script" path="res://scenes/ui/debug/debug.gd" id="2_7sids"]
 
-[node name="Debug" type="CanvasLayer" node_paths=PackedStringArray("fps", "coordinates", "seed")]
+[node name="Debug" type="CanvasLayer" node_paths=PackedStringArray("fps", "coordinates")]
 visible = false
 script = ExtResource("2_7sids")
 fps = NodePath("Debug/HBoxContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/FPS")
 coordinates = NodePath("Debug/HBoxContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/Position")
-seed = NodePath("Debug/HBoxContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/Seed")
 
 [node name="Debug" type="MarginContainer" parent="."]
 anchors_preset = 15

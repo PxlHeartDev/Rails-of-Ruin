@@ -12,7 +12,7 @@ var curTween: Tween
 
 func _on_mouse_entered() -> void:
 	if !locked:
-		doTween(90)
+		doTween(45)
 		bip.play()
 func _on_mouse_exited() -> void:
 	if !locked:
@@ -25,7 +25,7 @@ func doTween(xPos: int, time: float = 0.2) -> Tween:
 	return tween
 
 func hideSelf() -> void:
-	if position.x > 89:
+	if position.x > 44:
 		anim.play("hidePressed")
 	else:
 		anim.play("hide")
