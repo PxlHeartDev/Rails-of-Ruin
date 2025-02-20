@@ -1,9 +1,9 @@
 extends Node2D
 
 
-@export var cam: Camera2D
-@export var saveNum: int
-@onready var player: CharacterBody2D = $Player
+@export var cam: 		Camera2D
+@export var saveNum: 	int
+@export var player: 		Player
 
 var isGravityFlipped: bool = false
 
@@ -38,3 +38,21 @@ func loadGame() -> void:
 	
 	while saveFile.get_position() < saveFile.get_length():
 		var jsonString = saveFile.get_line()
+		
+		var json = JSON.new()
+		
+		var parseResult = json.parse(jsonString)
+		if parseResult != OK:
+			print("JSON Parse Error: ", json.get_error_message(), " in ", jsonString, " at line ", json.get_error_line())
+			continue
+		
+		var nodeData = json.data
+		
+		var newObject = load(nodeData["filename"]).instantiate()
+		get_node(nodeData["parent"]).add_child(newObject)
+		newObject.position = Vector2(nodeData["pos_x"], nodeData["pos_y"])
+		
+		for i in nodeData.keys():
+			if i in ["filename", "parent", "pos_x", "pos_y"]:
+				continue
+			newObject.set(i, nodeData[i])

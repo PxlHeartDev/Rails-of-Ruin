@@ -13,7 +13,7 @@ func _input(event: InputEvent) -> void:
 		var b = bullet.instantiate().duplicate()
 		b.global_position = global_position
 		game.add_child(b)
-		b.fire(targetPos, false)
+		b.fire(targetPos - position, false)
 
 func targetChanged(pos: Vector2) -> void:
 	if pos.x < 0:

@@ -35,6 +35,11 @@ window/stretch/mode="canvas_items"
 [global_group]
 
 Saves="Node that saves to disk"
+nav_ob="Navigation Obstacle"
+
+[gui]
+
+fonts/dynamic_fonts/use_oversampling=false
 
 [input]
 
@@ -104,6 +109,7 @@ locale/translations=PackedStringArray("res://resources/localisation/Localisation
 2d_physics/layer_2="Player"
 2d_physics/layer_3="BulletEnemy"
 2d_physics/layer_4="BulletPlayer"
+2d_physics/layer_5="Enemy"
 
 [physics]
 

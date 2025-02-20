@@ -3,6 +3,7 @@ extends CharacterBody2D
 
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var decayTimer: Timer = $Decay
+@onready var attackComponent: Attack_Component = $ComponentManager/AttackComponent
 
 @export var speed: int = 500
 @export var decayTime: float = 2.0
@@ -11,14 +12,17 @@ func _ready() -> void:
 	decayTimer.wait_time = decayTime
 
 func fire(direction: Vector2, isEnemy: bool = false) -> void:
-	velocity = speed * Vector2.ZERO.direction_to(direction)#
+	velocity = speed * direction.normalized()
+	sprite.rotation = direction.angle()
 	decayTimer.start()
 	if isEnemy:
-		collision_layer = 4
+		attackComponent.collision_layer = 4
+		attackComponent.collision_mask = 0
 	else:
-		collision_layer = 8
+		attackComponent.collision_layer = 8
+		attackComponent.collision_mask = 16
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	move_and_slide()
 
 func die() -> void:

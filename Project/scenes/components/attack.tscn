@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/components/attack.gd" id="1_4d5ln"]
 
-[node name="AttackComponent" type="Area2D"]
+[node name="Attack_Component" type="Area2D"]
 collision_layer = 0
 collision_mask = 0
 script = ExtResource("1_4d5ln")

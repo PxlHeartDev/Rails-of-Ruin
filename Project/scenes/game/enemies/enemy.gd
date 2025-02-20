@@ -1,14 +1,44 @@
 class_name Enemy
 extends CharacterBody2D
 
+signal died
 
-const SPEED = 300.0
-const JUMP_VELOCITY = -400.0
+@export_group("Stats")
+@export var speed: float = 	50.0
+
+@export_group("Nodes")
+@export var sprite: 			AnimatedSprite2D
+@export var nav: 			NavigationAgent2D
+@export var stateMachine: 	StateMachine
+@export var attackComponent:	Attack_Component
+@export var hitBoxComponent:	HitBox_Component
+@export var col:				CollisionShape2D
 
 
-func _physics_process(delta: float) -> void:
-	# Add the gravity.
-	if not is_on_floor():
-		velocity += get_gravity() * delta
+@export_group("Timers")
+@export var stunTimer: 		Timer
 
-	move_and_slide()
+var player: Player
+
+func _ready() -> void:
+	player = get_parent().get_parent().player
+
+
+func damage(attack: Attack_Obj) -> void:
+	
+	var tween = create_tween().set_parallel(true)
+	tween.tween_property(sprite, "modulate:g", 0.0, 0.05)
+	tween.tween_property(sprite, "modulate:b", 0.0, 0.05)
+	tween.chain()
+	tween.tween_property(sprite, "modulate:g", 1.0, 0.2)
+	tween.tween_property(sprite, "modulate:b", 1.0, 0.2)
+
+func die() -> void:
+	died.emit()
+	stateMachine.die()
+	attackComponent.disable()
+	hitBoxComponent.disable()
+	col.set_deferred("disabled", true)
+
+func stun(time: float) -> void:
+	stunTimer.start(time)

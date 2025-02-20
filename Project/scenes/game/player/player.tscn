@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://bj6r5tpn7kxqq"]
+[gd_scene load_steps=27 format=3 uid="uid://bj6r5tpn7kxqq"]
 
 [ext_resource type="Script" path="res://scenes/game/player/player.gd" id="1_53xdg"]
 [ext_resource type="Texture2D" uid="uid://bnaj6if6ath1h" path="res://assets/sprites/player/idle.png" id="2_u36vw"]
@@ -6,13 +6,14 @@
 [ext_resource type="Texture2D" uid="uid://cucwrbjovc7uk" path="res://assets/sprites/player/jump.png" id="3_5dqy2"]
 [ext_resource type="Texture2D" uid="uid://ctowryrnxqjd7" path="res://assets/ui/gizmos/target.png" id="4_uheth"]
 [ext_resource type="Script" path="res://scenes/game/player/target.gd" id="4_wgsib"]
+[ext_resource type="Texture2D" uid="uid://c2mfjjxs5fisc" path="res://assets/sprites/player/wall.png" id="5_uontk"]
 [ext_resource type="PackedScene" uid="uid://ccsdpsgfovixi" path="res://scenes/game/weapons/weapon.tscn" id="7_vy2q0"]
 [ext_resource type="PackedScene" uid="uid://d3o31trh0j3gs" path="res://scenes/components/manager.tscn" id="8_dl8hj"]
 [ext_resource type="PackedScene" uid="uid://cid3fdyllr67t" path="res://scenes/components/health.tscn" id="9_1ht0i"]
 [ext_resource type="PackedScene" uid="uid://cfmxx0q28naxb" path="res://scenes/components/hitBox.tscn" id="10_1yuy7"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3g7mv"]
-radius = 16.0
+radius = 12.0
 height = 44.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_di5ro"]
@@ -115,7 +116,18 @@ animations = [{
 "loop": true,
 "name": &"run",
 "speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_uontk")
+}],
+"loop": true,
+"name": &"wall",
+"speed": 5.0
 }]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7o34y"]
+size = Vector2(4, 8)
 
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
@@ -130,8 +142,10 @@ position = Vector2(0, -32)
 sprite_frames = SubResource("SpriteFrames_s02o0")
 animation = &"idle"
 autoplay = "idle"
+frame_progress = 0.169998
 
 [node name="Target" type="Node2D" parent="."]
+z_index = 1
 position = Vector2(0, -22)
 script = ExtResource("4_wgsib")
 
@@ -141,14 +155,37 @@ texture = ExtResource("4_uheth")
 [node name="Weapon" parent="." instance=ExtResource("7_vy2q0")]
 position = Vector2(0, -22)
 
-[node name="ComponentManager" parent="." instance=ExtResource("8_dl8hj")]
+[node name="ComponentManager" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("8_dl8hj")]
+parent = NodePath("..")
 
 [node name="Health_Component" parent="ComponentManager" instance=ExtResource("9_1ht0i")]
 health = 10.0
 maxHealth = 10.0
 
-[node name="HitBox_Component" parent="ComponentManager" instance=ExtResource("10_1yuy7")]
+[node name="HitBox_Component" parent="ComponentManager" node_paths=PackedStringArray("healthComponent") instance=ExtResource("10_1yuy7")]
+collision_layer = 2
+collision_mask = 20
+healthComponent = NodePath("../Health_Component")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ComponentManager/HitBox_Component"]
 position = Vector2(0, -22)
 shape = SubResource("CapsuleShape2D_3g7mv")
+
+[node name="LeftWall" type="Area2D" parent="."]
+position = Vector2(-14, -22)
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWall"]
+shape = SubResource("RectangleShape2D_7o34y")
+
+[node name="RightWall" type="Area2D" parent="."]
+position = Vector2(14, -22)
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightWall"]
+shape = SubResource("RectangleShape2D_7o34y")
+
+[connection signal="body_entered" from="LeftWall" to="." method="_on_left_wall_body_entered"]
+[connection signal="body_exited" from="LeftWall" to="." method="_on_left_wall_body_exited"]
+[connection signal="body_entered" from="RightWall" to="." method="_on_right_wall_body_entered"]
+[connection signal="body_exited" from="RightWall" to="." method="_on_right_wall_body_exited"]

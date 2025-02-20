@@ -3,11 +3,13 @@
 [ext_resource type="Theme" uid="uid://bsbo2358o1a7l" path="res://assets/themes/debug.tres" id="1_8kfyy"]
 [ext_resource type="Script" path="res://scenes/ui/debug/debug.gd" id="2_7sids"]
 
-[node name="Debug" type="CanvasLayer" node_paths=PackedStringArray("fps", "coordinates")]
+[node name="Debug" type="CanvasLayer" node_paths=PackedStringArray("fps", "coordinates", "seedLabel", "stateLabel")]
 visible = false
 script = ExtResource("2_7sids")
 fps = NodePath("Debug/HBoxContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/FPS")
 coordinates = NodePath("Debug/HBoxContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/Position")
+seedLabel = NodePath("Debug/HBoxContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/Seed")
+stateLabel = NodePath("Debug/HBoxContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/State")
 
 [node name="Debug" type="MarginContainer" parent="."]
 anchors_preset = 15
@@ -35,12 +37,12 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = -8
-theme_override_constants/margin_right = 16
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_right = 12
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Debug/HBoxContainer/VBoxContainer/Panel/MarginContainer"]
 layout_mode = 2
+theme_override_constants/separation = -12
 
 [node name="FPS" type="Label" parent="Debug/HBoxContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -53,6 +55,10 @@ text = "Position: "
 [node name="Seed" type="Label" parent="Debug/HBoxContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Seed: "
+
+[node name="State" type="Label" parent="Debug/HBoxContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "State:"
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="Debug/HBoxContainer"]
 layout_mode = 2

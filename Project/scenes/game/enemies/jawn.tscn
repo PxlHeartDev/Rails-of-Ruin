@@ -1,0 +1,97 @@
+[gd_scene load_steps=13 format=3 uid="uid://iu27675qhmpy"]
+
+[ext_resource type="PackedScene" uid="uid://d31tdxejqy8es" path="res://scenes/game/enemies/enemy.tscn" id="1_wrqvd"]
+[ext_resource type="Script" path="res://scenes/game/enemies/air_enemy.gd" id="2_nxvd2"]
+[ext_resource type="Texture2D" uid="uid://dbfuyk7kbkwon" path="res://assets/sprites/enemies/jawn.png" id="2_otn67"]
+[ext_resource type="Script" path="res://scenes/game/enemies/FSM/air_to_player.gd" id="3_idcrl"]
+[ext_resource type="Script" path="res://scenes/game/enemies/FSM/air_attack.gd" id="5_uecki"]
+[ext_resource type="Script" path="res://scenes/game/enemies/FSM/air_dying.gd" id="6_lsjp5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x2yb7"]
+atlas = ExtResource("2_otn67")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f8e2h"]
+atlas = ExtResource("2_otn67")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_resp4"]
+atlas = ExtResource("2_otn67")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kfck1"]
+atlas = ExtResource("2_otn67")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yhgja"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x2yb7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f8e2h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_resp4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kfck1")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rb6k4"]
+radius = 14.0
+
+[node name="Jawn" instance=ExtResource("1_wrqvd")]
+script = ExtResource("2_nxvd2")
+
+[node name="AnimatedSprite2D" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_yhgja")
+autoplay = "default"
+frame_progress = 0.396805
+
+[node name="CollisionShape2D" parent="." index="1"]
+shape = SubResource("CircleShape2D_rb6k4")
+
+[node name="Attack_Component" parent="ComponentManager" index="0"]
+attackDamage = 4.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ComponentManager/Attack_Component" index="0"]
+shape = SubResource("CircleShape2D_rb6k4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ComponentManager/HitBox_Component" index="0"]
+shape = SubResource("CircleShape2D_rb6k4")
+
+[node name="NavigationAgent2D" parent="." index="3"]
+path_max_distance = 1000.0
+debug_enabled = true
+
+[node name="NavTimer" parent="." index="5"]
+autostart = true
+
+[node name="Cooldown" parent="." index="6"]
+one_shot = true
+
+[node name="BuildUp" parent="." index="7"]
+one_shot = true
+
+[node name="StateMachine" parent="." index="8" node_paths=PackedStringArray("initState")]
+initState = NodePath("AirToPlayer")
+
+[node name="AirToPlayer" type="Node" parent="StateMachine" index="0"]
+script = ExtResource("3_idcrl")
+
+[node name="AirAttack" type="Node" parent="StateMachine" index="1" node_paths=PackedStringArray("attackComponent", "buildUp", "CD")]
+script = ExtResource("5_uecki")
+attackComponent = NodePath("../../ComponentManager/Attack_Component")
+buildUp = NodePath("../../BuildUp")
+CD = NodePath("../../Cooldown")
+
+[node name="Dying" type="Node" parent="StateMachine" index="2"]
+script = ExtResource("6_lsjp5")
+
+[connection signal="timeout" from="NavTimer" to="StateMachine/AirToPlayer" method="navUpdate"]

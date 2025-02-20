@@ -6,6 +6,8 @@ MENU_settings,SETTINGS,OPTIONS,OPCIONES,OPTIONEN,OPZIONI,OPÇÕES,OPÇÕES,НА�
 MENU_quit,QUIT,QUITTER,CERRAR,BEENDEN,ESCI,SAIR,SAIR,ВЫХОД,ΈΞΟΔΟΣ,OYUNU KAPAT,AFSLUT,AVSLUTT,AVSLUTA,STOPPEN,WYJDŹ,LOPETA,終了する,退出,退出,종료,UKONČIT HRU,BEZÁRÁS,ÎNCHIDERE,ออก,ИЗХОД,הפסק,خروج,IZAĆI
 MENU_saveSelect,SAVE SELECT,Sauvegarder les données,Guardar partida,Spiel speichern,Salva dati,Salvar progresso,Guardar progresso,Сохранения,Αποθήκευση δεδομένων,Kaydet,Spildata,Spilldata,Spardata,Waarden opslaan,Zapisz dane,Tallenna tiedot,セーブデータ,保存数据,保存數據,저장된 데이터,Uložit nastavení,Adatok mentése,Salvează datele,บันทึกข้อมูล,Записване на данните,שמור נתונים,حفظ البيانات,Spremiti Podatke
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+GENERIC_default,Default,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 SETTINGS_audio,Audio Settings,Options sonores,Opciones de sonido,Audioeinstellungen,Opzioni audio,Opções de Som,Opções de Som,Настройки звука,Επιλογές ήχου,Ses Ayarları,Lydinstillinger,Lydinnstillinger,Ljudinställningar,Geluidsinstellingen,Ustawienia Dźwieku,Ääniasetukset,サウンド設定,声音设置,聲音設置,소리 설정,Nastavení zvuku,Hangbeállítások,Preferințe sunet,ปรับเสียง,Настройки на звука,אפשרויות קול,خيارات الصوت,Postavke Zvuka
 SETTINGS_audioButton,AUDIO,Son,Sonido,Audio,Audio,Som,Som,Звук,Ήχος,Ses,Lyd,Lyd,Ljud,Geluid,Dźwiek,Ääni,サウンド,声音,聲音,음향,Zvuk,Hang,Sunet,เสียง,Звук,קול,صوت,Zvuk
 SETTINGS_audio.master,Master Volume,,,,,,,,,,,,,,,,,,,,,,,,,,,
@@ -15,8 +17,6 @@ SETTINGS_audio.game_sfx,Game SFX Volume,,,,,,,,,,,,,,,,,,,,,,,,,,,
 SETTINGS_audio.output,Output Device,,,,,,,,,,,,,,,,,,,,,,,,,,,
 SETTINGS_audio.reduceHigh,Reduce high frequencies,,,,,,,,,,,,,,,,,,,,,,,,,,,
 SETTINGS_audio.reduceHigh.desc,Applies a low-pass filter to all audio to reduce high pitched noises,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 SETTINGS_video,Video Settings,Options vidéo,Opciones de vídeo,Videoeinstellungen,Opzioni video,Opções de Vídeo,Opções de Vídeo,Настройки видео,Επιλογές εικόνας,Video Ayarları,Video Indstillinger,Videoinnstillinger,Videoinställningar,Videoinstellingen,Ustawienia Wideo,Videoasetukset,ビデオ設定,视频设置,視頻設置,영상 설정,Nastavení obrazu,Videobeállítások,Preferințe video,ปรับค่าวีดิโอ,Настройки на видеото,אפשרויות וידאו,خيارات الفيديو,Video Postavke
 SETTINGS_videoButton,VIDEO,Vidéo,Vídeo,Video,Video,Vídeo,Vídeo,Видео,Εικόνα,Video,Video,Video,Video,Video,Jakość Wideo,Video,ビデオクオリティ,视频设置,視頻設置,영상,Kvalita obrazu,Video,Video,วีดิโอ,Видео,וידאו,فيديو,Video
@@ -29,3 +29,5 @@ SETTINGS_accessibilityButton,ACCESSIBILITY,Aide,Ayuda,Hilfe,Aiuto,Ajuda,Ajuda,П
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 DIALOGUE_test/conv1/d1,This is a test dialogue string,,,,,,,,,,,,,,,,,,,,,,,,,,,
 DIALOGUE_test/conv1/d2,What the freak,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+GAME_levelComplete,CARRIAGE COMPLETE!,,,,,,,,,,,,,,,,,,,,,,,,,,,

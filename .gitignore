@@ -17,3 +17,6 @@ mono_crash.*.json
 
 # Bitwig backups
 External/BitWig/*/auto-backups/*
+
+# Excel temp file
+External/~$*.xlsm
