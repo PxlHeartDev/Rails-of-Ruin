@@ -36,6 +36,9 @@ window/stretch/mode="canvas_items"
 
 Saves="Node that saves to disk"
 nav_ob="Navigation Obstacle"
+enemy_spawn="Is spawn point for enemy"
+level_spawn="Level spawnpoint/entrance for player"
+level_exit="Player exit for the level"
 
 [gui]
 

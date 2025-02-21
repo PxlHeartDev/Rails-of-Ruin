@@ -17,9 +17,6 @@ func update(_delta: float):
 	
 	if direction.length_squared() < 10000:
 		transitioned.emit(self, "airattack")
-	
-	#if enemy.velocity != Vector2(0, 0) and !enemy.anim.is_playing():
-		#enemy.anim.play("walk")
 
 func physUpdate(_delta: float):
 	if enemy.nav.is_navigation_finished():
@@ -33,6 +30,7 @@ func physUpdate(_delta: float):
 	enemy.move_and_slide()
 
 func navUpdate():
-	if enemy.player == null: return
+	if enemy.player == null:
+		return
 	var playerPos = enemy.player.position
 	enemy.nav.target_position = playerPos

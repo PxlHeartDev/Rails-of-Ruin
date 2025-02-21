@@ -1,18 +1,17 @@
-[gd_scene load_steps=7 format=3 uid="uid://cywafsdjrrp73"]
+[gd_scene load_steps=6 format=3 uid="uid://cywafsdjrrp73"]
 
 [ext_resource type="Script" path="res://scenes/game/game.gd" id="1_lxapy"]
-[ext_resource type="PackedScene" uid="uid://dn3hjypoqfkgp" path="res://scenes/game/levels/level.tscn" id="2_faxes"]
 [ext_resource type="Script" path="res://scenes/game/music.gd" id="6_n7rr2"]
-[ext_resource type="PackedScene" uid="uid://iu27675qhmpy" path="res://scenes/game/enemies/jawn.tscn" id="6_pi7qs"]
 [ext_resource type="AudioStream" uid="uid://bx5mp58ho88r3" path="res://assets/music/14470LS.wav" id="7_0xqkn"]
+[ext_resource type="PackedScene" uid="uid://8tr7ww2dfvhn" path="res://scenes/ui/game_ui/game_ui.tscn" id="8_desc7"]
 [ext_resource type="PackedScene" uid="uid://bj6r5tpn7kxqq" path="res://scenes/game/player/player.tscn" id="8_mcxbc"]
 
-[node name="Game" type="Node2D" node_paths=PackedStringArray("cam", "player")]
+[node name="Game" type="Node2D" node_paths=PackedStringArray("cam", "player", "gameUI", "enemies")]
 script = ExtResource("1_lxapy")
 cam = NodePath("Player/Camera2D")
 player = NodePath("Player")
-
-[node name="Level" parent="." instance=ExtResource("2_faxes")]
+gameUI = NodePath("GameUI")
+enemies = NodePath("Enemies")
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_0xqkn")
@@ -30,9 +29,9 @@ one_shot = true
 position = Vector2(0, -32)
 
 [node name="Enemies" type="Node2D" parent="."]
+z_index = 2
 
-[node name="Jawn" parent="Enemies" instance=ExtResource("6_pi7qs")]
-position = Vector2(-58, -104)
+[node name="GameUI" parent="." instance=ExtResource("8_desc7")]
 
 [connection signal="finished" from="Music" to="Music" method="_on_finished"]
 [connection signal="timeout" from="Music/Timer" to="Music" method="_on_timer_timeout"]

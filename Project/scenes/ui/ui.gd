@@ -1,11 +1,12 @@
 class_name UI
-extends Control
+extends CanvasLayer
 
 @export var bg: TextureRect
 @export var fade: ColorRect
 @export var mainMenu: MarginContainer
 @export var saveSelect: MarginContainer
 @export var settings: MarginContainer
+@export var gameUI: MarginContainer
 
 @onready var p_layer: ParallaxLayer = $ParallaxBackground/ParallaxLayer
 

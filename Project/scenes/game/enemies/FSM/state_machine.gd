@@ -17,7 +17,7 @@ func _ready():
 			states[child.name.to_lower()] = child
 			child.transitioned.connect(onTransition)
 	if initState:
-		initState.enter(initState.name)
+		initState.enter(initState.name.to_lower())
 		curState = initState
 
 	await get_tree().create_timer(randf_range(0.01, 0.9)).timeout

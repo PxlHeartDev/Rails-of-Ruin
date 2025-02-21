@@ -37,6 +37,10 @@ func _process(_delta: float) -> void:
 	updateAnimation()
 	getInputs()
 
+func nextLevel() -> void:
+	# TODO: Player being set to WallSlide state when entering a level through a door in the air
+	state = STATE.Idle
+
 const SPEED: float = 300.0
 const JUMP_STRENGTH: float = 750.0
 
@@ -163,6 +167,7 @@ func floorCheck() -> bool:
 		return is_on_floor()
 
 func flipSprite(flip: bool) -> void:
+	sprite.flip_v = game.isGravityFlipped
 	if game.isGravityFlipped:
 		sprite.flip_h = !flip
 	else:
@@ -170,7 +175,7 @@ func flipSprite(flip: bool) -> void:
 
 func damage(attack: Attack_Obj) -> void:
 	if attack.damage > 0:
-		# TODO: Took damage, health bar and whatnot
+		# TODO: Take damage anim
 		pass
 
 func die() -> void:

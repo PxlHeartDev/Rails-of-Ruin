@@ -18,15 +18,16 @@ func enter(prevState: String):
 		buildUp.timeout.connect(attack)
 		firstEntry = false
 	
-	#attackComponent.disable()
 	enemy.velocity *= 0.2
 	buildUp.start()
 	
-	#var attackSFX = AudioStreamPlayer2D.new()
-	#attackSFX.pitch_scale = 2.0
-	#attackSFX.volume_db = -2.0
-	#attackSFX.attenuation = 6.0
-	#enemy.audioManager.playSound(attackSFX, enemy.position)
+	var tween = create_tween().set_parallel(true)
+	tween.tween_property(enemy.sprite, "modulate:r", 0.0, 0.05)
+	tween.tween_property(enemy.sprite, "modulate:g", 0.0, 0.05)
+	tween.chain()
+	tween.tween_property(enemy.sprite, "modulate:r", 1.0, 0.2)
+	tween.tween_property(enemy.sprite, "modulate:g", 1.0, 0.2)
+
 
 func exit():
 	CD.stop()
@@ -63,9 +64,3 @@ func attack() -> void:
 	
 	CD.start()
 	attackComponent.enable()
-	
-	#var attackSFX = AudioStreamPlayer2D.new()
-	#attackSFX.pitch_scale = 1.0
-	#attackSFX.volume_db = -3.0
-	#attackSFX.attenuation = 6.0
-	#enemy.audioManager.playSound(attackSFX, enemy.position)

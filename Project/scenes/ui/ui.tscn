@@ -1,7 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://hrn80kjjh30a"]
+[gd_scene load_steps=5 format=3 uid="uid://hrn80kjjh30a"]
 
 [ext_resource type="Script" path="res://scenes/ui/ui.gd" id="1_s5oq1"]
-[ext_resource type="Theme" uid="uid://dwimkpe573wse" path="res://assets/themes/menu.tres" id="1_wr7y3"]
 [ext_resource type="Texture2D" uid="uid://c4n3qxjfxtj4p" path="res://assets/images/menu/cover.png" id="3_aebn4"]
 [ext_resource type="Material" uid="uid://cdvxwyxsp7yhc" path="res://assets/materials/cover_wobble.tres" id="4_bh0ug"]
 
@@ -9,14 +8,7 @@
 offsets = PackedFloat32Array(0, 0.0715631, 0.896422, 1)
 colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
 
-[node name="UI" type="Control" node_paths=PackedStringArray("bg", "fade")]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("1_wr7y3")
+[node name="UI" type="CanvasLayer" node_paths=PackedStringArray("bg", "fade")]
 script = ExtResource("1_s5oq1")
 bg = NodePath("ParallaxBackground/ParallaxLayer/BG")
 fade = NodePath("Fade")
@@ -42,7 +34,6 @@ expand_mode = 1
 
 [node name="Fade" type="ColorRect" parent="."]
 modulate = Color(1, 1, 1, 0)
-layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -54,7 +45,6 @@ color = Color(0, 0, 0, 1)
 [node name="Cover" type="TextureRect" parent="."]
 z_index = -1
 material = ExtResource("4_bh0ug")
-layout_mode = 0
 offset_top = 1.0
 offset_right = 960.0
 offset_bottom = 541.0
@@ -89,7 +79,6 @@ color = Color(0.834614, 0.834614, 0.834614, 1)
 color_ramp = SubResource("Gradient_fuotc")
 
 [node name="Credit" type="Label" parent="."]
-layout_mode = 0
 offset_top = 504.0
 offset_right = 408.0
 offset_bottom = 540.0

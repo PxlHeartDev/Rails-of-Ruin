@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://drlxddjuwdtr3"]
+
+[ext_resource type="Texture2D" uid="uid://dakwvnwcjp3dh" path="res://assets/sprites/environment/door.png" id="1_40e3e"]
+
+[node name="Entrance" type="Node2D" groups=["level_spawn"]]
+
+[node name="Door" type="Sprite2D" parent="."]
+position = Vector2(0, -32)
+texture = ExtResource("1_40e3e")

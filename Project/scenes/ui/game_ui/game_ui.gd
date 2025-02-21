@@ -1,13 +1,19 @@
-extends MarginContainer
+extends CanvasLayer
 
-@onready var completeLabel: RichTextLabel = $CentrePopup/CompleteLabel
-@onready var anim_complete: AnimationPlayer = $CentrePopup/AnimationPlayer
+@export_group("Nodes")
+@export var completeLabel: RichTextLabel
+@export var healthBar: ProgressBar
 
-func _ready() -> void:
-	anim_complete.play("show")
+@export_group("AnimationPlayers")
+@export var anim_complete: AnimationPlayer
+
 
 func _process(delta: float) -> void:
 	pass
+
+func carriageComplete() -> void:
+	completeLabel.show()
+	anim_complete.play("show")
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_TRANSLATION_CHANGED:

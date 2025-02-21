@@ -130,6 +130,7 @@ animations = [{
 size = Vector2(4, 8)
 
 [node name="Player" type="CharacterBody2D"]
+z_index = 3
 collision_layer = 2
 script = ExtResource("1_53xdg")
 

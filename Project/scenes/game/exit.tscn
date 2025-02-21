@@ -1,0 +1,69 @@
+[gd_scene load_steps=8 format=3 uid="uid://6rqhogfvhj1s"]
+
+[ext_resource type="Texture2D" uid="uid://dakwvnwcjp3dh" path="res://assets/sprites/environment/door.png" id="1_wojb7"]
+[ext_resource type="Script" path="res://scenes/game/exit.gd" id="1_wsfh4"]
+[ext_resource type="Texture2D" uid="uid://gdxsgo0gh6gt" path="res://assets/sprites/environment/doorFrame.png" id="2_o6ohu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p87o6"]
+size = Vector2(32, 64)
+
+[sub_resource type="Animation" id="Animation_cjd34"]
+resource_name = "open"
+length = 0.5
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Door:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, -32, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.5)
+}
+
+[sub_resource type="Animation" id="Animation_jclbf"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Door:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qdmh7"]
+_data = {
+"RESET": SubResource("Animation_jclbf"),
+"open": SubResource("Animation_cjd34")
+}
+
+[node name="Exit" type="Node2D" groups=["level_exit"]]
+script = ExtResource("1_wsfh4")
+
+[node name="Frame" type="Sprite2D" parent="."]
+position = Vector2(0, -32)
+texture = ExtResource("2_o6ohu")
+
+[node name="Door" type="Sprite2D" parent="."]
+position = Vector2(0, -32)
+texture = ExtResource("1_wojb7")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -32)
+shape = SubResource("RectangleShape2D_p87o6")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_qdmh7")
+}
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
