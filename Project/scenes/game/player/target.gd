@@ -2,10 +2,15 @@ extends Node2D
 
 signal posChanged(pos: Vector2)
 
-func _process(delta: float) -> void:
-	rotation += 0.02
+@onready var cam: Camera2D = $".."
 
-func _input(event: InputEvent) -> void:
-	if event is InputEventMouseMotion:
-		position = event.position - Vector2(480, 302)
-		posChanged.emit(position)
+func _process(_delta: float) -> void:
+	rotation += 0.02
+	position = get_viewport(
+			).get_mouse_position(
+			) + Vector2(
+			-480,
+			-270 +
+			cam.get_screen_center_position().y -
+			cam.global_position.y)
+	posChanged.emit(position - Vector2(0, 24))

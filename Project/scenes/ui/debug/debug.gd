@@ -1,9 +1,17 @@
 extends CanvasLayer
 
+@onready var debugVals: VBoxContainer = $Debug/HBoxContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer
+
 @export var fps: Label
 @export var coordinates: Label
 @export var seedLabel: Label
 @export var stateLabel: Label
+@export var canJumpLabel: Label
+@export var canWallJumpLabel: Label
+
+var debugValList: Dictionary = {
+	
+}
 
 var shown: bool = false
 
@@ -28,11 +36,17 @@ func _process(_delta: float) -> void:
 	times.append(now)
 	fps.text = "FPS: %s" % str(times.size())
 
+func trackVal(valName: String, val: Variant) -> void:
+	if valName in debugValList.keys():
+		debugValList[valName].text = "%s: %s" % [valName, val]
+	else:
+		var label = Label.new()
+		label.text = "%s: %s" % [valName, val]
+		debugVals.add_child(label)
+		debugValList[valName] = label
+
 func positionChanged(newPos: Vector2) -> void:
 	coordinates.text = "Pos: %s, %s" % [int(newPos.x), int(newPos.y)]
 
 func seedChanged(newSeed: int) -> void:
 	seedLabel.text = "Seed: %s" % newSeed
-
-func playerStateChanged(newState: String) -> void:
-	stateLabel.text = "State: %s" % newState

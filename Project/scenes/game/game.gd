@@ -7,13 +7,21 @@ signal waveComplete
 @export var cam: 		Camera2D
 @export var player: 		Player
 @export var gameUI: 		CanvasLayer
-@export var curLevel: 	Level
 @export var enemies: 	Node2D
 
 @export_group("Details")
 @export var saveNum: 	int
 
 var isGravityFlipped: bool = false
+
+####################
+## Game Variables ##
+####################
+
+var distance: int = 0
+var fuel: int = 0
+var speed: int = 0
+var turbo: bool = false
 
 var enemyCount: int = 0:
 	set(val):
@@ -27,7 +35,7 @@ var wavesLeft: int = 0
 var level: int = 0
 
 func _ready() -> void:
-	loadLevel(load("res://scenes/game/levels/level.tscn"))
+	#loadLevel(load("res://scenes/game/levels/level.tscn"))
 	
 	player.healthComponent.healthChanged.connect(gameUI.healthBar.changed)
 	player.healthComponent.maxHealthChanged.connect(gameUI.healthBar.maxChanged)
@@ -35,18 +43,22 @@ func _ready() -> void:
 
 func loadLevel(levelScene: PackedScene) -> void:
 	if !levelScene or !levelScene.can_instantiate():
-		print("Level %s not found or couldn't load" % levelScene)
+		print("Level %s not found or couldn't load" % level)
+		level -= 1
 		return
-	if curLevel:
-		curLevel.queue_free()
-	curLevel = levelScene.instantiate()
-	add_child.call_deferred(curLevel)
-	player.position = curLevel.entrance.position
-	curLevel.exit.playerExited.connect(playerNextLevel)
-	curLevel.spawnEnemy.connect(enemySpawned)
-	carriageComplete.connect(curLevel.exit.levelCleared)
+	#if curLevel:
+		#curLevel.queue_free()
+	#curLevel = levelScene.instantiate()
+	#add_child.call_deferred(curLevel)
+	#
+	#player.position = curLevel.entrance.position
+	#
+	#curLevel.exit.playerExited.connect(nextLevel)
+	#curLevel.spawnEnemy.connect(enemySpawned)
+	#carriageComplete.connect(curLevel.exit.levelCleared)
+	gameUI.levelChanged(level)
 
-func playerNextLevel() -> void:
+func nextLevel() -> void:
 	player.nextLevel()
 	level += 1
 	loadLevel(load("res://scenes/game/levels/level_%s.tscn" % level))

@@ -3,13 +3,16 @@
 [ext_resource type="Theme" uid="uid://bsbo2358o1a7l" path="res://assets/themes/debug.tres" id="1_8kfyy"]
 [ext_resource type="Script" path="res://scenes/ui/debug/debug.gd" id="2_7sids"]
 
-[node name="Debug" type="CanvasLayer" node_paths=PackedStringArray("fps", "coordinates", "seedLabel", "stateLabel")]
+[node name="Debug" type="CanvasLayer" node_paths=PackedStringArray("fps", "coordinates", "seedLabel", "stateLabel", "canJumpLabel", "canWallJumpLabel")]
+layer = 2
 visible = false
 script = ExtResource("2_7sids")
 fps = NodePath("Debug/HBoxContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/FPS")
-coordinates = NodePath("Debug/HBoxContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/Position")
+coordinates = NodePath("")
 seedLabel = NodePath("Debug/HBoxContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/Seed")
-stateLabel = NodePath("Debug/HBoxContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/State")
+stateLabel = NodePath("")
+canJumpLabel = NodePath("")
+canWallJumpLabel = NodePath("")
 
 [node name="Debug" type="MarginContainer" parent="."]
 anchors_preset = 15
@@ -48,17 +51,9 @@ theme_override_constants/separation = -12
 layout_mode = 2
 text = "FPS:"
 
-[node name="Position" type="Label" parent="Debug/HBoxContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "Position: "
-
 [node name="Seed" type="Label" parent="Debug/HBoxContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Seed: "
-
-[node name="State" type="Label" parent="Debug/HBoxContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "State:"
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="Debug/HBoxContainer"]
 layout_mode = 2

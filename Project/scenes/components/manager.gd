@@ -14,3 +14,5 @@ func _ready() -> void:
 func die():
 	if parent.has_method("die"):
 		parent.die()
+	else:
+		print("'die' function not found on %s" % parent)

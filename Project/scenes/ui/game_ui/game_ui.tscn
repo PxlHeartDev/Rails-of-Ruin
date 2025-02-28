@@ -1,8 +1,16 @@
-[gd_scene load_steps=7 format=3 uid="uid://8tr7ww2dfvhn"]
+[gd_scene load_steps=15 format=3 uid="uid://8tr7ww2dfvhn"]
 
 [ext_resource type="Theme" uid="uid://bstup10hd438g" path="res://assets/themes/game_ui.tres" id="1_hskbh"]
 [ext_resource type="Script" path="res://scenes/ui/game_ui/game_ui.gd" id="2_jqdkw"]
 [ext_resource type="PackedScene" uid="uid://bpvkxu51giy0b" path="res://scenes/ui/game_ui/health_bar.tscn" id="3_1wj52"]
+[ext_resource type="Texture2D" uid="uid://dxyg8is2pnsqb" path="res://assets/sprites/ui/panel/panel.png" id="4_dwyla"]
+[ext_resource type="Texture2D" uid="uid://btpqn6lyl5qiw" path="res://assets/sprites/ui/panel/icons/anomalies.png" id="5_kcgrr"]
+[ext_resource type="Texture2D" uid="uid://rpt34yvd57ta" path="res://assets/sprites/ui/panel/fuelGauge/under.png" id="5_mdkxi"]
+[ext_resource type="Texture2D" uid="uid://cdouml0sgrwmw" path="res://assets/sprites/ui/panel/icons/distance.png" id="5_xf5ck"]
+[ext_resource type="Texture2D" uid="uid://c7p077m1bvqbt" path="res://assets/sprites/ui/panel/fuelGauge/icon.png" id="6_0t05r"]
+[ext_resource type="Texture2D" uid="uid://bi1o66cy40jgi" path="res://assets/sprites/ui/panel/icons/kills.png" id="6_bl7gi"]
+[ext_resource type="Texture2D" uid="uid://38ig60dvx2dr" path="res://assets/sprites/ui/panel/fuelGauge/over.png" id="6_jr3e7"]
+[ext_resource type="Texture2D" uid="uid://ujejcrpjiklk" path="res://assets/sprites/ui/panel/fuelGauge/fill.png" id="7_50fd7"]
 
 [sub_resource type="Animation" id="Animation_dpj12"]
 length = 0.001
@@ -40,10 +48,16 @@ _data = {
 "show": SubResource("Animation_rxiat")
 }
 
-[node name="GameUI" type="CanvasLayer" node_paths=PackedStringArray("completeLabel", "healthBar", "anim_complete")]
+[node name="GameUI" type="CanvasLayer" node_paths=PackedStringArray("completeLabel", "healthBar", "distanceIcon", "distanceLabel", "anomaliesIcon", "anomaliesLabel", "enemiesIcon", "enemiesLabel", "anim_complete")]
 script = ExtResource("2_jqdkw")
 completeLabel = NodePath("Margin/CentrePopup/CompleteLabel")
-healthBar = NodePath("Margin/Main/VBoxContainer/HealthBar")
+healthBar = NodePath("Margin/Main/VBoxContainer/MarginContainer/HealthBar")
+distanceIcon = NodePath("Panel/HBoxContainer/Center/Distance/Icon")
+distanceLabel = NodePath("Panel/HBoxContainer/Center/Distance/Label")
+anomaliesIcon = NodePath("Panel/HBoxContainer/Right/HBoxContainer/VBoxContainer/Progress/Icons/Anomalies")
+anomaliesLabel = NodePath("Panel/HBoxContainer/Right/HBoxContainer/VBoxContainer/Progress/Numbers/Anomalies")
+enemiesIcon = NodePath("Panel/HBoxContainer/Right/HBoxContainer/VBoxContainer/Progress/Icons/Enemies")
+enemiesLabel = NodePath("Panel/HBoxContainer/Right/HBoxContainer/VBoxContainer/Progress/Numbers/Enemies")
 anim_complete = NodePath("Margin/CentrePopup/AnimationPlayer")
 
 [node name="Margin" type="MarginContainer" parent="."]
@@ -53,10 +67,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_hskbh")
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 16
 
 [node name="CentrePopup" type="CenterContainer" parent="Margin"]
 layout_mode = 2
@@ -90,14 +100,136 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="HealthBar" parent="Margin/Main/VBoxContainer" instance=ExtResource("3_1wj52")]
+[node name="MarginContainer" type="MarginContainer" parent="Margin/Main/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="HealthBar" parent="Margin/Main/VBoxContainer/MarginContainer" instance=ExtResource("3_1wj52")]
 custom_minimum_size = Vector2(32, 16)
 layout_mode = 2
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="Margin/Main"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_constants/separation = -16
 
 [node name="VBoxContainer3" type="VBoxContainer" parent="Margin/Main"]
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="Panel" type="TextureRect" parent="."]
+offset_top = 420.0
+offset_right = 960.0
+offset_bottom = 540.0
+theme = ExtResource("1_hskbh")
+texture = ExtResource("4_dwyla")
+stretch_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel"]
+layout_mode = 2
+offset_top = 7.0
+offset_right = 960.0
+offset_bottom = 120.0
+
+[node name="ometers" type="VBoxContainer" parent="Panel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Center" type="MarginContainer" parent="Panel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_top = 69
+
+[node name="Distance" type="HBoxContainer" parent="Panel/HBoxContainer/Center"]
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="Panel/HBoxContainer/Center/Distance"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+size_flags_horizontal = 10
+tooltip_text = "GAME_distance"
+texture = ExtResource("5_xf5ck")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Panel/HBoxContainer/Center/Distance"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "%s"
+vertical_alignment = 1
+
+[node name="Right" type="MarginContainer" parent="Panel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/HBoxContainer/Right"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/HBoxContainer/Right/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+
+[node name="Progress" type="HBoxContainer" parent="Panel/HBoxContainer/Right/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 10
+
+[node name="Icons" type="VBoxContainer" parent="Panel/HBoxContainer/Right/HBoxContainer/VBoxContainer/Progress"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Anomalies" type="TextureRect" parent="Panel/HBoxContainer/Right/HBoxContainer/VBoxContainer/Progress/Icons"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 3
+tooltip_text = "GAME_anomaliesSurvived"
+texture = ExtResource("5_kcgrr")
+stretch_mode = 5
+
+[node name="Enemies" type="TextureRect" parent="Panel/HBoxContainer/Right/HBoxContainer/VBoxContainer/Progress/Icons"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 3
+tooltip_text = "GAME_enemiesKilled"
+texture = ExtResource("6_bl7gi")
+stretch_mode = 5
+
+[node name="Numbers" type="VBoxContainer" parent="Panel/HBoxContainer/Right/HBoxContainer/VBoxContainer/Progress"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Anomalies" type="Label" parent="Panel/HBoxContainer/Right/HBoxContainer/VBoxContainer/Progress/Numbers"]
+layout_mode = 2
+text = "%s"
+
+[node name="Enemies" type="Label" parent="Panel/HBoxContainer/Right/HBoxContainer/VBoxContainer/Progress/Numbers"]
+layout_mode = 2
+text = "%s"
+
+[node name="FuelGauge" type="HBoxContainer" parent="Panel/HBoxContainer/Right/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="Panel/HBoxContainer/Right/HBoxContainer/VBoxContainer/FuelGauge"]
+modulate = Color(0, 0.835294, 0, 1)
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+size_flags_vertical = 10
+tooltip_text = "GAME_fuel"
+texture = ExtResource("6_0t05r")
+stretch_mode = 4
+
+[node name="FuelBar" type="TextureProgressBar" parent="Panel/HBoxContainer/Right/HBoxContainer/VBoxContainer/FuelGauge"]
+layout_mode = 2
+size_flags_vertical = 10
+value = 8.0
+texture_under = ExtResource("5_mdkxi")
+texture_over = ExtResource("6_jr3e7")
+texture_progress = ExtResource("7_50fd7")
+tint_over = Color(0, 0, 0, 1)

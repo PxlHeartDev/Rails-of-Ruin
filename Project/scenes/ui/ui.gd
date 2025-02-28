@@ -6,19 +6,20 @@ extends CanvasLayer
 @export var mainMenu: MarginContainer
 @export var saveSelect: MarginContainer
 @export var settings: MarginContainer
-@export var gameUI: MarginContainer
 
 @onready var p_layer: ParallaxLayer = $ParallaxBackground/ParallaxLayer
 
 var tween: Tween
 
-var bgImages: Array[String] = []
+@export var bgImages: Array[Texture2D]
 
-func _ready() -> void:
-	var dir := DirAccess.open("res://assets/images/backgrounds")
-	for f in dir.get_files():
-		if !f.contains(".import"):
-			bgImages.append(f)
+#func _ready() -> void:
+	#var dir := DirAccess.open("res://assets/images/backgrounds")
+	#for f in dir.get_files():
+		#if f.contains(".import"):
+			#continue
+		#bgImages.append(f)
+		#print(f)
 
 func _process(delta: float) -> void:
 	if p_layer.motion_offset != targetParaPos:
@@ -42,11 +43,12 @@ func updateBG(img: Texture2D) -> void:
 var curBG = 0
 
 func _on_bg_cycling_timeout() -> void:
-	var newBGIndex = 0
-	while newBGIndex == curBG:
-		newBGIndex = randi_range(0, len(bgImages)-1)
-	curBG = newBGIndex
-	#updateBG(load("res://assets/images/backgrounds/%s" % bgImages[curBG]))
+	if bgImages.size() > 1:
+		var newBGIndex = 0
+		while newBGIndex == curBG:
+			newBGIndex = randi_range(0, len(bgImages)-1)
+		curBG = newBGIndex
+		updateBG(bgImages[curBG])
 
 func enterGame() -> void:
 	mainMenu.hide()

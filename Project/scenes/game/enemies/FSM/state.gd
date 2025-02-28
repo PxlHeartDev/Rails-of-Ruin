@@ -9,7 +9,7 @@ signal transitioned
 func _ready() -> void:
 	enemy = get_parent().enemy
 
-func enter(prevState: String):
+func enter(_prevState: String):
 	pass
 
 func exit():

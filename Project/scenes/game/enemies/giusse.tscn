@@ -1,0 +1,22 @@
+[gd_scene load_steps=6 format=3 uid="uid://dnhw5lgxjro2s"]
+
+[ext_resource type="PackedScene" uid="uid://d31tdxejqy8es" path="res://scenes/game/enemies/enemy.tscn" id="1_sgdhc"]
+[ext_resource type="Script" path="res://scenes/game/enemies/FSM/air_attack.gd" id="2_mx5vy"]
+[ext_resource type="Script" path="res://scenes/game/enemies/FSM/air_to_player.gd" id="3_cqbm8"]
+[ext_resource type="Script" path="res://scenes/game/enemies/FSM/air_dying.gd" id="4_wibmm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y8par"]
+
+[node name="Giusse" instance=ExtResource("1_sgdhc")]
+
+[node name="CollisionShape2D" parent="." index="1"]
+shape = SubResource("RectangleShape2D_y8par")
+
+[node name="AirAttack" type="Node" parent="StateMachine" index="0"]
+script = ExtResource("2_mx5vy")
+
+[node name="AirToPlayer" type="Node" parent="StateMachine" index="1"]
+script = ExtResource("3_cqbm8")
+
+[node name="Dying" type="Node" parent="StateMachine" index="2"]
+script = ExtResource("4_wibmm")

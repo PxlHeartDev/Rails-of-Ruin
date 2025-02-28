@@ -67,7 +67,7 @@ func startDialogue() -> void:
 	
 	speaking = true
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if speaking and text.visible_characters < charCount:
 		text.visible_characters += 1
 		audioPlayers.pick_random().play()

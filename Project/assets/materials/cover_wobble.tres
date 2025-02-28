@@ -23,5 +23,6 @@ noise = SubResource("FastNoiseLite_n5lgm")
 [resource]
 shader = ExtResource("1_cobod")
 shader_parameter/speed = 0.005
+shader_parameter/alpha = 1.0
 shader_parameter/noise_texture = SubResource("NoiseTexture2D_b4i21")
 shader_parameter/noise_texture2 = SubResource("NoiseTexture2D_mlo63")

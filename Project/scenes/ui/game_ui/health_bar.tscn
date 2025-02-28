@@ -5,21 +5,21 @@
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4ejid"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_306h4"]
-bg_color = Color(0.394313, 0.841714, 0.626777, 1)
+bg_color = Color(0.396078, 0.843137, 0.627451, 1)
 corner_radius_top_right = 4
 corner_radius_bottom_left = 4
 corner_detail = 1
 anti_aliasing = false
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eg5hc"]
-bg_color = Color(0.873298, 0.873298, 0.873298, 1)
+bg_color = Color(0.849246, 0.370407, 0.408487, 0.345098)
 corner_radius_top_right = 4
 corner_radius_bottom_left = 4
 corner_detail = 1
 anti_aliasing = false
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4xeic"]
-bg_color = Color(0.970638, 0.679449, 0.674377, 1)
+bg_color = Color(0.972549, 0.678431, 0.67451, 0.611765)
 corner_radius_top_right = 4
 corner_radius_bottom_left = 4
 corner_detail = 1
@@ -27,7 +27,7 @@ anti_aliasing = false
 
 [node name="HealthBar" type="ProgressBar"]
 z_index = 1
-custom_minimum_size = Vector2(32, 8)
+custom_minimum_size = Vector2(306, 16)
 theme_override_styles/background = SubResource("StyleBoxEmpty_4ejid")
 theme_override_styles/fill = SubResource("StyleBoxFlat_306h4")
 max_value = 10.0

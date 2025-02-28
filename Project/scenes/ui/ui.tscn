@@ -1,8 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://hrn80kjjh30a"]
+[gd_scene load_steps=8 format=3 uid="uid://hrn80kjjh30a"]
 
 [ext_resource type="Script" path="res://scenes/ui/ui.gd" id="1_s5oq1"]
+[ext_resource type="Texture2D" uid="uid://nevnuwvn7ade" path="res://assets/images/backgrounds/skull.png" id="2_w0soq"]
 [ext_resource type="Texture2D" uid="uid://c4n3qxjfxtj4p" path="res://assets/images/menu/cover.png" id="3_aebn4"]
+[ext_resource type="Texture2D" uid="uid://dqkqjcypg3cb0" path="res://assets/images/backgrounds/skull2.png" id="3_cvvfw"]
 [ext_resource type="Material" uid="uid://cdvxwyxsp7yhc" path="res://assets/materials/cover_wobble.tres" id="4_bh0ug"]
+[ext_resource type="Theme" uid="uid://dwimkpe573wse" path="res://assets/themes/menu.tres" id="6_7b0tj"]
 
 [sub_resource type="Gradient" id="Gradient_fuotc"]
 offsets = PackedFloat32Array(0, 0.0715631, 0.896422, 1)
@@ -12,6 +15,7 @@ colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
 script = ExtResource("1_s5oq1")
 bg = NodePath("ParallaxBackground/ParallaxLayer/BG")
 fade = NodePath("Fade")
+bgImages = Array[Texture2D]([ExtResource("2_w0soq"), ExtResource("3_cvvfw")])
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
@@ -83,11 +87,12 @@ offset_top = 504.0
 offset_right = 408.0
 offset_bottom = 540.0
 size_flags_vertical = 10
+theme = ExtResource("6_7b0tj")
 theme_override_font_sizes/font_size = 20
 text = " Rian Young, Nerve Centre GDA 2025"
 
 [node name="BGCycling" type="Timer" parent="."]
-wait_time = 30.0
+wait_time = 5.0
 autostart = true
 
 [connection signal="timeout" from="BGCycling" to="." method="_on_bg_cycling_timeout"]

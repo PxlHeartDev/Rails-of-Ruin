@@ -27,7 +27,7 @@ func _ready() -> void:
 
 
 func damage(dmg: float) -> void:
-	var oldHealth = health
+	#var oldHealth = health
 	health -= dmg
 	if health <= 0:
 		health = 0

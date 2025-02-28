@@ -37,6 +37,9 @@ collision_mask = 8
 healthComponent = NodePath("../Health_Component")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+simplify_path = true
+simplify_epsilon = 8.0
+debug_enabled = true
 
 [node name="StunTimer" type="Timer" parent="."]
 

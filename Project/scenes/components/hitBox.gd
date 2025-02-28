@@ -6,6 +6,8 @@ extends Area2D
 
 var collisionShapes: Array[Node2D]
 
+var disabled := false
+
 func _ready() -> void:
 	if !manager:
 		var p = get_parent() 
@@ -30,15 +32,19 @@ func _on_area_entered(area: Area2D) -> void:
 		manager.die()
 
 func damage(attack: Attack_Obj) -> void:
+	if disabled:
+		return
 	if healthComponent:
 		healthComponent.damage(attack.damage)
 	if manager.parent.has_method("damage"):
 		manager.parent.damage(attack)
 
 func disable():
+	disabled = true
 	for c in collisionShapes:
 		c.set_deferred("disabled", true)
 
 func enable():
+	disabled = false
 	for c in collisionShapes:
 		c.set_deferred("disabled", false)

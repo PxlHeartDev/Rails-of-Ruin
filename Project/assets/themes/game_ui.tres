@@ -3,5 +3,7 @@
 [ext_resource type="FontFile" uid="uid://flcr8xso2u5e" path="res://assets/ui/fonts/Kubasta.otf" id="1_1bvsn"]
 
 [resource]
+Label/font_sizes/font_size = 20
+Label/fonts/font = ExtResource("1_1bvsn")
 RichTextLabel/font_sizes/normal_font_size = 20
 RichTextLabel/fonts/normal_font = ExtResource("1_1bvsn")

@@ -25,15 +25,11 @@ func _ready() -> void:
 
 
 func damage(attack: Attack_Obj) -> void:
-	
-	var tween = create_tween().set_parallel(true)
-	tween.tween_property(sprite, "modulate:g", 0.0, 0.05)
-	tween.tween_property(sprite, "modulate:b", 0.0, 0.05)
-	tween.chain()
-	tween.tween_property(sprite, "modulate:g", 1.0, 0.2)
-	tween.tween_property(sprite, "modulate:b", 1.0, 0.2)
+	if attack.damage > 0:
+		damageFlash()
 
 func die() -> void:
+	damageFlash()
 	died.emit()
 	stateMachine.die()
 	attackComponent.disable()
@@ -42,3 +38,11 @@ func die() -> void:
 
 func stun(time: float) -> void:
 	stunTimer.start(time)
+
+func damageFlash() -> void:
+	var tween = create_tween().set_parallel(true)
+	tween.tween_property(sprite, "modulate:g", 0.0, 0.05)
+	tween.tween_property(sprite, "modulate:b", 0.0, 0.05)
+	tween.chain()
+	tween.tween_property(sprite, "modulate:g", 1.0, 0.2)
+	tween.tween_property(sprite, "modulate:b", 1.0, 0.2)

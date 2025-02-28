@@ -5,13 +5,13 @@ extends ProgressBar
 
 var tween: Tween
 
-func changed(old: float, new: float) -> void:
+func changed(_old: float, new: float) -> void:
 	value = new
 	if tween and tween.is_running():
 		tween.stop()
 	dmgTimer.start()
 
-func maxChanged(old: float, new: float) -> void:
+func maxChanged(_old: float, new: float) -> void:
 	max_value = new
 	dmgBar.max_value = new
 

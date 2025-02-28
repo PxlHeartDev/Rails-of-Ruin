@@ -1,14 +1,15 @@
-[gd_scene load_steps=6 format=3 uid="uid://cywafsdjrrp73"]
+[gd_scene load_steps=8 format=3 uid="uid://cywafsdjrrp73"]
 
 [ext_resource type="Script" path="res://scenes/game/game.gd" id="1_lxapy"]
+[ext_resource type="Texture2D" uid="uid://c8a03ml3qsr6l" path="res://assets/sprites/environment/rail.png" id="6_bv8yq"]
 [ext_resource type="Script" path="res://scenes/game/music.gd" id="6_n7rr2"]
 [ext_resource type="AudioStream" uid="uid://bx5mp58ho88r3" path="res://assets/music/14470LS.wav" id="7_0xqkn"]
+[ext_resource type="PackedScene" uid="uid://cpuwua8t6v2dk" path="res://scenes/game/train_car.tscn" id="7_1cwia"]
 [ext_resource type="PackedScene" uid="uid://8tr7ww2dfvhn" path="res://scenes/ui/game_ui/game_ui.tscn" id="8_desc7"]
 [ext_resource type="PackedScene" uid="uid://bj6r5tpn7kxqq" path="res://scenes/game/player/player.tscn" id="8_mcxbc"]
 
-[node name="Game" type="Node2D" node_paths=PackedStringArray("cam", "player", "gameUI", "enemies")]
+[node name="Game" type="Node2D" node_paths=PackedStringArray("player", "gameUI", "enemies")]
 script = ExtResource("1_lxapy")
-cam = NodePath("Player/Camera2D")
 player = NodePath("Player")
 gameUI = NodePath("GameUI")
 enemies = NodePath("Enemies")
@@ -24,14 +25,25 @@ script = ExtResource("6_n7rr2")
 one_shot = true
 
 [node name="Player" parent="." instance=ExtResource("8_mcxbc")]
-
-[node name="Camera2D" type="Camera2D" parent="Player"]
-position = Vector2(0, -32)
+position = Vector2(0, -64)
 
 [node name="Enemies" type="Node2D" parent="."]
 z_index = 2
 
 [node name="GameUI" parent="." instance=ExtResource("8_desc7")]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_left = -960.0
+offset_top = -30.0
+offset_right = 960.0
+offset_bottom = 2.0
+texture = ExtResource("6_bv8yq")
+stretch_mode = 1
+
+[node name="TrainCar" parent="." instance=ExtResource("7_1cwia")]
+
+[node name="TrainCar2" parent="." instance=ExtResource("7_1cwia")]
+position = Vector2(-480, 0)
 
 [connection signal="finished" from="Music" to="Music" method="_on_finished"]
 [connection signal="timeout" from="Music/Timer" to="Music" method="_on_timer_timeout"]
