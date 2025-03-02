@@ -1,12 +1,24 @@
-[gd_scene load_steps=8 format=3 uid="uid://cywafsdjrrp73"]
+[gd_scene load_steps=12 format=3 uid="uid://cywafsdjrrp73"]
 
 [ext_resource type="Script" path="res://scenes/game/game.gd" id="1_lxapy"]
+[ext_resource type="PackedScene" uid="uid://iu27675qhmpy" path="res://scenes/game/enemies/jawn.tscn" id="5_gtja7"]
 [ext_resource type="Texture2D" uid="uid://c8a03ml3qsr6l" path="res://assets/sprites/environment/rail.png" id="6_bv8yq"]
 [ext_resource type="Script" path="res://scenes/game/music.gd" id="6_n7rr2"]
 [ext_resource type="AudioStream" uid="uid://bx5mp58ho88r3" path="res://assets/music/14470LS.wav" id="7_0xqkn"]
 [ext_resource type="PackedScene" uid="uid://cpuwua8t6v2dk" path="res://scenes/game/train_car.tscn" id="7_1cwia"]
 [ext_resource type="PackedScene" uid="uid://8tr7ww2dfvhn" path="res://scenes/ui/game_ui/game_ui.tscn" id="8_desc7"]
 [ext_resource type="PackedScene" uid="uid://bj6r5tpn7kxqq" path="res://scenes/game/player/player.tscn" id="8_mcxbc"]
+[ext_resource type="Texture2D" uid="uid://ya1hq31uhfj1" path="res://assets/images/noise/anomaly_pass.tres" id="9_53u5g"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_8k08j"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_onatg"]
+vertices = PackedVector2Array(271, 31, 4289.7, 97.9688, -3595, 92.0234, -751, 31, 4278.28, -1135.13, 271, -63, -3595, -1169.86, -751, -63)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 1, 0, 5), PackedInt32Array(6, 4, 5, 7), PackedInt32Array(2, 6, 7, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-3626, -1201, 4309, -1166, 4321, 129, -3626, 123)])
+source_geometry_mode = 2
+source_geometry_group_name = &"nav_ob"
+agent_radius = 31.0
 
 [node name="Game" type="Node2D" node_paths=PackedStringArray("player", "gameUI", "enemies")]
 script = ExtResource("1_lxapy")
@@ -25,14 +37,17 @@ script = ExtResource("6_n7rr2")
 one_shot = true
 
 [node name="Player" parent="." instance=ExtResource("8_mcxbc")]
-position = Vector2(0, -64)
+position = Vector2(0, -32)
 
 [node name="Enemies" type="Node2D" parent="."]
 z_index = 2
 
+[node name="Jawn" parent="Enemies" instance=ExtResource("5_gtja7")]
+position = Vector2(-12, -198)
+
 [node name="GameUI" parent="." instance=ExtResource("8_desc7")]
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="Rails" type="TextureRect" parent="."]
 offset_left = -960.0
 offset_top = -30.0
 offset_right = 960.0
@@ -40,10 +55,29 @@ offset_bottom = 2.0
 texture = ExtResource("6_bv8yq")
 stretch_mode = 1
 
-[node name="TrainCar" parent="." instance=ExtResource("7_1cwia")]
+[node name="Death" type="StaticBody2D" parent="Rails"]
+position = Vector2(960, 28)
+collision_layer = 32
+collision_mask = 18
 
-[node name="TrainCar2" parent="." instance=ExtResource("7_1cwia")]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rails/Death"]
+shape = SubResource("WorldBoundaryShape2D_8k08j")
+
+[node name="AnomalyTimer" type="Timer" parent="."]
+
+[node name="Train" type="Node2D" parent="."]
+
+[node name="TrainCar" parent="Train" instance=ExtResource("7_1cwia")]
+
+[node name="TrainCar2" parent="Train" instance=ExtResource("7_1cwia")]
 position = Vector2(-480, 0)
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_onatg")
+
+[node name="AnomalyPass2" type="Sprite2D" parent="."]
+position = Vector2(-840, 431)
+texture = ExtResource("9_53u5g")
 
 [connection signal="finished" from="Music" to="Music" method="_on_finished"]
 [connection signal="timeout" from="Music/Timer" to="Music" method="_on_timer_timeout"]

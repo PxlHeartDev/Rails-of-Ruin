@@ -5,11 +5,19 @@ extends ProgressBar
 
 var tween: Tween
 
+func _ready() -> void:
+	await get_tree().process_frame
+	dmgBar.value = dmgBar.max_value
+
 func changed(_old: float, new: float) -> void:
 	value = new
 	if tween and tween.is_running():
 		tween.stop()
 	dmgTimer.start()
+	dmgBar.modulate = Color.WHITE
+	var flashTween := create_tween()
+	flashTween.tween_interval(0.1)
+	flashTween.tween_property(dmgBar, "modulate", Color(0.973, 0.678, 0.675), 0.2)
 
 func maxChanged(_old: float, new: float) -> void:
 	max_value = new

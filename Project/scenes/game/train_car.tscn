@@ -31,7 +31,7 @@ sources/0 = SubResource("TileSetAtlasSource_d2eys")
 position = Vector2(0, -88)
 texture = ExtResource("1_aug6q")
 
-[node name="Floor" type="StaticBody2D" parent="."]
+[node name="Floor" type="StaticBody2D" parent="." groups=["nav_ob"]]
 position = Vector2(0, -16)
 collision_mask = 18
 
@@ -40,6 +40,7 @@ shape = SubResource("RectangleShape2D_0fol3")
 
 [node name="Ceiling" type="StaticBody2D" parent="."]
 position = Vector2(0, -162)
+collision_layer = 64
 collision_mask = 18
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ceiling"]

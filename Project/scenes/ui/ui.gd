@@ -13,14 +13,6 @@ var tween: Tween
 
 @export var bgImages: Array[Texture2D]
 
-#func _ready() -> void:
-	#var dir := DirAccess.open("res://assets/images/backgrounds")
-	#for f in dir.get_files():
-		#if f.contains(".import"):
-			#continue
-		#bgImages.append(f)
-		#print(f)
-
 func _process(delta: float) -> void:
 	if p_layer.motion_offset != targetParaPos:
 		p_layer.motion_offset.x = move_toward(p_layer.motion_offset.x, targetParaPos.x, 4)

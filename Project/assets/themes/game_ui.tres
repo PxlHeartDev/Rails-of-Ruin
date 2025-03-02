@@ -1,9 +1,18 @@
-[gd_resource type="Theme" load_steps=2 format=3 uid="uid://bstup10hd438g"]
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://bstup10hd438g"]
 
 [ext_resource type="FontFile" uid="uid://flcr8xso2u5e" path="res://assets/ui/fonts/Kubasta.otf" id="1_1bvsn"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jj7aj"]
+content_margin_left = 8.0
+content_margin_right = 8.0
+bg_color = Color(0.372549, 0.333333, 0.588235, 0.635294)
+corner_radius_top_right = 8
+corner_radius_bottom_left = 8
+corner_detail = 1
 
 [resource]
 Label/font_sizes/font_size = 20
 Label/fonts/font = ExtResource("1_1bvsn")
 RichTextLabel/font_sizes/normal_font_size = 20
 RichTextLabel/fonts/normal_font = ExtResource("1_1bvsn")
+TooltipPanel/styles/panel = SubResource("StyleBoxFlat_jj7aj")

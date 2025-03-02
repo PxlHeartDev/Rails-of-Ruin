@@ -12,14 +12,14 @@ corner_detail = 1
 anti_aliasing = false
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eg5hc"]
-bg_color = Color(0.849246, 0.370407, 0.408487, 0.345098)
+bg_color = Color(0.922555, 0.534578, 0.551341, 0.345098)
 corner_radius_top_right = 4
 corner_radius_bottom_left = 4
 corner_detail = 1
 anti_aliasing = false
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4xeic"]
-bg_color = Color(0.972549, 0.678431, 0.67451, 0.611765)
+bg_color = Color(1, 1, 1, 0.611765)
 corner_radius_top_right = 4
 corner_radius_bottom_left = 4
 corner_detail = 1
@@ -37,6 +37,7 @@ show_percentage = false
 script = ExtResource("1_4wuuj")
 
 [node name="RecentDamageBar" type="ProgressBar" parent="."]
+modulate = Color(0.972549, 0.678431, 0.67451, 1)
 z_index = -1
 custom_minimum_size = Vector2(32, 8)
 layout_mode = 1

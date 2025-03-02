@@ -1,7 +1,16 @@
 extends Node2D
 
-signal carriageComplete
 signal waveComplete
+
+signal anomalyProcessed
+
+# Value signals
+signal anomalyIncoming
+signal speedUpdated(newSpeed: float)
+signal distanceUpdated(newDistance: float)
+signal anomalySurvived(newCount: int)
+signal enemyKilled(newCount: int)
+signal fuelUpdated(newFuel: float)
 
 @export_group("Nodes")
 @export var cam: 		Camera2D
@@ -18,18 +27,30 @@ var isGravityFlipped: bool = false
 ## Game Variables ##
 ####################
 
-var distance: int = 0
-var fuel: int = 0
-var speed: int = 0
+var anomalyCount: int:
+	set(val):
+		anomalyCount = val
+		anomalySurvived.emit(val)
+var distance: float = 0:
+	set(val):
+		distance = val
+		distanceUpdated.emit(val)
+var fuel: float = 0:
+	set(val):
+		fuel = val
+		fuelUpdated.emit(val)
+var speed: float = 0:
+	set(val):
+		speed = val
+		speedUpdated.emit(val)
 var turbo: bool = false
 
 var enemyCount: int = 0:
 	set(val):
 		enemyCount = val
+		enemyKilled.emit(val)
 		if val == 0:
 			waveComplete.emit()
-			if wavesLeft == 0:
-				carriageComplete.emit()
 
 var wavesLeft: int = 0
 var level: int = 0
@@ -37,9 +58,24 @@ var level: int = 0
 func _ready() -> void:
 	#loadLevel(load("res://scenes/game/levels/level.tscn"))
 	
+	# Game signals
 	player.healthComponent.healthChanged.connect(gameUI.healthBar.changed)
 	player.healthComponent.maxHealthChanged.connect(gameUI.healthBar.maxChanged)
-	carriageComplete.connect(gameUI.carriageComplete)
+	
+	# UI signals
+	anomalyIncoming.connect(gameUI.anomalyAlert)
+	distanceUpdated.connect(gameUI.distanceUpdated)
+	speedUpdated.connect(gameUI.speedUpdated)
+	anomalySurvived.connect(gameUI.anomalySurvived)
+	enemyKilled.connect(gameUI.enemyKilled)
+	fuelUpdated.connect(gameUI.fuelUpdated)
+	
+	gameUI.anomalyCoveredScreen.connect(processAnomaly)
+	anomalyProcessed.connect(gameUI.anomalyProcessingComplete.emit)
+	
+	var tween := create_tween()
+	tween.tween_property(self, "fuel", 50, 1)
+	tween.tween_property(self, "fuel", 10, 1)
 
 func loadLevel(levelScene: PackedScene) -> void:
 	if !levelScene or !levelScene.can_instantiate():
@@ -57,6 +93,10 @@ func loadLevel(levelScene: PackedScene) -> void:
 	#curLevel.spawnEnemy.connect(enemySpawned)
 	#carriageComplete.connect(curLevel.exit.levelCleared)
 	gameUI.levelChanged(level)
+
+func processAnomaly() -> void:
+	await get_tree().create_timer(0.5).timeout
+	anomalyProcessed.emit()
 
 func nextLevel() -> void:
 	player.nextLevel()

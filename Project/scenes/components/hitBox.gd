@@ -31,6 +31,10 @@ func _on_area_entered(area: Area2D) -> void:
 	if area.collision_layer in [4, 8]:
 		manager.die()
 
+func _on_body_entered(body: Node2D) -> void:
+	if body.collision_layer == 32:
+		manager.die()
+
 func damage(attack: Attack_Obj) -> void:
 	if disabled:
 		return

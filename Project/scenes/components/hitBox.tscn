@@ -4,7 +4,8 @@
 
 [node name="HitBox_Component" type="Area2D"]
 collision_layer = 0
-collision_mask = 0
+collision_mask = 32
 script = ExtResource("1_h174s")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

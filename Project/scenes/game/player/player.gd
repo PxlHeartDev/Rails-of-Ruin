@@ -222,6 +222,8 @@ func _on_i_frames_timeout() -> void:
 func die() -> void:
 	# TODO: Death sequence
 	died.emit()
+	if healthComponent.health > 0:
+		healthComponent.health = 0
 
 ###############
 ## Wall Jump ##

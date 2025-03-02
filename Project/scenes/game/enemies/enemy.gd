@@ -4,7 +4,9 @@ extends CharacterBody2D
 signal died
 
 @export_group("Stats")
-@export var speed: float = 	50.0
+@export var speed: 			float = 50.0
+@export var fuelValue: 		float = 1.0
+
 
 @export_group("Nodes")
 @export var sprite: 			AnimatedSprite2D

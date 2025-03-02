@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://8tr7ww2dfvhn"]
+[gd_scene load_steps=25 format=3 uid="uid://8tr7ww2dfvhn"]
 
 [ext_resource type="Theme" uid="uid://bstup10hd438g" path="res://assets/themes/game_ui.tres" id="1_hskbh"]
 [ext_resource type="Script" path="res://scenes/ui/game_ui/game_ui.gd" id="2_jqdkw"]
@@ -11,6 +11,8 @@
 [ext_resource type="Texture2D" uid="uid://bi1o66cy40jgi" path="res://assets/sprites/ui/panel/icons/kills.png" id="6_bl7gi"]
 [ext_resource type="Texture2D" uid="uid://38ig60dvx2dr" path="res://assets/sprites/ui/panel/fuelGauge/over.png" id="6_jr3e7"]
 [ext_resource type="Texture2D" uid="uid://ujejcrpjiklk" path="res://assets/sprites/ui/panel/fuelGauge/fill.png" id="7_50fd7"]
+[ext_resource type="Shader" path="res://assets/shaders/anomaly_pass.gdshader" id="12_80ngf"]
+[ext_resource type="Texture2D" uid="uid://ya1hq31uhfj1" path="res://assets/images/noise/anomaly_pass.tres" id="13_mudp5"]
 
 [sub_resource type="Animation" id="Animation_dpj12"]
 length = 0.001
@@ -48,9 +50,74 @@ _data = {
 "show": SubResource("Animation_rxiat")
 }
 
-[node name="GameUI" type="CanvasLayer" node_paths=PackedStringArray("completeLabel", "healthBar", "distanceIcon", "distanceLabel", "anomaliesIcon", "anomaliesLabel", "enemiesIcon", "enemiesLabel", "anim_complete")]
+[sub_resource type="Animation" id="Animation_x38s1"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-50, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_yja8m"]
+resource_name = "alert"
+length = 3.0
+step = 0.1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0),
+"points": PackedFloat32Array(-50, -0.25, 0, 0.2, 117.5, 10, -0.25, 0, 0.25, 0, 10, -0.25, 0, 0.0999999, -57.5, -50, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.5, 2.5, 3)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_v8cjp"]
+_data = {
+"RESET": SubResource("Animation_x38s1"),
+"alert": SubResource("Animation_yja8m")
+}
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_iq78r"]
+noise_type = 2
+seed = 2
+frequency = 0.021
+fractal_octaves = 3
+fractal_lacunarity = 1.43
+cellular_return_type = 6
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_dwspc"]
+width = 190
+height = 108
+seamless = true
+noise = SubResource("FastNoiseLite_iq78r")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_idovj"]
+shader = ExtResource("12_80ngf")
+shader_parameter/sweepProg = 0.0
+shader_parameter/noiseTex = ExtResource("13_mudp5")
+shader_parameter/noiseTex2 = SubResource("NoiseTexture2D_dwspc")
+
+[sub_resource type="Gradient" id="Gradient_pgi46"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_7mifo"]
+gradient = SubResource("Gradient_pgi46")
+width = 1
+
+[node name="GameUI" type="CanvasLayer" node_paths=PackedStringArray("completeLabel", "warningLabel", "healthBar", "distanceIcon", "distanceLabel", "anomaliesIcon", "anomaliesLabel", "enemiesIcon", "enemiesLabel", "fuelGauge", "anomalyPass", "anim_complete", "anim_warning")]
 script = ExtResource("2_jqdkw")
 completeLabel = NodePath("Margin/CentrePopup/CompleteLabel")
+warningLabel = NodePath("Margin/Main/VBoxContainer2/Warning")
 healthBar = NodePath("Margin/Main/VBoxContainer/MarginContainer/HealthBar")
 distanceIcon = NodePath("Panel/HBoxContainer/Center/Distance/Icon")
 distanceLabel = NodePath("Panel/HBoxContainer/Center/Distance/Label")
@@ -58,7 +125,10 @@ anomaliesIcon = NodePath("Panel/HBoxContainer/Right/HBoxContainer/VBoxContainer/
 anomaliesLabel = NodePath("Panel/HBoxContainer/Right/HBoxContainer/VBoxContainer/Progress/Numbers/Anomalies")
 enemiesIcon = NodePath("Panel/HBoxContainer/Right/HBoxContainer/VBoxContainer/Progress/Icons/Enemies")
 enemiesLabel = NodePath("Panel/HBoxContainer/Right/HBoxContainer/VBoxContainer/Progress/Numbers/Enemies")
+fuelGauge = NodePath("Panel/HBoxContainer/Right/HBoxContainer/VBoxContainer/FuelGauge/FuelBar")
+anomalyPass = NodePath("AnomalyPass")
 anim_complete = NodePath("Margin/CentrePopup/AnimationPlayer")
+anim_warning = NodePath("Margin/Main/VBoxContainer2/Warning/AnimationPlayer")
 
 [node name="Margin" type="MarginContainer" parent="."]
 anchors_preset = 15
@@ -72,7 +142,6 @@ theme = ExtResource("1_hskbh")
 layout_mode = 2
 
 [node name="CompleteLabel" type="RichTextLabel" parent="Margin/CentrePopup"]
-visible = false
 clip_contents = false
 custom_minimum_size = Vector2(928, 0)
 layout_mode = 2
@@ -80,7 +149,7 @@ mouse_filter = 2
 theme_override_constants/outline_size = 15
 theme_override_font_sizes/normal_font_size = 40
 bbcode_enabled = true
-text = "[center][wave amp=150 freq=10][rainbow freq=0.1 speed=1.0]CARRIAGE COMPLETE!"
+text = "[center][wave amp=150 freq=10][rainbow freq=0.1 speed=1.0]ANOMALY SURVIVED!"
 fit_content = true
 scroll_active = false
 shortcut_keys_enabled = false
@@ -115,6 +184,18 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = -16
+
+[node name="Warning" type="RichTextLabel" parent="Margin/Main/VBoxContainer2"]
+custom_minimum_size = Vector2(0, 34.325)
+layout_mode = 2
+bbcode_enabled = true
+text = "[center][img]assets/sprites/ui/panel/icons/alert.png[/img][color=e75c57][pulse freq=2.0 color=#ffffff80][tornado radius=2 freq=4][shake] ANOMALY INCOMING [img]assets/sprites/ui/panel/icons/alert.png[/img]"
+scroll_active = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Margin/Main/VBoxContainer2/Warning"]
+libraries = {
+"": SubResource("AnimationLibrary_v8cjp")
+}
 
 [node name="VBoxContainer3" type="VBoxContainer" parent="Margin/Main"]
 layout_mode = 2
@@ -233,3 +314,15 @@ texture_under = ExtResource("5_mdkxi")
 texture_over = ExtResource("6_jr3e7")
 texture_progress = ExtResource("7_50fd7")
 tint_over = Color(0, 0, 0, 1)
+
+[node name="AnomalyPass" type="TextureRect" parent="."]
+modulate = Color(0.690196, 0.156863, 0.988235, 1)
+z_index = 2
+texture_filter = 1
+material = SubResource("ShaderMaterial_idovj")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture1D_7mifo")
