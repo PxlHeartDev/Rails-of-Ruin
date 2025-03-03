@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="Dialogue_Object" load_steps=4 format=3 uid="uid://dnece5me1x6ca"]
 
-[ext_resource type="Script" path="res://resourceSpec/dia_option.gd" id="1_arjdo"]
+[ext_resource type="Script" uid="uid://c8hg4f7v5lgeb" path="res://resourceSpec/dia_option.gd" id="1_arjdo"]
 [ext_resource type="Texture2D" uid="uid://c5m53s0pxpvrj" path="res://assets/images/characters/portrait/coomer.png" id="2_665oa"]
-[ext_resource type="Script" path="res://resourceSpec/dia_object.gd" id="2_uecgf"]
+[ext_resource type="Script" uid="uid://cmmf73r3xg2y" path="res://resourceSpec/dia_object.gd" id="2_uecgf"]
 
 [resource]
 script = ExtResource("2_uecgf")

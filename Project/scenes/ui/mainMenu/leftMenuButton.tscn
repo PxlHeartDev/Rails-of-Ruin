@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://baajq84gj2rpv"]
 
-[ext_resource type="Script" path="res://scenes/ui/mainMenu/left_menu_button.gd" id="1_nynly"]
+[ext_resource type="Script" uid="uid://cf50wf0rmnp04" path="res://scenes/ui/mainMenu/left_menu_button.gd" id="1_nynly"]
 [ext_resource type="Theme" uid="uid://dwimkpe573wse" path="res://assets/themes/menu.tres" id="1_rfmrf"]
 
 [sub_resource type="Animation" id="Animation_tfk7i"]
@@ -64,10 +64,10 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1hlc0"]
 _data = {
-"RESET": SubResource("Animation_tfk7i"),
-"hide": SubResource("Animation_celvx"),
-"hidePressed": SubResource("Animation_w2cg8"),
-"show": SubResource("Animation_d032b")
+&"RESET": SubResource("Animation_tfk7i"),
+&"hide": SubResource("Animation_celvx"),
+&"hidePressed": SubResource("Animation_w2cg8"),
+&"show": SubResource("Animation_d032b")
 }
 
 [sub_resource type="Gradient" id="Gradient_dmodm"]

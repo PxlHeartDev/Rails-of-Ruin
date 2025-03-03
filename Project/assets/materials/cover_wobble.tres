@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" load_steps=6 format=3 uid="uid://cdvxwyxsp7yhc"]
 
-[ext_resource type="Shader" path="res://assets/shaders/cover_wobble.gdshader" id="1_cobod"]
+[ext_resource type="Shader" uid="uid://ccxt80t00dyqp" path="res://assets/shaders/cover_wobble.gdshader" id="1_cobod"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_syp3b"]
 seed = 2
@@ -22,7 +22,7 @@ noise = SubResource("FastNoiseLite_n5lgm")
 
 [resource]
 shader = ExtResource("1_cobod")
-shader_parameter/speed = 0.005
-shader_parameter/alpha = 1.0
 shader_parameter/noise_texture = SubResource("NoiseTexture2D_b4i21")
 shader_parameter/noise_texture2 = SubResource("NoiseTexture2D_mlo63")
+shader_parameter/speed = 0.005
+shader_parameter/alpha = 1.0

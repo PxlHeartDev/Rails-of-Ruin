@@ -2,7 +2,7 @@
 
 [ext_resource type="Theme" uid="uid://dwimkpe573wse" path="res://assets/themes/menu.tres" id="1_6j5on"]
 [ext_resource type="PackedScene" uid="uid://baajq84gj2rpv" path="res://scenes/ui/mainMenu/leftMenuButton.tscn" id="2_l1802"]
-[ext_resource type="Script" path="res://scenes/ui/settings/settings.gd" id="2_lsviy"]
+[ext_resource type="Script" uid="uid://slbsvk2og25m" path="res://scenes/ui/settings/settings.gd" id="2_lsviy"]
 [ext_resource type="AudioStream" uid="uid://bih47sqls24lg" path="res://assets/sfx/bip.wav" id="4_w6fix"]
 [ext_resource type="PackedScene" uid="uid://d2fjioylniqmi" path="res://scenes/ui/settings/audio.tscn" id="5_dc6pq"]
 [ext_resource type="PackedScene" uid="uid://cm3874phnwmso" path="res://scenes/ui/settings/video.tscn" id="5_qva47"]
@@ -263,9 +263,9 @@ tracks/5/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_dld3b"]
 _data = {
-"RESET": SubResource("Animation_axuvk"),
-"hide": SubResource("Animation_ft0x3"),
-"show": SubResource("Animation_05db1")
+&"RESET": SubResource("Animation_axuvk"),
+&"hide": SubResource("Animation_ft0x3"),
+&"show": SubResource("Animation_05db1")
 }
 
 [node name="Settings" type="MarginContainer" node_paths=PackedStringArray("audioTab", "videoTab", "controlsTab", "accessibilityTab")]

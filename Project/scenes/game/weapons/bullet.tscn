@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://dyo27ei5sytnt"]
 
-[ext_resource type="Script" path="res://scenes/game/weapons/bullet.gd" id="1_28ddo"]
+[ext_resource type="Script" uid="uid://bpsvh6o61ju5a" path="res://scenes/game/weapons/bullet.gd" id="1_28ddo"]
 [ext_resource type="Texture2D" uid="uid://c0k3tvyg8vqsq" path="res://assets/sprites/bullets/bullet.png" id="2_a0n0f"]
 [ext_resource type="PackedScene" uid="uid://d3o31trh0j3gs" path="res://scenes/components/manager.tscn" id="2_x1jn4"]
 [ext_resource type="PackedScene" uid="uid://codttjer4sp0s" path="res://scenes/components/attack.tscn" id="3_a26uu"]

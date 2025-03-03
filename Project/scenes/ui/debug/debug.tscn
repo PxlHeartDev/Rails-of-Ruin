@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://c8rujsgown22e"]
 
 [ext_resource type="Theme" uid="uid://bsbo2358o1a7l" path="res://assets/themes/debug.tres" id="1_8kfyy"]
-[ext_resource type="Script" path="res://scenes/ui/debug/debug.gd" id="2_7sids"]
+[ext_resource type="Script" uid="uid://da6mfogrwb6aa" path="res://scenes/ui/debug/debug.gd" id="2_7sids"]
 
 [node name="Debug" type="CanvasLayer" node_paths=PackedStringArray("fps", "coordinates", "seedLabel", "stateLabel", "canJumpLabel", "canWallJumpLabel")]
 layer = 2

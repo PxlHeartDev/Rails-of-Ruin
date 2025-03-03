@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://p0i2irmyi7s3"]
 
-[ext_resource type="Script" path="res://globals/dialogue/dialogue_option.gd" id="1_la3ep"]
+[ext_resource type="Script" uid="uid://b2agxomlbsi52" path="res://globals/dialogue/dialogue_option.gd" id="1_la3ep"]
 [ext_resource type="Texture2D" uid="uid://cb55ulbhw57oc" path="res://scenes/ui/settings/Dialogue_Icon.png" id="2_r1pwn"]
 
 [node name="DialogueOption" type="Button"]

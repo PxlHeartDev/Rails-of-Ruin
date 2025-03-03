@@ -1,14 +1,13 @@
-[gd_scene load_steps=12 format=3 uid="uid://cywafsdjrrp73"]
+[gd_scene load_steps=11 format=3 uid="uid://cywafsdjrrp73"]
 
-[ext_resource type="Script" path="res://scenes/game/game.gd" id="1_lxapy"]
+[ext_resource type="Script" uid="uid://bgil2oa0dmn6o" path="res://scenes/game/game.gd" id="1_lxapy"]
 [ext_resource type="PackedScene" uid="uid://iu27675qhmpy" path="res://scenes/game/enemies/jawn.tscn" id="5_gtja7"]
 [ext_resource type="Texture2D" uid="uid://c8a03ml3qsr6l" path="res://assets/sprites/environment/rail.png" id="6_bv8yq"]
-[ext_resource type="Script" path="res://scenes/game/music.gd" id="6_n7rr2"]
+[ext_resource type="Script" uid="uid://dymmxs8tak1r4" path="res://scenes/game/music.gd" id="6_n7rr2"]
 [ext_resource type="AudioStream" uid="uid://bx5mp58ho88r3" path="res://assets/music/14470LS.wav" id="7_0xqkn"]
 [ext_resource type="PackedScene" uid="uid://cpuwua8t6v2dk" path="res://scenes/game/train_car.tscn" id="7_1cwia"]
 [ext_resource type="PackedScene" uid="uid://8tr7ww2dfvhn" path="res://scenes/ui/game_ui/game_ui.tscn" id="8_desc7"]
 [ext_resource type="PackedScene" uid="uid://bj6r5tpn7kxqq" path="res://scenes/game/player/player.tscn" id="8_mcxbc"]
-[ext_resource type="Texture2D" uid="uid://ya1hq31uhfj1" path="res://assets/images/noise/anomaly_pass.tres" id="9_53u5g"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_8k08j"]
 
@@ -74,10 +73,6 @@ position = Vector2(-480, 0)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_onatg")
-
-[node name="AnomalyPass2" type="Sprite2D" parent="."]
-position = Vector2(-840, 431)
-texture = ExtResource("9_53u5g")
 
 [connection signal="finished" from="Music" to="Music" method="_on_finished"]
 [connection signal="timeout" from="Music/Timer" to="Music" method="_on_timer_timeout"]

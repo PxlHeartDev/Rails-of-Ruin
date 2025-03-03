@@ -1,11 +1,11 @@
 [gd_scene load_steps=7 format=3 uid="uid://d31tdxejqy8es"]
 
-[ext_resource type="Script" path="res://scenes/game/enemies/enemy.gd" id="1_ucjyy"]
+[ext_resource type="Script" uid="uid://ms4ylm5temrn" path="res://scenes/game/enemies/enemy.gd" id="1_ucjyy"]
 [ext_resource type="PackedScene" uid="uid://d3o31trh0j3gs" path="res://scenes/components/manager.tscn" id="2_ugf3t"]
 [ext_resource type="PackedScene" uid="uid://codttjer4sp0s" path="res://scenes/components/attack.tscn" id="3_ikv1w"]
 [ext_resource type="PackedScene" uid="uid://cid3fdyllr67t" path="res://scenes/components/health.tscn" id="4_bbo1y"]
 [ext_resource type="PackedScene" uid="uid://cfmxx0q28naxb" path="res://scenes/components/hitBox.tscn" id="5_ee4dy"]
-[ext_resource type="Script" path="res://scenes/game/enemies/FSM/state_machine.gd" id="6_lav2o"]
+[ext_resource type="Script" uid="uid://y7p40jfea1ds" path="res://scenes/game/enemies/FSM/state_machine.gd" id="6_lav2o"]
 
 [node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "nav", "stateMachine", "attackComponent", "hitBoxComponent", "col", "stunTimer")]
 collision_layer = 16

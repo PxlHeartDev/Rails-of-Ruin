@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://dowxtew821cfl" path="res://scenes/ui/settings/settings_tab.tscn" id="1_edr2p"]
 [ext_resource type="Texture2D" uid="uid://cws8d1rirsfkl" path="res://assets/ui/icons/accessibility.png" id="2_lpukf"]
-[ext_resource type="Script" path="res://scenes/ui/settings/accessibility.gd" id="2_pu4q4"]
+[ext_resource type="Script" uid="uid://mvwqh17r31sq" path="res://scenes/ui/settings/accessibility.gd" id="2_pu4q4"]
 
 [node name="Accessibility" instance=ExtResource("1_edr2p")]
 script = ExtResource("2_pu4q4")

@@ -1,9 +1,9 @@
 [gd_scene load_steps=6 format=3 uid="uid://dnhw5lgxjro2s"]
 
 [ext_resource type="PackedScene" uid="uid://d31tdxejqy8es" path="res://scenes/game/enemies/enemy.tscn" id="1_sgdhc"]
-[ext_resource type="Script" path="res://scenes/game/enemies/FSM/air_attack.gd" id="2_mx5vy"]
-[ext_resource type="Script" path="res://scenes/game/enemies/FSM/air_to_player.gd" id="3_cqbm8"]
-[ext_resource type="Script" path="res://scenes/game/enemies/FSM/air_dying.gd" id="4_wibmm"]
+[ext_resource type="Script" uid="uid://mxs0mxdvcp5d" path="res://scenes/game/enemies/FSM/air_attack.gd" id="2_mx5vy"]
+[ext_resource type="Script" uid="uid://df6mjr7re36e1" path="res://scenes/game/enemies/FSM/air_to_player.gd" id="3_cqbm8"]
+[ext_resource type="Script" uid="uid://dnlqe3ge54src" path="res://scenes/game/enemies/FSM/air_dying.gd" id="4_wibmm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y8par"]
 

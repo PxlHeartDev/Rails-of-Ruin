@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="Dialogue_Object" load_steps=5 format=3 uid="uid://dmd2qiiiipsjk"]
 
-[ext_resource type="Script" path="res://resourceSpec/dia_option.gd" id="1_aa3fd"]
+[ext_resource type="Script" uid="uid://c8hg4f7v5lgeb" path="res://resourceSpec/dia_option.gd" id="1_aa3fd"]
 [ext_resource type="Texture2D" uid="uid://h8t08ml8n566" path="res://assets/ui/icons/skull.png" id="2_l6d7h"]
-[ext_resource type="Script" path="res://resourceSpec/dia_object.gd" id="3_qk43g"]
+[ext_resource type="Script" uid="uid://cmmf73r3xg2y" path="res://resourceSpec/dia_object.gd" id="3_qk43g"]
 
 [sub_resource type="Resource" id="Resource_yikjs"]
 script = ExtResource("1_aa3fd")

@@ -1,11 +1,11 @@
 [gd_scene load_steps=13 format=3 uid="uid://iu27675qhmpy"]
 
 [ext_resource type="PackedScene" uid="uid://d31tdxejqy8es" path="res://scenes/game/enemies/enemy.tscn" id="1_wrqvd"]
-[ext_resource type="Script" path="res://scenes/game/enemies/air_enemy.gd" id="2_nxvd2"]
+[ext_resource type="Script" uid="uid://cajyctxdaelcj" path="res://scenes/game/enemies/air_enemy.gd" id="2_nxvd2"]
 [ext_resource type="Texture2D" uid="uid://dbfuyk7kbkwon" path="res://assets/sprites/enemies/jawn.png" id="2_otn67"]
-[ext_resource type="Script" path="res://scenes/game/enemies/FSM/air_to_player.gd" id="3_idcrl"]
-[ext_resource type="Script" path="res://scenes/game/enemies/FSM/air_attack.gd" id="5_uecki"]
-[ext_resource type="Script" path="res://scenes/game/enemies/FSM/air_dying.gd" id="6_lsjp5"]
+[ext_resource type="Script" uid="uid://df6mjr7re36e1" path="res://scenes/game/enemies/FSM/air_to_player.gd" id="3_idcrl"]
+[ext_resource type="Script" uid="uid://mxs0mxdvcp5d" path="res://scenes/game/enemies/FSM/air_attack.gd" id="5_uecki"]
+[ext_resource type="Script" uid="uid://dnlqe3ge54src" path="res://scenes/game/enemies/FSM/air_dying.gd" id="6_lsjp5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_x2yb7"]
 atlas = ExtResource("2_otn67")
