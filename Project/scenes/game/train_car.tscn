@@ -44,6 +44,7 @@ collision_layer = 64
 collision_mask = 18
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ceiling"]
+z_index = 1
 shape = SubResource("RectangleShape2D_ff72t")
 one_way_collision = true
 

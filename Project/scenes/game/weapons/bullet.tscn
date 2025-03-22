@@ -29,6 +29,7 @@ shape = SubResource("CapsuleShape2D_krg8u")
 [node name="ComponentManager" parent="." instance=ExtResource("2_x1jn4")]
 
 [node name="AttackComponent" parent="ComponentManager" instance=ExtResource("3_a26uu")]
+pierce = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ComponentManager/AttackComponent"]
 rotation = 1.5708

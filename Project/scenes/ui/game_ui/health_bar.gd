@@ -16,7 +16,7 @@ func changed(_old: float, new: float) -> void:
 	dmgTimer.start()
 	dmgBar.modulate = Color.WHITE
 	var flashTween := create_tween()
-	flashTween.tween_interval(0.1)
+	flashTween.tween_interval(0.15)
 	flashTween.tween_property(dmgBar, "modulate", Color(0.973, 0.678, 0.675), 0.2)
 
 func maxChanged(_old: float, new: float) -> void:

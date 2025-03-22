@@ -12,6 +12,7 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("shoot"):
 		var b = bullet.instantiate().duplicate()
 		b.global_position = global_position
+		b.damage = 1.0
 		game.add_child(b)
 		b.fire(targetPos - position, false)
 

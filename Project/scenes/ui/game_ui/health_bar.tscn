@@ -53,6 +53,7 @@ value = 6.0
 show_percentage = false
 
 [node name="DamageDelay" type="Timer" parent="."]
+wait_time = 0.5
 one_shot = true
 
 [connection signal="timeout" from="DamageDelay" to="." method="_on_damage_delay_timeout"]

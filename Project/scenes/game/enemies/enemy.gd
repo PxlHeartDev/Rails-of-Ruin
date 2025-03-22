@@ -1,7 +1,7 @@
 class_name Enemy
 extends CharacterBody2D
 
-signal died
+signal died(fuelVal)
 
 @export_group("Stats")
 @export var speed: 			float = 50.0
@@ -22,17 +22,13 @@ signal died
 
 var player: Player
 
-func _ready() -> void:
-	player = get_parent().get_parent().player
-
-
 func damage(attack: Attack_Obj) -> void:
 	if attack.damage > 0:
 		damageFlash()
 
 func die() -> void:
 	damageFlash()
-	died.emit()
+	died.emit(fuelValue)
 	stateMachine.die()
 	attackComponent.disable()
 	hitBoxComponent.disable()

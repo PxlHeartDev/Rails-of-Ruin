@@ -27,8 +27,8 @@ func _ready() -> void:
 func hit() -> void:
 	pass
 
-func _on_area_entered(area: Area2D) -> void:
-	if area.collision_layer in [4, 8]:
+func _on_area_entered(_area: Area2D) -> void:
+	if collision_layer in [4, 8]:
 		manager.die()
 
 func _on_body_entered(body: Node2D) -> void:

@@ -13,10 +13,11 @@ signal enemyKilled(newCount: int)
 signal fuelUpdated(newFuel: float)
 
 @export_group("Nodes")
-@export var cam: 		Camera2D
-@export var player: 		Player
-@export var gameUI: 		CanvasLayer
-@export var enemies: 	Node2D
+@export var cam: 			Camera2D
+@export var player: 			Player
+@export var gameUI: 			CanvasLayer
+@export var enemies: 		Node2D
+@export var anomalyManager: 	Node2D
 
 @export_group("Details")
 @export var saveNum: 	int
@@ -43,12 +44,15 @@ var speed: float = 0:
 	set(val):
 		speed = val
 		speedUpdated.emit(val)
+var enemiesKilled: int = 0:
+	set(val):
+		enemiesKilled = val
+		enemyKilled.emit(val)
 var turbo: bool = false
 
 var enemyCount: int = 0:
 	set(val):
 		enemyCount = val
-		enemyKilled.emit(val)
 		if val == 0:
 			waveComplete.emit()
 
@@ -56,11 +60,13 @@ var wavesLeft: int = 0
 var level: int = 0
 
 func _ready() -> void:
+	player.game = self
 	#loadLevel(load("res://scenes/game/levels/level.tscn"))
 	
 	# Game signals
 	player.healthComponent.healthChanged.connect(gameUI.healthBar.changed)
 	player.healthComponent.maxHealthChanged.connect(gameUI.healthBar.maxChanged)
+	player.died.connect(playerDied)
 	
 	# UI signals
 	anomalyIncoming.connect(gameUI.anomalyAlert)
@@ -73,25 +79,24 @@ func _ready() -> void:
 	gameUI.anomalyCoveredScreen.connect(processAnomaly)
 	anomalyProcessed.connect(gameUI.anomalyProcessingComplete.emit)
 	
-	var tween := create_tween()
-	tween.tween_property(self, "fuel", 50, 1)
-	tween.tween_property(self, "fuel", 10, 1)
+	# Anomaly manager signals
+	anomalyManager.spawnEnemy.connect(spawnEnemy)
+	
+	anomalyCount = 1
+	await get_tree().create_timer(2.0).timeout
+	#anomalyIncoming.emit()
+	
+	anomalyManager.chooseAnomaly().call()
+
+func playerDied() -> void:
+	pass
 
 func loadLevel(levelScene: PackedScene) -> void:
 	if !levelScene or !levelScene.can_instantiate():
 		print("Level %s not found or couldn't load" % level)
 		level -= 1
 		return
-	#if curLevel:
-		#curLevel.queue_free()
-	#curLevel = levelScene.instantiate()
-	#add_child.call_deferred(curLevel)
-	#
-	#player.position = curLevel.entrance.position
-	#
-	#curLevel.exit.playerExited.connect(nextLevel)
-	#curLevel.spawnEnemy.connect(enemySpawned)
-	#carriageComplete.connect(curLevel.exit.levelCleared)
+	
 	gameUI.levelChanged(level)
 
 func processAnomaly() -> void:
@@ -103,12 +108,20 @@ func nextLevel() -> void:
 	level += 1
 	loadLevel(load("res://scenes/game/levels/level_%s.tscn" % level))
 
-func enemyDied() -> void:
+func enemyDied(fuelVal: float) -> void:
 	enemyCount -= 1
+	enemiesKilled += 1
+	fuel += fuelVal
 
-func enemySpawned(enemy: Enemy) -> void:
+func spawnEnemy(enemy: Enemy) -> void:
+	if enemy == null:
+		return
 	enemy.died.connect(enemyDied)
 	enemyCount += 1
+	enemy.player = player
+	enemy.position.y -= 400
+	enemy.position.x += randi_range(-200, 200)
+	enemy.position.y += randi_range(-50, 50)
 	enemies.add_child(enemy)
 
 func saveGame() -> void:
@@ -134,8 +147,9 @@ func loadGame() -> void:
 	if not FileAccess.file_exists("user://save%s.save" % saveNum):
 		return # No save found
 	
-	var nodesToLoad = get_tree().get_nodes_in_group("Saves")
-	for node in nodesToLoad:
+	# Delete old nodes to prevent duplicates
+	var oldNodes = get_tree().get_nodes_in_group("Saves")
+	for node in oldNodes:
 		node.queue_free()
 	
 	var saveFile = FileAccess.open("user://save%s.save" % saveNum, FileAccess.READ)

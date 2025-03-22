@@ -1,29 +1,30 @@
 [gd_scene load_steps=11 format=3 uid="uid://cywafsdjrrp73"]
 
 [ext_resource type="Script" uid="uid://bgil2oa0dmn6o" path="res://scenes/game/game.gd" id="1_lxapy"]
-[ext_resource type="PackedScene" uid="uid://iu27675qhmpy" path="res://scenes/game/enemies/jawn.tscn" id="5_gtja7"]
 [ext_resource type="Texture2D" uid="uid://c8a03ml3qsr6l" path="res://assets/sprites/environment/rail.png" id="6_bv8yq"]
 [ext_resource type="Script" uid="uid://dymmxs8tak1r4" path="res://scenes/game/music.gd" id="6_n7rr2"]
 [ext_resource type="AudioStream" uid="uid://bx5mp58ho88r3" path="res://assets/music/14470LS.wav" id="7_0xqkn"]
 [ext_resource type="PackedScene" uid="uid://cpuwua8t6v2dk" path="res://scenes/game/train_car.tscn" id="7_1cwia"]
 [ext_resource type="PackedScene" uid="uid://8tr7ww2dfvhn" path="res://scenes/ui/game_ui/game_ui.tscn" id="8_desc7"]
 [ext_resource type="PackedScene" uid="uid://bj6r5tpn7kxqq" path="res://scenes/game/player/player.tscn" id="8_mcxbc"]
+[ext_resource type="PackedScene" uid="uid://co0ag6polcqg3" path="res://scenes/game/anomaly_manager.tscn" id="10_4j704"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_8k08j"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_onatg"]
-vertices = PackedVector2Array(271, 31, 4289.7, 97.9688, -3595, 92.0234, -751, 31, 4278.28, -1135.13, 271, -63, -3595, -1169.86, -751, -63)
+vertices = PackedVector2Array(263, 37, 4289.7, 97.9688, -3595, 92.0234, -759, 37, 4278.28, -1135.13, 263, -57, -3595, -1169.86, -759, -57)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 1, 0, 5), PackedInt32Array(6, 4, 5, 7), PackedInt32Array(2, 6, 7, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-3626, -1201, 4309, -1166, 4321, 129, -3626, 123)])
 source_geometry_mode = 2
 source_geometry_group_name = &"nav_ob"
 agent_radius = 31.0
 
-[node name="Game" type="Node2D" node_paths=PackedStringArray("player", "gameUI", "enemies")]
+[node name="Game" type="Node2D" node_paths=PackedStringArray("player", "gameUI", "enemies", "anomalyManager")]
 script = ExtResource("1_lxapy")
 player = NodePath("Player")
 gameUI = NodePath("GameUI")
 enemies = NodePath("Enemies")
+anomalyManager = NodePath("AnomalyManager")
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_0xqkn")
@@ -41,25 +42,33 @@ position = Vector2(0, -32)
 [node name="Enemies" type="Node2D" parent="."]
 z_index = 2
 
-[node name="Jawn" parent="Enemies" instance=ExtResource("5_gtja7")]
-position = Vector2(-12, -198)
+[node name="BG" type="ParallaxBackground" parent="."]
 
-[node name="GameUI" parent="." instance=ExtResource("8_desc7")]
+[node name="Far" type="ParallaxLayer" parent="BG"]
+motion_scale = Vector2(0.2, 0.2)
 
-[node name="Rails" type="TextureRect" parent="."]
-offset_left = -960.0
-offset_top = -30.0
-offset_right = 960.0
-offset_bottom = 2.0
+[node name="Mid" type="ParallaxLayer" parent="BG"]
+motion_scale = Vector2(0.4, 0.4)
+
+[node name="Close" type="ParallaxLayer" parent="BG"]
+motion_scale = Vector2(0.7, 0.7)
+
+[node name="Rails" type="Parallax2D" parent="."]
+repeat_size = Vector2(32, 0)
+autoscroll = Vector2(-100, 0)
+repeat_times = 120
+ignore_camera_scroll = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Rails"]
+position = Vector2(0, -14)
 texture = ExtResource("6_bv8yq")
-stretch_mode = 1
 
-[node name="Death" type="StaticBody2D" parent="Rails"]
-position = Vector2(960, 28)
+[node name="Death" type="StaticBody2D" parent="."]
+position = Vector2(0, -2)
 collision_layer = 32
 collision_mask = 18
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Rails/Death"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Death"]
 shape = SubResource("WorldBoundaryShape2D_8k08j")
 
 [node name="AnomalyTimer" type="Timer" parent="."]
@@ -72,7 +81,12 @@ shape = SubResource("WorldBoundaryShape2D_8k08j")
 position = Vector2(-480, 0)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+position = Vector2(8, -6)
 navigation_polygon = SubResource("NavigationPolygon_onatg")
+
+[node name="GameUI" parent="." instance=ExtResource("8_desc7")]
+
+[node name="AnomalyManager" parent="." instance=ExtResource("10_4j704")]
 
 [connection signal="finished" from="Music" to="Music" method="_on_finished"]
 [connection signal="timeout" from="Music/Timer" to="Music" method="_on_timer_timeout"]

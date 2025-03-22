@@ -1,0 +1,79 @@
+[gd_scene load_steps=12 format=3 uid="uid://mygcgoiq3e4n"]
+
+[ext_resource type="PackedScene" uid="uid://d31tdxejqy8es" path="res://scenes/game/enemies/enemy.tscn" id="1_4hxwo"]
+[ext_resource type="Texture2D" uid="uid://csreglyi637vi" path="res://assets/sprites/enemies/dwain.png" id="2_ddhnj"]
+[ext_resource type="PackedScene" uid="uid://coxpa5f3qxe52" path="res://scenes/game/enemies/FSM/air_attack.tscn" id="3_206om"]
+[ext_resource type="PackedScene" uid="uid://besaf1ivrjqaw" path="res://scenes/game/enemies/FSM/air_dying.tscn" id="4_fvoec"]
+[ext_resource type="PackedScene" uid="uid://c76yds1naclwp" path="res://scenes/game/enemies/FSM/air_to_player.tscn" id="5_uc3nc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_206om"]
+atlas = ExtResource("2_ddhnj")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fvoec"]
+atlas = ExtResource("2_ddhnj")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uc3nc"]
+atlas = ExtResource("2_ddhnj")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qbmv6"]
+atlas = ExtResource("2_ddhnj")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_uc3nc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_206om")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fvoec")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uc3nc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qbmv6")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_206om"]
+
+[node name="Dwain" instance=ExtResource("1_4hxwo")]
+speed = 70.0
+
+[node name="AnimatedSprite2D" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_uc3nc")
+autoplay = "default"
+frame_progress = 0.671409
+
+[node name="CollisionShape2D" parent="." index="1"]
+shape = SubResource("CircleShape2D_206om")
+
+[node name="Attack_Component" parent="ComponentManager" index="0"]
+attackDamage = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ComponentManager/Attack_Component" index="0"]
+shape = SubResource("CircleShape2D_206om")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ComponentManager/HitBox_Component" index="0"]
+shape = SubResource("CircleShape2D_206om")
+
+[node name="StateMachine" parent="." index="8" node_paths=PackedStringArray("initState")]
+initState = NodePath("AirToPlayer")
+
+[node name="AirAttack" parent="StateMachine" index="0" node_paths=PackedStringArray("attackComponent", "buildUp", "CD") instance=ExtResource("3_206om")]
+attackComponent = NodePath("../../ComponentManager/Attack_Component")
+buildUp = NodePath("../../BuildUp")
+CD = NodePath("../../Cooldown")
+
+[node name="AirToPlayer" parent="StateMachine" index="1" node_paths=PackedStringArray("enemy") instance=ExtResource("5_uc3nc")]
+enemy = NodePath("../..")
+
+[node name="Dying" parent="StateMachine" index="2" node_paths=PackedStringArray("enemy") instance=ExtResource("4_fvoec")]
+enemy = NodePath("../..")

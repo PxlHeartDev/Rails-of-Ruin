@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://coxpa5f3qxe52"]
+
+[ext_resource type="Script" uid="uid://mxs0mxdvcp5d" path="res://scenes/game/enemies/FSM/air_attack.gd" id="1_l7tlt"]
+
+[node name="AirAttack" type="Node" node_paths=PackedStringArray("attackComponent", "buildUp", "CD")]
+script = ExtResource("1_l7tlt")
+attackComponent = NodePath("")
+buildUp = NodePath("")
+CD = NodePath("")

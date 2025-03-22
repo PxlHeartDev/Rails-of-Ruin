@@ -1,10 +1,13 @@
 class_name Attack_Component
 extends Area2D
 
+signal hitSomething
+
 @export_group("Vars")
 @export var attackDamage: 		float
 @export var knockbackStrength: 	float
 @export var active: 				bool = true
+@export var pierce:				int = -1
 @export var stunTime:			float
 
 @export_group("Nodes")
@@ -28,7 +31,15 @@ func _ready():
 		disable()
 
 func _on_area_entered(area):
+	if !active:
+		return
 	if area is HitBox_Component:
+		if pierce != -1:
+			pierce -= 1
+			if pierce == 0:
+				active = false
+				disable()
+		hitSomething.emit()
 		var hitBox: HitBox_Component = area
 		
 		var attack = Attack_Obj.new()

@@ -28,8 +28,8 @@ func _ready() -> void:
 	enemyKilled(0)
 	distanceUpdated(0)
 	anim_warning.play("RESET")
-	await get_tree().create_timer(1.0).timeout
-	anomalyAlert()
+	#await get_tree().create_timer(1.0).timeout
+	#anomalyAlert()
 
 func levelChanged(level: Variant) -> void:
 	pass
@@ -38,6 +38,10 @@ func levelChanged(level: Variant) -> void:
 func anomalySurvived(newCount: int) -> void:
 	anomaliesIcon.tooltip_text = tr("GAME_anomaliesSurvived") % newCount
 	anomaliesLabel.text = str(newCount)
+	
+	if newCount == 0:
+		return
+	
 	anomaliesLabel.position.x =  10
 	anomaliesLabel.scale = Vector2i(2, 2)
 	

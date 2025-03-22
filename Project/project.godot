@@ -43,6 +43,7 @@ level_exit="Player exit for the level"
 [gui]
 
 fonts/dynamic_fonts/use_oversampling=false
+theme/default_font_antialiasing=0
 
 [input]
 

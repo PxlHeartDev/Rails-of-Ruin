@@ -103,6 +103,7 @@ noise = SubResource("FastNoiseLite_iq78r")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_idovj"]
 shader = ExtResource("12_80ngf")
 shader_parameter/sweepProg = 0.0
+shader_parameter/pixelStrength = 16.0
 shader_parameter/noiseTex = ExtResource("13_mudp5")
 shader_parameter/noiseTex2 = SubResource("NoiseTexture2D_dwspc")
 
@@ -142,6 +143,7 @@ theme = ExtResource("1_hskbh")
 layout_mode = 2
 
 [node name="CompleteLabel" type="RichTextLabel" parent="Margin/CentrePopup"]
+visible = false
 clip_contents = false
 custom_minimum_size = Vector2(928, 0)
 layout_mode = 2
@@ -309,7 +311,6 @@ stretch_mode = 4
 [node name="FuelBar" type="TextureProgressBar" parent="Panel/HBoxContainer/Right/HBoxContainer/VBoxContainer/FuelGauge"]
 layout_mode = 2
 size_flags_vertical = 10
-value = 8.0
 texture_under = ExtResource("5_mdkxi")
 texture_over = ExtResource("6_jr3e7")
 texture_progress = ExtResource("7_50fd7")
@@ -325,4 +326,5 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 texture = SubResource("GradientTexture1D_7mifo")

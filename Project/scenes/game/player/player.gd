@@ -9,6 +9,7 @@ enum STATE {
 	Air,
 	WallSlide,
 	WallJump,
+	Die,
 }
 
 var state := STATE.Idle:
@@ -17,18 +18,24 @@ var state := STATE.Idle:
 			Debug.trackVal("State", STATE.find_key(val))
 		state = val
 
-@onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
-@onready var game: Node2D = get_parent()
-@onready var target: Node2D = $Camera2D/Target
-@onready var weapon: Weapon = $Weapon
-@onready var iFrames: Timer = $iFrames
+@export_category("Nodes")
+@export_group("Nodes")
+@export var sprite: AnimatedSprite2D
+@export var game: Node2D = get_parent()
+@export var target: Node2D
+@export var weapon: Weapon
 
+@export_group("Timers")
+@export var iFrames: Timer
 
-@onready var leftCheck: Area2D = $LeftWall
-@onready var rightCheck: Area2D = $RightWall
+@export_group("Areas")
+@export var leftCheck: Area2D
+@export var rightCheck: Area2D
+@export var oneWayCheck: Area2D
 
-@onready var healthComponent: Health_Component = $ComponentManager/Health_Component
-@onready var hitBoxComponent: HitBox_Component = $ComponentManager/HitBox_Component
+@export_group("Components")
+@export var healthComponent: Health_Component
+@export var hitBoxComponent: HitBox_Component
 
 var direction := Vector2.ZERO
 
@@ -48,10 +55,20 @@ var disableInput := false
 
 func _ready() -> void:
 	target.posChanged.connect(weapon.targetChanged)
+	var e = Color(0.604, 0.341, 0.706)
 
 func _process(_delta: float) -> void:
 	updateAnimation()
 	getInputs()
+
+func _physics_process(_delta: float) -> void:
+	updateState()
+	doJumpChecks()
+	doMovementChecks()
+	
+	move_and_slide()
+	
+	Debug.trackVal("Position", "%s, %s" % [int(position.x), int(position.y)])
 
 func nextLevel() -> void:
 	state = STATE.Idle
@@ -72,15 +89,6 @@ func resetCoyote() -> void:
 	if coyoteFrames != COYOTE_FRAMES:
 		coyoteFrames = COYOTE_FRAMES
 
-func _physics_process(_delta: float) -> void:
-	updateState()
-	doJumpChecks()
-	doMovementChecks()
-	
-	move_and_slide()
-	
-	Debug.trackVal("Position", "%s, %s" % [int(position.x), int(position.y)])
-
 func getInputs() -> void:
 	# Get movement direction
 	direction = Input.get_vector("move_left", "move_right", "move_down", "move_up")
@@ -91,6 +99,9 @@ func getInputs() -> void:
 		queueJump = false
 
 func updateState() -> void:
+	if state == STATE.Die:
+		return
+	
 	if floorCheck():
 		justWallJumped = false
 		if direction.x:
@@ -133,11 +144,15 @@ func updateAnimation() -> void:
 		STATE.WallJump:
 			sprite.stop()
 			sprite.animation = "jump"
+		STATE.Die:
+			# TODO: Die state
+			pass
 
 func doMovementChecks() -> void:
 	canJump = false
 	canWallJump = false
 	var xLim: float = 400
+	
 	match state:
 		STATE.Idle:
 			canJump = true
@@ -170,6 +185,8 @@ func doMovementChecks() -> void:
 			velocity.x = move_toward(velocity.x, 0, SPEED/16)
 			velocity.y += get_gravity().y
 			velocity.y = clamp(velocity.y, -1200, 1200)
+		STATE.Die:
+			velocity.x = move_toward(velocity.x, 0, SPEED)
 	
 	if justJumped:
 		justJumped = false
@@ -222,6 +239,8 @@ func _on_i_frames_timeout() -> void:
 func die() -> void:
 	# TODO: Death sequence
 	died.emit()
+	disableInput = true
+	state = STATE.Die
 	if healthComponent.health > 0:
 		healthComponent.health = 0
 
@@ -230,8 +249,6 @@ func die() -> void:
 ###############
 
 var isOnWall := false
-
-@onready var oneWayCheck: Area2D = $OneWayCheck
 
 var leftWall := false:
 	set(val):

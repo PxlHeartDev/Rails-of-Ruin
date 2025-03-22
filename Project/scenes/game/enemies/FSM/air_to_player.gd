@@ -2,6 +2,8 @@ class_name State_AirToPlayer
 extends State
 
 func enter(prevState: String):
+	if !enemy.is_node_ready():
+		await enemy.ready
 	navUpdate()
 
 func exit():
@@ -31,6 +33,6 @@ func physUpdate(_delta: float):
 
 func navUpdate():
 	if enemy.player == null:
-		return
+		await get_tree().process_frame
 	var playerPos = enemy.player.position
 	enemy.nav.target_position = playerPos

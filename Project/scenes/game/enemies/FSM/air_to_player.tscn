@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c76yds1naclwp"]
+
+[ext_resource type="Script" uid="uid://df6mjr7re36e1" path="res://scenes/game/enemies/FSM/air_to_player.gd" id="1_71ltq"]
+
+[node name="AirToPlayer" type="Node"]
+script = ExtResource("1_71ltq")

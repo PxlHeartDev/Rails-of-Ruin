@@ -3,9 +3,9 @@
 [ext_resource type="PackedScene" uid="uid://d31tdxejqy8es" path="res://scenes/game/enemies/enemy.tscn" id="1_wrqvd"]
 [ext_resource type="Script" uid="uid://cajyctxdaelcj" path="res://scenes/game/enemies/air_enemy.gd" id="2_nxvd2"]
 [ext_resource type="Texture2D" uid="uid://dbfuyk7kbkwon" path="res://assets/sprites/enemies/jawn.png" id="2_otn67"]
-[ext_resource type="Script" uid="uid://df6mjr7re36e1" path="res://scenes/game/enemies/FSM/air_to_player.gd" id="3_idcrl"]
-[ext_resource type="Script" uid="uid://mxs0mxdvcp5d" path="res://scenes/game/enemies/FSM/air_attack.gd" id="5_uecki"]
-[ext_resource type="Script" uid="uid://dnlqe3ge54src" path="res://scenes/game/enemies/FSM/air_dying.gd" id="6_lsjp5"]
+[ext_resource type="PackedScene" uid="uid://c76yds1naclwp" path="res://scenes/game/enemies/FSM/air_to_player.tscn" id="4_7dhyy"]
+[ext_resource type="PackedScene" uid="uid://coxpa5f3qxe52" path="res://scenes/game/enemies/FSM/air_attack.tscn" id="5_sbctf"]
+[ext_resource type="PackedScene" uid="uid://besaf1ivrjqaw" path="res://scenes/game/enemies/FSM/air_dying.tscn" id="6_6msfb"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_x2yb7"]
 atlas = ExtResource("2_otn67")
@@ -58,7 +58,7 @@ frame_progress = 0.396805
 shape = SubResource("CircleShape2D_rb6k4")
 
 [node name="Attack_Component" parent="ComponentManager" index="0"]
-attackDamage = 4.0
+attackDamage = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ComponentManager/Attack_Component" index="0"]
 shape = SubResource("CircleShape2D_rb6k4")
@@ -69,9 +69,6 @@ shape = SubResource("CircleShape2D_rb6k4")
 [node name="NavigationAgent2D" parent="." index="3"]
 path_max_distance = 1000.0
 
-[node name="NavTimer" parent="." index="5"]
-autostart = true
-
 [node name="Cooldown" parent="." index="6"]
 one_shot = true
 
@@ -81,16 +78,13 @@ one_shot = true
 [node name="StateMachine" parent="." index="8" node_paths=PackedStringArray("initState")]
 initState = NodePath("AirToPlayer")
 
-[node name="AirToPlayer" type="Node" parent="StateMachine" index="0"]
-script = ExtResource("3_idcrl")
-
-[node name="AirAttack" type="Node" parent="StateMachine" index="1" node_paths=PackedStringArray("attackComponent", "buildUp", "CD")]
-script = ExtResource("5_uecki")
+[node name="AirAttack" parent="StateMachine" index="0" node_paths=PackedStringArray("attackComponent", "buildUp", "CD") instance=ExtResource("5_sbctf")]
 attackComponent = NodePath("../../ComponentManager/Attack_Component")
 buildUp = NodePath("../../BuildUp")
 CD = NodePath("../../Cooldown")
 
-[node name="Dying" type="Node" parent="StateMachine" index="2"]
-script = ExtResource("6_lsjp5")
+[node name="AirToPlayer" parent="StateMachine" index="1" node_paths=PackedStringArray("enemy") instance=ExtResource("4_7dhyy")]
+enemy = NodePath("../..")
 
-[connection signal="timeout" from="NavTimer" to="StateMachine/AirToPlayer" method="navUpdate"]
+[node name="Dying" parent="StateMachine" index="2" node_paths=PackedStringArray("enemy") instance=ExtResource("6_6msfb")]
+enemy = NodePath("../..")

@@ -39,7 +39,6 @@ healthComponent = NodePath("../Health_Component")
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 simplify_path = true
 simplify_epsilon = 8.0
-debug_enabled = true
 
 [node name="StunTimer" type="Timer" parent="."]
 
@@ -53,3 +52,5 @@ debug_enabled = true
 script = ExtResource("6_lav2o")
 navTimer = NodePath("../NavTimer")
 enemy = NodePath("..")
+
+[connection signal="timeout" from="NavTimer" to="StateMachine" method="_on_nav_timer_timeout"]
