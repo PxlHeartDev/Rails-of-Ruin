@@ -15,12 +15,16 @@ signal died(fuelVal)
 @export var attackComponent:	Attack_Component
 @export var hitBoxComponent:	HitBox_Component
 @export var col:				CollisionShape2D
+@export var deathParticles:	CPUParticles2D
 
 
 @export_group("Timers")
 @export var stunTimer: 		Timer
 
 var player: Player
+
+func _ready() -> void:
+	stateMachine.states["dying"].faded.connect(dieFade)
 
 func damage(attack: Attack_Obj) -> void:
 	if attack.damage > 0:
@@ -34,6 +38,9 @@ func die() -> void:
 	hitBoxComponent.disable()
 	col.set_deferred("disabled", true)
 
+func dieFade() -> void:
+	deathParticles.emitting = true
+
 func stun(time: float) -> void:
 	stunTimer.start(time)
 
@@ -44,3 +51,6 @@ func damageFlash() -> void:
 	tween.chain()
 	tween.tween_property(sprite, "modulate:g", 1.0, 0.2)
 	tween.tween_property(sprite, "modulate:b", 1.0, 0.2)
+
+func _on_death_particles_finished() -> void:
+	queue_free()

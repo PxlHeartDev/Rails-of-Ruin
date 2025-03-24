@@ -3,6 +3,19 @@ extends Node2D
 
 signal spawnEnemy(enemy: Enemy)
 
+enum Region {
+	PLAINS,
+	DESSERT,
+	TUNDRA,
+	OCEAN,
+	ANOMALY,
+}
+
+@export var materiaManager: MateriaManager
+
+var validSpawnMin: Vector2 = Vector2(-800, -360)
+var validSpawnMax: Vector2 = Vector2(320, -180)
+
 # Ranges reasonably from 0 to 30, numbers quickly approach infinity at 80
 var difficulty: int = 30
 
@@ -12,6 +25,7 @@ var anomalyList: Dictionary[String, Callable] = {
 	"enemies_easy": summonEnemies.bind(1.5),
 	"enemies_mid": summonEnemies.bind(1.7),
 	"enemies_hard": summonEnemies.bind(1.8),
+	"spawn_objects": spawnMateria,
 }
 
 const ENEMY_PATH = "res://scenes/game/enemies/enemies/"
@@ -43,8 +57,12 @@ func summonEnemies(diff: float) -> void:
 	var enemyCount: int = int(
 			randf_range(5.0, 10.0
 			) * (
-			(wave/(80-difficulty)) + diff - 0.5 ) ** diff
+			(wave/(80.0-difficulty)) + diff - 0.5 ) ** diff
 			+ difficulty / 5.0)
 	for i in enemyCount:
 		await get_tree().physics_frame
 		spawnEnemy.emit(chooseEnemy())
+
+func spawnMateria() -> void:
+	for i in 50:
+		materiaManager.attemptSpawn(Region.PLAINS)

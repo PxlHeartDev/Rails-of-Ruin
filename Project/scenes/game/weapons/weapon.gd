@@ -2,7 +2,7 @@ class_name Weapon
 extends Node2D
 
 @onready var sprite: Sprite2D = $Sprite2D
-@onready var game: Node2D = get_parent().get_parent()
+@onready var game: Node2D = get_parent().get_parent().get_parent()
 
 @export var bullet: PackedScene
 

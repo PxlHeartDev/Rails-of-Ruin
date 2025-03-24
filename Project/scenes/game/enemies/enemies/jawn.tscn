@@ -69,22 +69,17 @@ shape = SubResource("CircleShape2D_rb6k4")
 [node name="NavigationAgent2D" parent="." index="3"]
 path_max_distance = 1000.0
 
-[node name="Cooldown" parent="." index="6"]
-one_shot = true
-
-[node name="BuildUp" parent="." index="7"]
-one_shot = true
-
-[node name="StateMachine" parent="." index="8" node_paths=PackedStringArray("initState")]
+[node name="StateMachine" parent="." index="5" node_paths=PackedStringArray("initState")]
 initState = NodePath("AirToPlayer")
 
 [node name="AirAttack" parent="StateMachine" index="0" node_paths=PackedStringArray("attackComponent", "buildUp", "CD") instance=ExtResource("5_sbctf")]
 attackComponent = NodePath("../../ComponentManager/Attack_Component")
-buildUp = NodePath("../../BuildUp")
-CD = NodePath("../../Cooldown")
+buildUp = NodePath("../../Timers/BuildUp")
+CD = NodePath("../../Timers/Cooldown")
 
 [node name="AirToPlayer" parent="StateMachine" index="1" node_paths=PackedStringArray("enemy") instance=ExtResource("4_7dhyy")]
 enemy = NodePath("../..")
 
 [node name="Dying" parent="StateMachine" index="2" node_paths=PackedStringArray("enemy") instance=ExtResource("6_6msfb")]
+free = false
 enemy = NodePath("../..")

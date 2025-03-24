@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://8tr7ww2dfvhn"]
+[gd_scene load_steps=30 format=3 uid="uid://8tr7ww2dfvhn"]
 
 [ext_resource type="Theme" uid="uid://bstup10hd438g" path="res://assets/themes/game_ui.tres" id="1_hskbh"]
 [ext_resource type="Script" uid="uid://cp5cjmfaoryfx" path="res://scenes/ui/game_ui/game_ui.gd" id="2_jqdkw"]
@@ -115,23 +115,142 @@ colors = PackedColorArray(1, 1, 1, 1)
 gradient = SubResource("Gradient_pgi46")
 width = 1
 
-[node name="GameUI" type="CanvasLayer" node_paths=PackedStringArray("completeLabel", "warningLabel", "healthBar", "distanceIcon", "distanceLabel", "anomaliesIcon", "anomaliesLabel", "enemiesIcon", "enemiesLabel", "fuelGauge", "anomalyPass", "anim_complete", "anim_warning")]
-script = ExtResource("2_jqdkw")
-completeLabel = NodePath("Margin/CentrePopup/CompleteLabel")
-warningLabel = NodePath("Margin/Main/VBoxContainer2/Warning")
-healthBar = NodePath("Margin/Main/VBoxContainer/MarginContainer/HealthBar")
-distanceIcon = NodePath("Panel/HBoxContainer/Center/Distance/Icon")
-distanceLabel = NodePath("Panel/HBoxContainer/Center/Distance/Label")
-anomaliesIcon = NodePath("Panel/HBoxContainer/Right/HBoxContainer/VBoxContainer/Progress/Icons/Anomalies")
-anomaliesLabel = NodePath("Panel/HBoxContainer/Right/HBoxContainer/VBoxContainer/Progress/Numbers/Anomalies")
-enemiesIcon = NodePath("Panel/HBoxContainer/Right/HBoxContainer/VBoxContainer/Progress/Icons/Enemies")
-enemiesLabel = NodePath("Panel/HBoxContainer/Right/HBoxContainer/VBoxContainer/Progress/Numbers/Enemies")
-fuelGauge = NodePath("Panel/HBoxContainer/Right/HBoxContainer/VBoxContainer/FuelGauge/FuelBar")
-anomalyPass = NodePath("AnomalyPass")
-anim_complete = NodePath("Margin/CentrePopup/AnimationPlayer")
-anim_warning = NodePath("Margin/Main/VBoxContainer2/Warning/AnimationPlayer")
+[sub_resource type="Animation" id="Animation_gc7ur"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MarginContainer/VBoxContainer/GameOver:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MarginContainer/VBoxContainer/Quip:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(100, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MarginContainer/VBoxContainer/Again:position:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(230, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("MarginContainer/VBoxContainer/Quit:position:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(302, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
 
-[node name="Margin" type="MarginContainer" parent="."]
+[sub_resource type="Animation" id="Animation_vjxrc"]
+resource_name = "show"
+length = 5.0
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MarginContainer/VBoxContainer/GameOver:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(-200, -0.25, 0, 0.698905, 285, 0, -0.667173, 37, 0.25, 0),
+"times": PackedFloat32Array(1.03333, 2.53274)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MarginContainer/VBoxContainer/Quip:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(500, -0.25, 0, 1.14943, 6, 100, -1, 24, 0.25, 0),
+"times": PackedFloat32Array(1.29941, 3.03274)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MarginContainer/VBoxContainer/Again:position:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(500, -0.25, 0, 0.25, 0, 230, -0.240721, -37.5, 0.25, 0),
+"times": PackedFloat32Array(2.56608, 3.03274)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("MarginContainer/VBoxContainer/Quit:position:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(500, -0.25, 0, 0.25, 0, 302, -0.240721, -38.5, 0.25, 0),
+"times": PackedFloat32Array(2.89941, 3.36608)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8jg32"]
+_data = {
+&"RESET": SubResource("Animation_gc7ur"),
+&"show": SubResource("Animation_vjxrc")
+}
+
+[sub_resource type="Curve" id="Curve_vjxrc"]
+_limits = [-200.0, 200.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.27, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+metadata/_snap_enabled = true
+metadata/_snap_count = 100
+
+[sub_resource type="Gradient" id="Gradient_vjxrc"]
+offsets = PackedFloat32Array(0, 0.689873, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[node name="GameUI" type="CanvasLayer" node_paths=PackedStringArray("completeLabel", "warningLabel", "gameOverLabel", "quipLabel", "againButton", "quitButton", "healthBar", "distanceIcon", "distanceLabel", "anomaliesIcon", "anomaliesLabel", "enemiesIcon", "enemiesLabel", "fuelGauge", "anomalyPass", "gameOverPanel", "anim_complete", "anim_warning", "anim_gameOver", "deathParticles")]
+script = ExtResource("2_jqdkw")
+completeLabel = NodePath("Main/CentrePopup/CompleteLabel")
+warningLabel = NodePath("Main/Main/VBoxContainer2/Warning")
+gameOverLabel = NodePath("GameOver/MarginContainer/VBoxContainer/GameOver")
+quipLabel = NodePath("GameOver/MarginContainer/VBoxContainer/Quip")
+againButton = NodePath("GameOver/MarginContainer/VBoxContainer/Again")
+quitButton = NodePath("GameOver/MarginContainer/VBoxContainer/Quit")
+healthBar = NodePath("Main/Main/VBoxContainer/MarginContainer/HealthBar")
+distanceIcon = NodePath("BottomPanel/HBoxContainer/Center/Distance/Icon")
+distanceLabel = NodePath("BottomPanel/HBoxContainer/Center/Distance/Label")
+anomaliesIcon = NodePath("BottomPanel/HBoxContainer/Right/HBoxContainer/VBoxContainer/Progress/Icons/Anomalies")
+anomaliesLabel = NodePath("BottomPanel/HBoxContainer/Right/HBoxContainer/VBoxContainer/Progress/Numbers/Anomalies")
+enemiesIcon = NodePath("BottomPanel/HBoxContainer/Right/HBoxContainer/VBoxContainer/Progress/Icons/Enemies")
+enemiesLabel = NodePath("BottomPanel/HBoxContainer/Right/HBoxContainer/VBoxContainer/Progress/Numbers/Enemies")
+fuelGauge = NodePath("BottomPanel/HBoxContainer/Right/HBoxContainer/VBoxContainer/FuelGauge/FuelBar")
+anomalyPass = NodePath("AnomalyPass")
+gameOverPanel = NodePath("GameOver")
+anim_complete = NodePath("Main/CentrePopup/AnimationPlayer")
+anim_warning = NodePath("Main/Main/VBoxContainer2/Warning/AnimationPlayer")
+anim_gameOver = NodePath("GameOver/AnimationPlayer")
+deathParticles = NodePath("GameOver/DeathParticles")
+
+[node name="Main" type="MarginContainer" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -139,10 +258,10 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_hskbh")
 
-[node name="CentrePopup" type="CenterContainer" parent="Margin"]
+[node name="CentrePopup" type="CenterContainer" parent="Main"]
 layout_mode = 2
 
-[node name="CompleteLabel" type="RichTextLabel" parent="Margin/CentrePopup"]
+[node name="CompleteLabel" type="RichTextLabel" parent="Main/CentrePopup"]
 visible = false
 clip_contents = false
 custom_minimum_size = Vector2(928, 0)
@@ -158,52 +277,52 @@ shortcut_keys_enabled = false
 deselect_on_focus_loss_enabled = false
 drag_and_drop_selection_enabled = false
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Margin/CentrePopup"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Main/CentrePopup"]
 root_node = NodePath("../..")
 libraries = {
 &"": SubResource("AnimationLibrary_jc27n")
 }
 
-[node name="Main" type="HBoxContainer" parent="Margin"]
+[node name="Main" type="HBoxContainer" parent="Main"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Margin/Main"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Main/Main"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="MarginContainer" type="MarginContainer" parent="Margin/Main/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Main/Main/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
-[node name="HealthBar" parent="Margin/Main/VBoxContainer/MarginContainer" instance=ExtResource("3_1wj52")]
+[node name="HealthBar" parent="Main/Main/VBoxContainer/MarginContainer" instance=ExtResource("3_1wj52")]
 custom_minimum_size = Vector2(32, 16)
 layout_mode = 2
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="Margin/Main"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="Main/Main"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = -16
 
-[node name="Warning" type="RichTextLabel" parent="Margin/Main/VBoxContainer2"]
+[node name="Warning" type="RichTextLabel" parent="Main/Main/VBoxContainer2"]
 custom_minimum_size = Vector2(0, 34.325)
 layout_mode = 2
 bbcode_enabled = true
 text = "[center][img]assets/sprites/ui/panel/icons/alert.png[/img][color=e75c57][pulse freq=2.0 color=#ffffff80][tornado radius=2 freq=4][shake] ANOMALY INCOMING [img]assets/sprites/ui/panel/icons/alert.png[/img]"
 scroll_active = false
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Margin/Main/VBoxContainer2/Warning"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Main/Main/VBoxContainer2/Warning"]
 libraries = {
 &"": SubResource("AnimationLibrary_v8cjp")
 }
 
-[node name="VBoxContainer3" type="VBoxContainer" parent="Margin/Main"]
+[node name="VBoxContainer3" type="VBoxContainer" parent="Main/Main"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Panel" type="TextureRect" parent="."]
+[node name="BottomPanel" type="TextureRect" parent="."]
 offset_top = 420.0
 offset_right = 960.0
 offset_bottom = 540.0
@@ -211,25 +330,25 @@ theme = ExtResource("1_hskbh")
 texture = ExtResource("4_dwyla")
 stretch_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel"]
+[node name="HBoxContainer" type="HBoxContainer" parent="BottomPanel"]
 layout_mode = 2
 offset_top = 7.0
 offset_right = 960.0
 offset_bottom = 120.0
 
-[node name="ometers" type="VBoxContainer" parent="Panel/HBoxContainer"]
+[node name="ometers" type="VBoxContainer" parent="BottomPanel/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Center" type="MarginContainer" parent="Panel/HBoxContainer"]
+[node name="Center" type="MarginContainer" parent="BottomPanel/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/margin_top = 69
 
-[node name="Distance" type="HBoxContainer" parent="Panel/HBoxContainer/Center"]
+[node name="Distance" type="HBoxContainer" parent="BottomPanel/HBoxContainer/Center"]
 layout_mode = 2
 
-[node name="Icon" type="TextureRect" parent="Panel/HBoxContainer/Center/Distance"]
+[node name="Icon" type="TextureRect" parent="BottomPanel/HBoxContainer/Center/Distance"]
 custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
 size_flags_horizontal = 10
@@ -237,36 +356,36 @@ tooltip_text = "GAME_distance"
 texture = ExtResource("5_xf5ck")
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="Panel/HBoxContainer/Center/Distance"]
+[node name="Label" type="Label" parent="BottomPanel/HBoxContainer/Center/Distance"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "%s"
 vertical_alignment = 1
 
-[node name="Right" type="MarginContainer" parent="Panel/HBoxContainer"]
+[node name="Right" type="MarginContainer" parent="BottomPanel/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel/HBoxContainer/Right"]
+[node name="HBoxContainer" type="HBoxContainer" parent="BottomPanel/HBoxContainer/Right"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/HBoxContainer/Right/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="BottomPanel/HBoxContainer/Right/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 10
 
-[node name="Progress" type="HBoxContainer" parent="Panel/HBoxContainer/Right/HBoxContainer/VBoxContainer"]
+[node name="Progress" type="HBoxContainer" parent="BottomPanel/HBoxContainer/Right/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 10
 
-[node name="Icons" type="VBoxContainer" parent="Panel/HBoxContainer/Right/HBoxContainer/VBoxContainer/Progress"]
+[node name="Icons" type="VBoxContainer" parent="BottomPanel/HBoxContainer/Right/HBoxContainer/VBoxContainer/Progress"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Anomalies" type="TextureRect" parent="Panel/HBoxContainer/Right/HBoxContainer/VBoxContainer/Progress/Icons"]
+[node name="Anomalies" type="TextureRect" parent="BottomPanel/HBoxContainer/Right/HBoxContainer/VBoxContainer/Progress/Icons"]
 custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
 size_flags_horizontal = 8
@@ -275,7 +394,7 @@ tooltip_text = "GAME_anomaliesSurvived"
 texture = ExtResource("5_kcgrr")
 stretch_mode = 5
 
-[node name="Enemies" type="TextureRect" parent="Panel/HBoxContainer/Right/HBoxContainer/VBoxContainer/Progress/Icons"]
+[node name="Enemies" type="TextureRect" parent="BottomPanel/HBoxContainer/Right/HBoxContainer/VBoxContainer/Progress/Icons"]
 custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
 size_flags_horizontal = 8
@@ -284,22 +403,22 @@ tooltip_text = "GAME_enemiesKilled"
 texture = ExtResource("6_bl7gi")
 stretch_mode = 5
 
-[node name="Numbers" type="VBoxContainer" parent="Panel/HBoxContainer/Right/HBoxContainer/VBoxContainer/Progress"]
+[node name="Numbers" type="VBoxContainer" parent="BottomPanel/HBoxContainer/Right/HBoxContainer/VBoxContainer/Progress"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Anomalies" type="Label" parent="Panel/HBoxContainer/Right/HBoxContainer/VBoxContainer/Progress/Numbers"]
+[node name="Anomalies" type="Label" parent="BottomPanel/HBoxContainer/Right/HBoxContainer/VBoxContainer/Progress/Numbers"]
 layout_mode = 2
 text = "%s"
 
-[node name="Enemies" type="Label" parent="Panel/HBoxContainer/Right/HBoxContainer/VBoxContainer/Progress/Numbers"]
+[node name="Enemies" type="Label" parent="BottomPanel/HBoxContainer/Right/HBoxContainer/VBoxContainer/Progress/Numbers"]
 layout_mode = 2
 text = "%s"
 
-[node name="FuelGauge" type="HBoxContainer" parent="Panel/HBoxContainer/Right/HBoxContainer/VBoxContainer"]
+[node name="FuelGauge" type="HBoxContainer" parent="BottomPanel/HBoxContainer/Right/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Icon" type="TextureRect" parent="Panel/HBoxContainer/Right/HBoxContainer/VBoxContainer/FuelGauge"]
+[node name="Icon" type="TextureRect" parent="BottomPanel/HBoxContainer/Right/HBoxContainer/VBoxContainer/FuelGauge"]
 modulate = Color(0, 0.835294, 0, 1)
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
@@ -308,7 +427,7 @@ tooltip_text = "GAME_fuel"
 texture = ExtResource("6_0t05r")
 stretch_mode = 4
 
-[node name="FuelBar" type="TextureProgressBar" parent="Panel/HBoxContainer/Right/HBoxContainer/VBoxContainer/FuelGauge"]
+[node name="FuelBar" type="TextureProgressBar" parent="BottomPanel/HBoxContainer/Right/HBoxContainer/VBoxContainer/FuelGauge"]
 layout_mode = 2
 size_flags_vertical = 10
 texture_under = ExtResource("5_mdkxi")
@@ -328,3 +447,95 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 texture = SubResource("GradientTexture1D_7mifo")
+
+[node name="GameOver" type="ColorRect" parent="."]
+visible = false
+z_index = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_hskbh")
+color = Color(0, 0, 0, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="GameOver"]
+libraries = {
+&"": SubResource("AnimationLibrary_8jg32")
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="GameOver"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 60
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 40
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameOver/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="GameOver" type="RichTextLabel" parent="GameOver/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(880, 90)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 50
+bbcode_enabled = true
+text = "[wave freq=2 amp=100]GAME_lose.generic"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Quip" type="RichTextLabel" parent="GameOver/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+bbcode_enabled = true
+text = "[shake rate=3 level=2]GAME_lose.quip1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Again" type="Button" parent="GameOver/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "GAME_lose.again"
+
+[node name="Quit" type="Button" parent="GameOver/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "GAME_lose.quit"
+
+[node name="DeathParticles" type="CPUParticles2D" parent="GameOver"]
+z_index = 5
+position = Vector2(480, 270)
+emitting = false
+amount = 128
+lifetime = 1.5
+one_shot = true
+explosiveness = 1.0
+emission_shape = 3
+emission_rect_extents = Vector2(24, 40)
+direction = Vector2(0, -1)
+spread = 90.0
+gravity = Vector2(0, 98)
+initial_velocity_min = 50.0
+initial_velocity_max = 100.0
+angular_velocity_min = -141.47
+angular_velocity_max = 101.05
+radial_accel_min = 500.0
+radial_accel_max = 600.0
+radial_accel_curve = SubResource("Curve_vjxrc")
+angle_min = -180.0
+angle_max = 180.0
+scale_amount_min = 2.0
+scale_amount_max = 6.0
+color = Color(0.762504, 0.360526, 0.968003, 1)
+color_ramp = SubResource("Gradient_vjxrc")
+
+[connection signal="pressed" from="GameOver/MarginContainer/VBoxContainer/Again" to="." method="_on_again_pressed"]
+[connection signal="pressed" from="GameOver/MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="finished" from="GameOver/DeathParticles" to="." method="_on_death_particles_finished"]

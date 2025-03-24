@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://dfctg17eoujpu"]
+
+[ext_resource type="Script" uid="uid://3m5ph8s6f2vc" path="res://scenes/game/materia/materia.gd" id="1_aektx"]
+[ext_resource type="TileSet" uid="uid://cuukjg5jcrnbv" path="res://resources/tilesets/grass.tres" id="1_o2cnf"]
+
+[node name="Materia" type="Node2D"]
+z_index = 1
+script = ExtResource("1_aektx")
+boundingCircleRadius = 23.0
+randomRest = null
+initRot = 2.14575
+randomPos = null
+initPos = Vector2(0, 0)
+
+[node name="Blocks" type="TileMapLayer" parent="."]
+z_index = -1
+tile_set = ExtResource("1_o2cnf")

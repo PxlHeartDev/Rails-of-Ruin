@@ -1,11 +1,10 @@
 extends Node2D
 
 signal waveComplete
-
 signal anomalyProcessed
+signal anomalyIncoming
 
 # Value signals
-signal anomalyIncoming
 signal speedUpdated(newSpeed: float)
 signal distanceUpdated(newDistance: float)
 signal anomalySurvived(newCount: int)
@@ -13,11 +12,12 @@ signal enemyKilled(newCount: int)
 signal fuelUpdated(newFuel: float)
 
 @export_group("Nodes")
-@export var cam: 			Camera2D
-@export var player: 			Player
-@export var gameUI: 			CanvasLayer
-@export var enemies: 		Node2D
-@export var anomalyManager: 	Node2D
+@export var cam: Camera2D
+@export var player: Player
+@export var gameUI: CanvasLayer
+@export var enemies: Node2D
+@export var anomalyManager: Node2D
+@export var gameSpace: Node2D
 
 @export_group("Details")
 @export var saveNum: 	int
@@ -40,7 +40,7 @@ var fuel: float = 0:
 	set(val):
 		fuel = val
 		fuelUpdated.emit(val)
-var speed: float = 0:
+var speed: float = 1.666:
 	set(val):
 		speed = val
 		speedUpdated.emit(val)
@@ -89,7 +89,7 @@ func _ready() -> void:
 	anomalyManager.chooseAnomaly().call()
 
 func playerDied() -> void:
-	pass
+	gameUI.gameOver()
 
 func loadLevel(levelScene: PackedScene) -> void:
 	if !levelScene or !levelScene.can_instantiate():
@@ -119,9 +119,8 @@ func spawnEnemy(enemy: Enemy) -> void:
 	enemy.died.connect(enemyDied)
 	enemyCount += 1
 	enemy.player = player
-	enemy.position.y -= 400
-	enemy.position.x += randi_range(-200, 200)
-	enemy.position.y += randi_range(-50, 50)
+	enemy.position.x = randi_range(anomalyManager.validSpawnMin.x, anomalyManager.validSpawnMax.x)
+	enemy.position.y = randi_range(anomalyManager.validSpawnMin.y, anomalyManager.validSpawnMax.y)
 	enemies.add_child(enemy)
 
 func saveGame() -> void:
@@ -174,3 +173,6 @@ func loadGame() -> void:
 			if i in ["filename", "parent", "pos_x", "pos_y"]:
 				continue
 			newObject.set(i, nodeData[i])
+
+func _on_game_ui_particles_complete() -> void:
+	gameSpace.queue_free()

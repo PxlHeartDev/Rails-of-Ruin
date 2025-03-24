@@ -1,6 +1,40 @@
-[gd_resource type="Theme" load_steps=3 format=3 uid="uid://bstup10hd438g"]
+[gd_resource type="Theme" load_steps=9 format=3 uid="uid://bstup10hd438g"]
 
 [ext_resource type="FontFile" uid="uid://flcr8xso2u5e" path="res://assets/ui/fonts/Kubasta.otf" id="1_1bvsn"]
+[ext_resource type="Texture2D" uid="uid://dgxi0fwko45ob" path="res://assets/ui/panels/simple.png" id="2_xpb4n"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_dxkm7"]
+texture = ExtResource("2_xpb4n")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+modulate_color = Color(0.822284, 0.546988, 0.531831, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xpb4n"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_au6vn"]
+texture = ExtResource("2_xpb4n")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+modulate_color = Color(0.501961, 0.635294, 0.85098, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_r33x3"]
+texture = ExtResource("2_xpb4n")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+modulate_color = Color(0.611765, 1, 0.643137, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2vk8d"]
+texture = ExtResource("2_xpb4n")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jj7aj"]
 content_margin_left = 8.0
@@ -11,6 +45,14 @@ corner_radius_bottom_left = 8
 corner_detail = 1
 
 [resource]
+Button/font_sizes/font_size = 30
+Button/fonts/font = ExtResource("1_1bvsn")
+Button/styles/disabled = SubResource("StyleBoxTexture_dxkm7")
+Button/styles/focus = SubResource("StyleBoxEmpty_xpb4n")
+Button/styles/hover = SubResource("StyleBoxTexture_au6vn")
+Button/styles/hover_pressed = SubResource("StyleBoxTexture_r33x3")
+Button/styles/normal = SubResource("StyleBoxTexture_2vk8d")
+Button/styles/pressed = SubResource("StyleBoxTexture_r33x3")
 Label/font_sizes/font_size = 20
 Label/fonts/font = ExtResource("1_1bvsn")
 RichTextLabel/font_sizes/normal_font_size = 20

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cywafsdjrrp73"]
+[gd_scene load_steps=14 format=4 uid="uid://cywafsdjrrp73"]
 
 [ext_resource type="Script" uid="uid://bgil2oa0dmn6o" path="res://scenes/game/game.gd" id="1_lxapy"]
 [ext_resource type="Texture2D" uid="uid://c8a03ml3qsr6l" path="res://assets/sprites/environment/rail.png" id="6_bv8yq"]
@@ -7,9 +7,20 @@
 [ext_resource type="PackedScene" uid="uid://cpuwua8t6v2dk" path="res://scenes/game/train_car.tscn" id="7_1cwia"]
 [ext_resource type="PackedScene" uid="uid://8tr7ww2dfvhn" path="res://scenes/ui/game_ui/game_ui.tscn" id="8_desc7"]
 [ext_resource type="PackedScene" uid="uid://bj6r5tpn7kxqq" path="res://scenes/game/player/player.tscn" id="8_mcxbc"]
+[ext_resource type="Texture2D" uid="uid://bjgwhg1fg7t3o" path="res://assets/tilesets/world/grass.png" id="9_2a8rs"]
 [ext_resource type="PackedScene" uid="uid://co0ag6polcqg3" path="res://scenes/game/anomaly_manager.tscn" id="10_4j704"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_8k08j"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4j704"]
+texture = ExtResource("9_2a8rs")
+0:0/0 = 0
+1:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_kp23o"]
+sources/0 = SubResource("TileSetAtlasSource_4j704")
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_onatg"]
 vertices = PackedVector2Array(263, 37, 4289.7, 97.9688, -3595, 92.0234, -759, 37, 4278.28, -1135.13, 263, -57, -3595, -1169.86, -759, -57)
@@ -19,12 +30,78 @@ source_geometry_mode = 2
 source_geometry_group_name = &"nav_ob"
 agent_radius = 31.0
 
-[node name="Game" type="Node2D" node_paths=PackedStringArray("player", "gameUI", "enemies", "anomalyManager")]
+[node name="Game" type="Node2D" node_paths=PackedStringArray("player", "gameUI", "enemies", "anomalyManager", "gameSpace")]
 script = ExtResource("1_lxapy")
-player = NodePath("Player")
+player = NodePath("GameSpace/Player")
 gameUI = NodePath("GameUI")
-enemies = NodePath("Enemies")
-anomalyManager = NodePath("AnomalyManager")
+enemies = NodePath("GameSpace/Enemies")
+anomalyManager = NodePath("GameSpace/AnomalyManager")
+gameSpace = NodePath("GameSpace")
+
+[node name="GameSpace" type="Node2D" parent="."]
+
+[node name="Player" parent="GameSpace" instance=ExtResource("8_mcxbc")]
+position = Vector2(0, -32)
+
+[node name="Enemies" type="Node2D" parent="GameSpace"]
+z_index = 2
+
+[node name="BG" type="ParallaxBackground" parent="GameSpace"]
+
+[node name="Far" type="ParallaxLayer" parent="GameSpace/BG"]
+motion_scale = Vector2(0.2, 0.2)
+
+[node name="Mid" type="ParallaxLayer" parent="GameSpace/BG"]
+motion_scale = Vector2(0.4, 0.4)
+
+[node name="Close" type="ParallaxLayer" parent="GameSpace/BG"]
+motion_scale = Vector2(0.7, 0.7)
+
+[node name="Rails" type="StaticBody2D" parent="GameSpace"]
+position = Vector2(0, -6)
+collision_layer = 32
+collision_mask = 18
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GameSpace/Rails"]
+shape = SubResource("WorldBoundaryShape2D_8k08j")
+
+[node name="Sprite" type="Parallax2D" parent="GameSpace/Rails"]
+scroll_offset = Vector2(0, 4)
+repeat_size = Vector2(32, 0)
+autoscroll = Vector2(-100, 0)
+repeat_times = 120
+ignore_camera_scroll = true
+
+[node name="Sprite2D" type="Sprite2D" parent="GameSpace/Rails/Sprite"]
+position = Vector2(0, -14)
+texture = ExtResource("6_bv8yq")
+
+[node name="Ground" type="TileMapLayer" parent="GameSpace/Rails/Sprite"]
+position = Vector2(0, 2)
+tile_map_data = PackedByteArray("AAD//wAAAAABAAEAAAD//wEAAAABAAAAAAD//wIAAAABAAAAAAD//wMAAAABAAAAAAD//wQAAAABAAAAAAD//wUAAAABAAAAAAD//wYAAAABAAAAAAD//wcAAAABAAAAAAD//wgAAAABAAAAAAD//wkAAAABAAAAAAD//woAAAABAAAAAAD//wsAAAABAAAAAAD//wwAAAABAAAAAAD//w0AAAABAAAAAAD//w4AAAABAAAAAAD//w8AAAABAAAAAAD//xAAAAABAAAAAAD+/wAAAAABAAEAAAD+/wEAAAABAAAAAAD+/wIAAAABAAAAAAD+/wMAAAABAAAAAAD+/wQAAAABAAAAAAD+/wUAAAABAAAAAAD+/wYAAAABAAAAAAD+/wcAAAABAAAAAAD+/wgAAAABAAAAAAD+/wkAAAABAAAAAAD+/woAAAABAAAAAAD+/wsAAAABAAAAAAD+/wwAAAABAAAAAAD+/w0AAAABAAAAAAD+/w4AAAABAAAAAAD+/w8AAAABAAAAAAD+/xAAAAABAAAAAAA=")
+tile_set = SubResource("TileSet_kp23o")
+
+[node name="SolidRails" type="StaticBody2D" parent="GameSpace/Rails"]
+position = Vector2(0, 4)
+collision_mask = 18
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GameSpace/Rails/SolidRails"]
+shape = SubResource("WorldBoundaryShape2D_8k08j")
+
+[node name="AnomalyTimer" type="Timer" parent="GameSpace"]
+
+[node name="Train" type="Node2D" parent="GameSpace"]
+
+[node name="TrainCar" parent="GameSpace/Train" instance=ExtResource("7_1cwia")]
+
+[node name="TrainCar2" parent="GameSpace/Train" instance=ExtResource("7_1cwia")]
+position = Vector2(-480, 0)
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="GameSpace"]
+position = Vector2(8, -6)
+navigation_polygon = SubResource("NavigationPolygon_onatg")
+
+[node name="AnomalyManager" parent="GameSpace" instance=ExtResource("10_4j704")]
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_0xqkn")
@@ -36,57 +113,8 @@ script = ExtResource("6_n7rr2")
 [node name="Timer" type="Timer" parent="Music"]
 one_shot = true
 
-[node name="Player" parent="." instance=ExtResource("8_mcxbc")]
-position = Vector2(0, -32)
-
-[node name="Enemies" type="Node2D" parent="."]
-z_index = 2
-
-[node name="BG" type="ParallaxBackground" parent="."]
-
-[node name="Far" type="ParallaxLayer" parent="BG"]
-motion_scale = Vector2(0.2, 0.2)
-
-[node name="Mid" type="ParallaxLayer" parent="BG"]
-motion_scale = Vector2(0.4, 0.4)
-
-[node name="Close" type="ParallaxLayer" parent="BG"]
-motion_scale = Vector2(0.7, 0.7)
-
-[node name="Rails" type="Parallax2D" parent="."]
-repeat_size = Vector2(32, 0)
-autoscroll = Vector2(-100, 0)
-repeat_times = 120
-ignore_camera_scroll = true
-
-[node name="Sprite2D" type="Sprite2D" parent="Rails"]
-position = Vector2(0, -14)
-texture = ExtResource("6_bv8yq")
-
-[node name="Death" type="StaticBody2D" parent="."]
-position = Vector2(0, -2)
-collision_layer = 32
-collision_mask = 18
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Death"]
-shape = SubResource("WorldBoundaryShape2D_8k08j")
-
-[node name="AnomalyTimer" type="Timer" parent="."]
-
-[node name="Train" type="Node2D" parent="."]
-
-[node name="TrainCar" parent="Train" instance=ExtResource("7_1cwia")]
-
-[node name="TrainCar2" parent="Train" instance=ExtResource("7_1cwia")]
-position = Vector2(-480, 0)
-
-[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
-position = Vector2(8, -6)
-navigation_polygon = SubResource("NavigationPolygon_onatg")
-
 [node name="GameUI" parent="." instance=ExtResource("8_desc7")]
-
-[node name="AnomalyManager" parent="." instance=ExtResource("10_4j704")]
 
 [connection signal="finished" from="Music" to="Music" method="_on_finished"]
 [connection signal="timeout" from="Music/Timer" to="Music" method="_on_timer_timeout"]
+[connection signal="particlesComplete" from="GameUI" to="." method="_on_game_ui_particles_complete"]

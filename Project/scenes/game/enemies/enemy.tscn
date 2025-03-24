@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://d31tdxejqy8es"]
+[gd_scene load_steps=8 format=3 uid="uid://d31tdxejqy8es"]
 
 [ext_resource type="Script" uid="uid://ms4ylm5temrn" path="res://scenes/game/enemies/enemy.gd" id="1_ucjyy"]
 [ext_resource type="PackedScene" uid="uid://d3o31trh0j3gs" path="res://scenes/components/manager.tscn" id="2_ugf3t"]
@@ -7,7 +7,11 @@
 [ext_resource type="PackedScene" uid="uid://cfmxx0q28naxb" path="res://scenes/components/hitBox.tscn" id="5_ee4dy"]
 [ext_resource type="Script" uid="uid://y7p40jfea1ds" path="res://scenes/game/enemies/FSM/state_machine.gd" id="6_lav2o"]
 
-[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "nav", "stateMachine", "attackComponent", "hitBoxComponent", "col", "stunTimer")]
+[sub_resource type="Gradient" id="Gradient_lps3g"]
+offsets = PackedFloat32Array(0, 0.689873, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "nav", "stateMachine", "attackComponent", "hitBoxComponent", "col", "deathParticles", "stunTimer")]
 collision_layer = 16
 script = ExtResource("1_ucjyy")
 sprite = NodePath("AnimatedSprite2D")
@@ -16,7 +20,8 @@ stateMachine = NodePath("StateMachine")
 attackComponent = NodePath("ComponentManager/Attack_Component")
 hitBoxComponent = NodePath("ComponentManager/HitBox_Component")
 col = NodePath("CollisionShape2D")
-stunTimer = NodePath("StunTimer")
+deathParticles = NodePath("DeathParticles")
+stunTimer = NodePath("Timers/StunTimer")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 
@@ -40,17 +45,41 @@ healthComponent = NodePath("../Health_Component")
 simplify_path = true
 simplify_epsilon = 8.0
 
-[node name="StunTimer" type="Timer" parent="."]
-
-[node name="NavTimer" type="Timer" parent="."]
-
-[node name="Cooldown" type="Timer" parent="."]
-
-[node name="BuildUp" type="Timer" parent="."]
+[node name="DeathParticles" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 16
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+emission_shape = 1
+emission_sphere_radius = 4.0
+direction = Vector2(0, -1)
+spread = 90.0
+gravity = Vector2(0, 98)
+initial_velocity_min = 10.0
+initial_velocity_max = 50.0
+angular_velocity_min = -141.47
+angular_velocity_max = 101.05
+angle_min = -180.0
+angle_max = 180.0
+scale_amount_max = 4.0
+color = Color(0.133333, 0.12549, 0.203922, 1)
+color_ramp = SubResource("Gradient_lps3g")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("navTimer", "enemy")]
 script = ExtResource("6_lav2o")
-navTimer = NodePath("../NavTimer")
+navTimer = NodePath("../Timers/NavTimer")
 enemy = NodePath("..")
 
-[connection signal="timeout" from="NavTimer" to="StateMachine" method="_on_nav_timer_timeout"]
+[node name="Timers" type="Node" parent="."]
+
+[node name="StunTimer" type="Timer" parent="Timers"]
+
+[node name="NavTimer" type="Timer" parent="Timers"]
+
+[node name="Cooldown" type="Timer" parent="Timers"]
+
+[node name="BuildUp" type="Timer" parent="Timers"]
+
+[connection signal="finished" from="DeathParticles" to="." method="_on_death_particles_finished"]
+[connection signal="timeout" from="Timers/NavTimer" to="StateMachine" method="_on_nav_timer_timeout"]

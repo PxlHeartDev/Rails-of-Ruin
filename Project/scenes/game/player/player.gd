@@ -3,23 +3,25 @@ extends CharacterBody2D
 
 signal died
 
-enum STATE {
-	Idle,
-	Run,
-	Air,
-	WallSlide,
-	WallJump,
-	Die,
+enum State {
+	IDLE,
+	RUN,
+	AIR,
+	WALLSLIDE,
+	WALLJUMP,
+	DIE,
 }
 
-var state := STATE.Idle:
+var state := State.IDLE:
 	set(val):
 		if val != state:
-			Debug.trackVal("State", STATE.find_key(val))
+			Debug.trackVal("State", State.find_key(val))
 		state = val
+		updateAnimation()
 
 @export_category("Nodes")
 @export_group("Nodes")
+@export var cam: Camera2D
 @export var sprite: AnimatedSprite2D
 @export var game: Node2D = get_parent()
 @export var target: Node2D
@@ -55,23 +57,34 @@ var disableInput := false
 
 func _ready() -> void:
 	target.posChanged.connect(weapon.targetChanged)
-	var e = Color(0.604, 0.341, 0.706)
+	hitBoxComponent.hitRails.connect(hitRails)
+	
+	#var e = Color(0.604, 0.341, 0.706)
 
 func _process(_delta: float) -> void:
-	updateAnimation()
+	if state == State.DIE:
+		return
 	getInputs()
+	if !isOnWall:
+		if target.position.x < 0:
+			flipSprite(true)
+		else:
+			flipSprite(false)
 
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	updateState()
 	doJumpChecks()
 	doMovementChecks()
 	
 	move_and_slide()
 	
+	if onRails:
+		doRailsMovement(delta)
+	
 	Debug.trackVal("Position", "%s, %s" % [int(position.x), int(position.y)])
 
 func nextLevel() -> void:
-	state = STATE.Idle
+	state = State.IDLE
 
 const SPEED: float = 300.0
 const JUMP_STRENGTH: float = 750.0
@@ -99,33 +112,29 @@ func getInputs() -> void:
 		queueJump = false
 
 func updateState() -> void:
-	if state == STATE.Die:
+	if state == State.DIE:
 		return
 	
 	if floorCheck():
 		justWallJumped = false
 		if direction.x:
-			state = STATE.Run
+			state = State.RUN
 		else:
-			state = STATE.Idle
+			state = State.IDLE
 	elif isOnWall:
-		state = STATE.WallSlide
+		state = State.WALLSLIDE
 	elif justWallJumped:
-		state = STATE.WallJump
+		state = State.WALLJUMP
 	else:
-		state = STATE.Air
+		state = State.AIR
 
 func updateAnimation() -> void:
-	if target.position.x < 0:
-		flipSprite(true)
-	else:
-		flipSprite(false)
 	match state:
-		STATE.Idle:
+		State.IDLE:
 			sprite.play("idle")
-		STATE.Run:
+		State.RUN:
 			sprite.play("run")
-		STATE.Air:
+		State.AIR:
 			sprite.stop()
 			sprite.animation = "jump"
 			if velocity.y < -20:
@@ -134,42 +143,46 @@ func updateAnimation() -> void:
 				sprite.set_frame_and_progress(2, 0.0)
 			else:
 				sprite.set_frame_and_progress(1, 0.0)
-		STATE.WallSlide:
+		State.WALLSLIDE:
 			sprite.stop()
 			sprite.animation = "wall"
 			if leftWall:
 				flipSprite(false)
 			elif rightWall:
 				flipSprite(true)
-		STATE.WallJump:
+		State.WALLJUMP:
 			sprite.stop()
 			sprite.animation = "jump"
-		STATE.Die:
-			# TODO: Die state
-			pass
+		State.DIE:
+			sprite.play("die")
 
 func doMovementChecks() -> void:
+	if state == State.DIE:
+		velocity.x = move_toward(velocity.x, 0, SPEED)
+		velocity.y = move_toward(velocity.y, 0, SPEED)
+		return
+	
 	canJump = false
 	canWallJump = false
 	var xLim: float = 400
 	
 	match state:
-		STATE.Idle:
+		State.IDLE:
 			canJump = true
 			velocity.x = move_toward(velocity.x, 0, SPEED)
 			resetCoyote()
-		STATE.Run:
+		State.RUN:
 			velocity.x += SPEED * direction.x
 			canJump = true
 			resetCoyote()
-		STATE.Air:
+		State.AIR:
 			if coyoteFrames > 0:
 				coyoteFrames -= 1
 				canJump = true
 			velocity.x += SPEED/2 * direction.x
 			velocity.y += get_gravity().y
 			velocity.y = clamp(velocity.y, -1200, 1200)
-		STATE.WallSlide:
+		State.WALLSLIDE:
 			if direction.y < -0.5:
 				velocity.y += get_gravity().y/8 
 			else:
@@ -179,14 +192,12 @@ func doMovementChecks() -> void:
 			elif rightWall and direction.x < -0.5:
 				velocity.x += SPEED * direction.x
 			canWallJump = true
-		STATE.WallJump:
+		State.WALLJUMP:
 			xLim = 800
 			velocity.x += SPEED/12 * direction.x
 			velocity.x = move_toward(velocity.x, 0, SPEED/16)
 			velocity.y += get_gravity().y
 			velocity.y = clamp(velocity.y, -1200, 1200)
-		STATE.Die:
-			velocity.x = move_toward(velocity.x, 0, SPEED)
 	
 	if justJumped:
 		justJumped = false
@@ -237,12 +248,28 @@ func _on_i_frames_timeout() -> void:
 	hitBoxComponent.enable()
 
 func die() -> void:
-	# TODO: Death sequence
-	died.emit()
+	if state == State.DIE:
+		return
 	disableInput = true
-	state = STATE.Die
+	state = State.DIE
 	if healthComponent.health > 0:
 		healthComponent.health = 0
+	var camTween: Tween = create_tween()
+	camTween.tween_property(cam, "zoom", Vector2(3.0, 3.0), 2.0).set_trans(Tween.TRANS_SINE)
+
+var onRails: bool = false
+
+func hitRails() -> void:
+	onRails = true
+
+func doRailsMovement(delta: float) -> void:
+	position.x -= game.speed * 59 * delta
+
+func _on_sprite_animation_finished() -> void:
+	if sprite.animation == "die":
+		sprite.hide()
+		weapon.hide()
+		died.emit()
 
 ###############
 ## Wall Jump ##
@@ -277,11 +304,20 @@ func anyWall(val: bool) -> void:
 		velocity.y = 0
 
 func _on_left_wall_body_entered(_body: Node2D) -> void:
+	if state == State.DIE:
+		return
 	leftWall = true
 func _on_left_wall_body_exited(_body: Node2D) -> void:
+	if state == State.DIE:
+		return
 	leftWall = false
 
 func _on_right_wall_body_entered(_body: Node2D) -> void:
+	if state == State.DIE:
+		return
 	rightWall = true
 func _on_right_wall_body_exited(_body: Node2D) -> void:
+	if state == State.DIE:
+		return
 	rightWall = false
+		

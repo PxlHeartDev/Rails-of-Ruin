@@ -1,6 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://co0ag6polcqg3"]
+[gd_scene load_steps=3 format=3 uid="uid://co0ag6polcqg3"]
 
 [ext_resource type="Script" uid="uid://buwbyk71akgn7" path="res://scenes/game/anomaly_manager.gd" id="1_a7tc4"]
+[ext_resource type="Script" uid="uid://1uol00btfylr" path="res://scenes/game/materia_manager.gd" id="2_2webo"]
 
-[node name="AnomalyManager" type="Node2D"]
+[node name="AnomalyManager" type="Node2D" node_paths=PackedStringArray("materiaManager")]
 script = ExtResource("1_a7tc4")
+materiaManager = NodePath("MateriaManager")
+
+[node name="MateriaManager" type="Node2D" parent="." node_paths=PackedStringArray("anomalyManager")]
+script = ExtResource("2_2webo")
+anomalyManager = NodePath("..")

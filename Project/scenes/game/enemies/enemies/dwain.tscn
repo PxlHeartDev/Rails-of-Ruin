@@ -64,16 +64,17 @@ shape = SubResource("CircleShape2D_206om")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ComponentManager/HitBox_Component" index="0"]
 shape = SubResource("CircleShape2D_206om")
 
-[node name="StateMachine" parent="." index="8" node_paths=PackedStringArray("initState")]
+[node name="StateMachine" parent="." index="5" node_paths=PackedStringArray("initState")]
 initState = NodePath("AirToPlayer")
 
 [node name="AirAttack" parent="StateMachine" index="0" node_paths=PackedStringArray("attackComponent", "buildUp", "CD") instance=ExtResource("3_206om")]
 attackComponent = NodePath("../../ComponentManager/Attack_Component")
-buildUp = NodePath("../../BuildUp")
-CD = NodePath("../../Cooldown")
+buildUp = NodePath("../../Timers/BuildUp")
+CD = NodePath("../../Timers/Cooldown")
 
 [node name="AirToPlayer" parent="StateMachine" index="1" node_paths=PackedStringArray("enemy") instance=ExtResource("5_uc3nc")]
 enemy = NodePath("../..")
 
 [node name="Dying" parent="StateMachine" index="2" node_paths=PackedStringArray("enemy") instance=ExtResource("4_fvoec")]
+free = false
 enemy = NodePath("../..")

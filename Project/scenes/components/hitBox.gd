@@ -1,6 +1,8 @@
 class_name HitBox_Component
 extends Area2D
 
+signal hitRails
+
 @export var manager: ComponentManager
 @export var healthComponent: Health_Component
 
@@ -34,6 +36,7 @@ func _on_area_entered(_area: Area2D) -> void:
 func _on_body_entered(body: Node2D) -> void:
 	if body.collision_layer == 32:
 		manager.die()
+		hitRails.emit()
 
 func damage(attack: Attack_Obj) -> void:
 	if disabled:
