@@ -1,19 +1,23 @@
 extends MarginContainer
 
-@onready var anim: 					AnimationPlayer = $AnimationPlayer
+@export var bip2: 					AudioStreamPlayer
 
-@onready var audioButton: 			Button = $"H/1/Audio"
-@onready var videoButton: 			Button = $"H/1/Video"
-@onready var controlsButton: 		Button = $"H/1/Controls"
-@onready var accessibilityButton: 	Button = $"H/1/Accessibility"
-@onready var backButton: 			Button = $"H/1/Back"
+@export_group("Buttons")
+@export var audioButton: 			Button
+@export var videoButton: 			Button
+@export var controlsButton: 			Button
+@export var accessibilityButton: 	Button
+@export var backButton: 				Button
 
-@onready var bip2: 					AudioStreamPlayer = $Bip2
-
+@export_group("Tabs")
 @export var audioTab: 				MarginContainer
 @export var videoTab: 				MarginContainer
 @export var controlsTab: 			MarginContainer
 @export var accessibilityTab: 		MarginContainer
+
+@export_group("Animation Players")
+@export var anim: 					AnimationPlayer
+
 
 var locked: bool = false:
 	set(val):

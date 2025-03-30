@@ -1,6 +1,6 @@
 extends CanvasLayer
 
-@onready var debugVals: VBoxContainer = $Debug/HBoxContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer
+@export var debugVals: VBoxContainer
 
 @export var fps: Label
 @export var coordinates: Label

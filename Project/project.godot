@@ -11,11 +11,12 @@ config_version=5
 [application]
 
 config/name="Rails of Ruin"
+config/version="0.0.1"
 config/tags=PackedStringArray("2d", "big_project")
 run/main_scene="res://globals/main.tscn"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 run/max_fps=60
-config/icon="res://icon.svg"
+config/icon="uid://1qfgcl38huok"
 
 [autoload]
 
@@ -39,6 +40,7 @@ nav_ob="Navigation Obstacle"
 enemy_spawn="Is spawn point for enemy"
 level_spawn="Level spawnpoint/entrance for player"
 level_exit="Player exit for the level"
+materia="Materia node group, for collision tests"
 
 [gui]
 
@@ -116,6 +118,7 @@ locale/translations=PackedStringArray("res://resources/localisation/Localisation
 2d_physics/layer_5="Enemy"
 2d_physics/layer_6="Death"
 2d_physics/layer_7="ThinPlatform"
+2d_physics/layer_8="Materia"
 
 [physics]
 

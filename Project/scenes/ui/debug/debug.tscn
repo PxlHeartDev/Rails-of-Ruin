@@ -3,16 +3,13 @@
 [ext_resource type="Theme" uid="uid://bsbo2358o1a7l" path="res://assets/themes/debug.tres" id="1_8kfyy"]
 [ext_resource type="Script" uid="uid://da6mfogrwb6aa" path="res://scenes/ui/debug/debug.gd" id="2_7sids"]
 
-[node name="Debug" type="CanvasLayer" node_paths=PackedStringArray("fps", "coordinates", "seedLabel", "stateLabel", "canJumpLabel", "canWallJumpLabel")]
+[node name="Debug" type="CanvasLayer" node_paths=PackedStringArray("debugVals", "fps", "seedLabel")]
 layer = 2
 visible = false
 script = ExtResource("2_7sids")
+debugVals = NodePath("Debug/HBoxContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer")
 fps = NodePath("Debug/HBoxContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/FPS")
-coordinates = NodePath("")
 seedLabel = NodePath("Debug/HBoxContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/Seed")
-stateLabel = NodePath("")
-canJumpLabel = NodePath("")
-canWallJumpLabel = NodePath("")
 
 [node name="Debug" type="MarginContainer" parent="."]
 anchors_preset = 15

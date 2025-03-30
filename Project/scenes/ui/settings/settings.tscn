@@ -268,7 +268,7 @@ _data = {
 &"show": SubResource("Animation_05db1")
 }
 
-[node name="Settings" type="MarginContainer" node_paths=PackedStringArray("audioTab", "videoTab", "controlsTab", "accessibilityTab")]
+[node name="Settings" type="MarginContainer" node_paths=PackedStringArray("bip2", "audioButton", "videoButton", "controlsButton", "accessibilityButton", "backButton", "audioTab", "videoTab", "controlsTab", "accessibilityTab", "anim")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -276,10 +276,17 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_6j5on")
 script = ExtResource("2_lsviy")
+bip2 = NodePath("Bip2")
+audioButton = NodePath("H/1/Audio")
+videoButton = NodePath("H/1/Video")
+controlsButton = NodePath("H/1/Controls")
+accessibilityButton = NodePath("H/1/Accessibility")
+backButton = NodePath("H/1/Back")
 audioTab = NodePath("Audio")
 videoTab = NodePath("Video")
 controlsTab = NodePath("Controls")
 accessibilityTab = NodePath("Accessibility")
+anim = NodePath("AnimationPlayer")
 
 [node name="H" type="HBoxContainer" parent="."]
 layout_mode = 2
@@ -346,7 +353,7 @@ size_flags_horizontal = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_dld3b")
+&"": SubResource("AnimationLibrary_dld3b")
 }
 
 [node name="Audio" parent="." node_paths=PackedStringArray("bip2") instance=ExtResource("5_dc6pq")]

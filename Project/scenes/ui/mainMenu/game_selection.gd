@@ -1,11 +1,11 @@
 extends MarginContainer
 
-@onready var save1: 		Button = $"H/1/1"
-@onready var save2: 		Button = $"H/1/2"
-@onready var save3: 		Button = $"H/1/3"
-@onready var save4: 		Button = $"H/1/4"
-@onready var backButton: 	Button = $"H/1/Back"
-@onready var anim: 			AnimationPlayer = $AnimationPlayer
+@export var save1: 		Button
+@export var save2: 		Button
+@export var save3: 		Button
+@export var save4: 		Button
+@export var backButton: 	Button
+@export var anim: 		AnimationPlayer
 
 signal back
 

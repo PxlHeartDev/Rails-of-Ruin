@@ -4,18 +4,19 @@ signal play
 signal settings
 signal quit
 
-@onready var playButton: 		Button = $"H/1/Play"
-@onready var settingsButton: 	Button = $"H/1/Settings"
-@onready var quitButton: 		Button = $"H/1/Quit"
+@export var playButton: 		Button
+@export var settingsButton: 	Button
+@export var quitButton: 		Button
 
-@onready var bip2: 				AudioStreamPlayer = $Bip2
-@onready var music: 			AudioStreamPlayer = $Music
-@onready var anim: 				AnimationPlayer = $AnimationPlayer
+@export var bip2: 			AudioStreamPlayer
+@export var music: 			AudioStreamPlayer
+@export var anim: 			AnimationPlayer
 
 func _on_play_pressed() -> void:
 	if !locked:
 		play.emit()
 		_on_any_pressed()
+		fadeMusic(-60.0, 2.0)
 
 func _on_settings_pressed() -> void:
 	if !locked:

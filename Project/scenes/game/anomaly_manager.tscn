@@ -3,10 +3,18 @@
 [ext_resource type="Script" uid="uid://buwbyk71akgn7" path="res://scenes/game/anomaly_manager.gd" id="1_a7tc4"]
 [ext_resource type="Script" uid="uid://1uol00btfylr" path="res://scenes/game/materia_manager.gd" id="2_2webo"]
 
-[node name="AnomalyManager" type="Node2D" node_paths=PackedStringArray("materiaManager")]
+[node name="AnomalyManager" type="Node2D" node_paths=PackedStringArray("materiaManager", "timer")]
 script = ExtResource("1_a7tc4")
 materiaManager = NodePath("MateriaManager")
+timer = NodePath("Timer")
 
 [node name="MateriaManager" type="Node2D" parent="." node_paths=PackedStringArray("anomalyManager")]
 script = ExtResource("2_2webo")
 anomalyManager = NodePath("..")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

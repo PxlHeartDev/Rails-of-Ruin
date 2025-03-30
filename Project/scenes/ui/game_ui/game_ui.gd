@@ -5,6 +5,13 @@ signal anomalyCoveredScreen
 signal anomalyProcessingComplete
 signal particlesComplete
 
+signal completeLabelDone
+
+signal againPressed
+signal quitPressed
+
+signal quitFadeComplete
+
 @export_category("Nodes")
 @export_group("Translate Nodes")
 @export var completeLabel: RichTextLabel
@@ -16,7 +23,12 @@ signal particlesComplete
 @export var quitButton: Button
 
 @export_group("Main UI Nodes")
+@export var main: MarginContainer
+@export var bottomPanel: TextureRect
+@export var anomalyPass: TextureRect
+@export var gameOverPanel: ColorRect
 @export var healthBar: ProgressBar
+
 
 @export var distanceIcon: TextureRect
 @export var distanceLabel: Label
@@ -29,11 +41,8 @@ signal particlesComplete
 
 @export var fuelGauge: TextureProgressBar
 
-@export var anomalyPass: TextureRect
 
-@export var gameOverPanel: ColorRect
-
-@export_group("AnimationPlayers")
+@export_group("Animation Players")
 @export var anim_complete: AnimationPlayer
 @export var anim_warning: AnimationPlayer
 @export var anim_gameOver: AnimationPlayer
@@ -46,16 +55,22 @@ func _ready() -> void:
 	enemyKilled(0)
 	distanceUpdated(0)
 	anim_warning.play("RESET")
+	
+	for i in 100:
+		if "quip" in tr("GAME_lose.quip%s" % i):
+			quipCount = i - 1
+			return
 
 func levelChanged(level: Variant) -> void:
 	pass
 	#levelLabel.text = str(level)
 
 func anomalySurvived(newCount: int) -> void:
+	newCount -= 1
 	anomaliesIcon.tooltip_text = tr("GAME_anomaliesSurvived") % newCount
 	anomaliesLabel.text = str(newCount)
 	
-	if newCount == 0:
+	if newCount == -1:
 		return
 	
 	anomaliesLabel.position.x =  10
@@ -71,6 +86,7 @@ func anomalySurvived(newCount: int) -> void:
 	
 	
 	await anim_complete.animation_finished
+	completeLabelDone.emit()
 	completeLabel.hide()
 
 func anomalyAlert() -> void:
@@ -78,6 +94,8 @@ func anomalyAlert() -> void:
 	await anim_warning.animation_finished
 	var tween := create_tween()
 	tween.tween_method(setAnomalySweepProg, 0.0, 1.0, 1.0)
+	if dead:
+		return
 	tween.tween_callback(anomalyCoveredScreen.emit)
 	await anomalyProcessingComplete
 	var tween2 := create_tween()
@@ -104,22 +122,56 @@ func fuelUpdated(newFuel: float) -> void:
 ## Game Over ##
 ###############
 
-const quipCount = 12
+var dead: bool = false
+
+func died() -> void:
+	dead = true
+	anomalyPass.hide()
+
+var quipCount = 0
 func gameOver() -> void:
-	var chosenQuip: int = randi_range(1, quipCount)
-	quipLabel.text = "[shake rate=3 level=2]" + tr("GAME_lose.quip%s" % chosenQuip)
+	Config.updateSetting("stats/deaths", int(Config.retrieveSetting("stats/deaths")) + 1)
 	
+	var chosenQuip: int = randi_range(0, quipCount)
+	quipLabel.text = "[shake rate=3 level=2]"
+	match chosenQuip:
+		12:
+			quipLabel.text += tr("GAME_lose.quip%s" % chosenQuip) % Config.retrieveSetting("stats/deaths")
+		_:
+			quipLabel.text += tr("GAME_lose.quip%s" % chosenQuip)
+	
+	toggleButtons(true)
 	anim_gameOver.play("show")
+	gameOverPanel.modulate.a = 1.0
 	await get_tree().process_frame
 	gameOverPanel.show()
 	deathParticles.emitting = true
 
-
 func _on_again_pressed() -> void:
-	pass # Replace with function body.
+	againPressed.emit()
+	var tween: Tween = create_tween()
+	tween.tween_property(gameOverPanel, "modulate:a", 0.0, 1.0)
+	againButton.release_focus()
+	toggleButtons(false)
 
 func _on_quit_pressed() -> void:
-	pass # Replace with function body.
+	quitPressed.emit()
+	var tween: Tween = create_tween()
+	tween.tween_property(gameOverPanel, "modulate:a", 0.0, 1.0)
+	
+	main.hide()
+	bottomPanel.hide()
+	anomalyPass.hide()
+	
+	quitButton.release_focus()
+	toggleButtons(false)
+	
+	await tween.finished
+	quitFadeComplete.emit()
+
+func toggleButtons(enabled: bool) -> void:
+	againButton.disabled = !enabled
+	quitButton.disabled = !enabled
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_TRANSLATION_CHANGED:

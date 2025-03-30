@@ -1,9 +1,9 @@
 class_name Bullet
 extends CharacterBody2D
 
-@onready var sprite: Sprite2D = $Sprite2D
-@onready var decayTimer: Timer = $Decay
-@onready var attackComponent: Attack_Component = $ComponentManager/AttackComponent
+@export var sprite: Sprite2D
+@export var decayTimer: Timer
+@export var attackComponent: Attack_Component
 
 @export var speed: int = 500
 @export var decayTime: float = 2.0
@@ -19,11 +19,11 @@ func fire(direction: Vector2, isEnemy: bool = false) -> void:
 	decayTimer.start()
 	attackComponent.attackDamage = damage
 	if isEnemy:
-		attackComponent.collision_layer = 4
-		attackComponent.collision_mask = 0
+		attackComponent.collision_layer += 4
+		attackComponent.collision_mask += 0
 	else:
-		attackComponent.collision_layer = 8
-		attackComponent.collision_mask = 16
+		attackComponent.collision_layer += 8
+		attackComponent.collision_mask += 16
 
 func _physics_process(_delta: float) -> void:
 	move_and_slide()
@@ -38,3 +38,12 @@ func die() -> void:
 
 func _on_decay_timeout() -> void:
 	die()
+
+func _on_attack_component_body_entered(body: Node2D) -> void:	
+	if body.is_in_group("materia"):
+		var attack = Attack_Obj.new()
+		attack.damage = attackComponent.attackDamage
+		attack.knockbackStrength = attackComponent.knockbackStrength
+		attack.attackSource = self
+		body.get_parent().damage(attack)
+		die()

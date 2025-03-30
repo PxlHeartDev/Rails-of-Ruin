@@ -1,17 +1,71 @@
-[gd_scene load_steps=3 format=3 uid="uid://dfctg17eoujpu"]
+[gd_scene load_steps=6 format=3 uid="uid://dfctg17eoujpu"]
 
 [ext_resource type="Script" uid="uid://3m5ph8s6f2vc" path="res://scenes/game/materia/materia.gd" id="1_aektx"]
 [ext_resource type="TileSet" uid="uid://cuukjg5jcrnbv" path="res://resources/tilesets/grass.tres" id="1_o2cnf"]
+[ext_resource type="PackedScene" uid="uid://d3o31trh0j3gs" path="res://scenes/components/manager.tscn" id="3_ld4nc"]
+[ext_resource type="PackedScene" uid="uid://cid3fdyllr67t" path="res://scenes/components/health.tscn" id="4_p7jee"]
 
-[node name="Materia" type="Node2D"]
+[sub_resource type="Gradient" id="Gradient_ld4nc"]
+offsets = PackedFloat32Array(0, 0.689873, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[node name="Materia" type="Node2D" node_paths=PackedStringArray("blocksTileMap", "healthComponent", "breakParticles", "breakParticles2")]
 z_index = 1
 script = ExtResource("1_aektx")
 boundingCircleRadius = 23.0
-randomRest = null
+particleRatio = 0.8
 initRot = 2.14575
-randomPos = null
-initPos = Vector2(0, 0)
+blocksTileMap = NodePath("Blocks")
+healthComponent = NodePath("ComponentManager/Health_Component")
+breakParticles = NodePath("BreakParticles")
+breakParticles2 = NodePath("BreakParticles2")
 
-[node name="Blocks" type="TileMapLayer" parent="."]
+[node name="Blocks" type="TileMapLayer" parent="." groups=["materia"]]
 z_index = -1
 tile_set = ExtResource("1_o2cnf")
+
+[node name="ComponentManager" parent="." instance=ExtResource("3_ld4nc")]
+
+[node name="Health_Component" parent="ComponentManager" instance=ExtResource("4_p7jee")]
+
+[node name="BreakParticles" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 16
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+emission_shape = 1
+emission_sphere_radius = 4.0
+direction = Vector2(0, -1)
+spread = 90.0
+gravity = Vector2(0, 98)
+initial_velocity_min = 10.0
+initial_velocity_max = 50.0
+angular_velocity_min = -141.47
+angular_velocity_max = 101.05
+angle_min = -180.0
+angle_max = 180.0
+scale_amount_max = 4.0
+color = Color(0.4, 0.223529, 0.192157, 1)
+color_ramp = SubResource("Gradient_ld4nc")
+
+[node name="BreakParticles2" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 16
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+emission_shape = 1
+emission_sphere_radius = 4.0
+direction = Vector2(0, -1)
+spread = 90.0
+gravity = Vector2(0, 98)
+initial_velocity_min = 10.0
+initial_velocity_max = 50.0
+angular_velocity_min = -141.47
+angular_velocity_max = 101.05
+angle_min = -180.0
+angle_max = 180.0
+scale_amount_max = 4.0
+color = Color(0.337255, 0.705882, 0.0823529, 1)
+color_ramp = SubResource("Gradient_ld4nc")

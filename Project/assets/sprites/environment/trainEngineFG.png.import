@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cvjwnwlqruy6w"
-path="res://.godot/imported/skull2.png-6c980987c8237802efba900bb007aaea.ctex"
+uid="uid://cp4qh1x2ncd7a"
+path="res://.godot/imported/trainEngineFG.png-80206f081ecb6619643559516041ba14.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/backgrounds/skull2.png"
-dest_files=["res://.godot/imported/skull2.png-6c980987c8237802efba900bb007aaea.ctex"]
+source_file="res://assets/sprites/environment/trainEngineFG.png"
+dest_files=["res://.godot/imported/trainEngineFG.png-80206f081ecb6619643559516041ba14.ctex"]
 
 [params]
 

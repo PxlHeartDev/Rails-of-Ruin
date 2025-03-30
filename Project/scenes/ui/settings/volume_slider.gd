@@ -3,9 +3,9 @@ extends VBoxContainer
 @export var bus: String = "Master"
 @export var text: String = "Master Volume"
 
-@onready var label: Label = $Label
-@onready var slider: HSlider = $HSlider
-@onready var feedback: AudioStreamPlayer = $Feedback
+@export var label: Label
+@export var slider: HSlider
+@export var feedback: AudioStreamPlayer
 
 var busID = 0
 

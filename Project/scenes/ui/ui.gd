@@ -1,17 +1,22 @@
 class_name UI
 extends CanvasLayer
 
-@export var bg: TextureRect
-@export var fade: ColorRect
+@export_group("Pages")
 @export var mainMenu: MarginContainer
 @export var saveSelect: MarginContainer
 @export var settings: MarginContainer
-
-@onready var p_layer: ParallaxLayer = $ParallaxBackground/ParallaxLayer
+@export_group("Nodes")
+@export var versionLabel: Label
+@export var bg: TextureRect
+@export var fade: ColorRect
+@export var p_layer: ParallaxLayer
 
 var tween: Tween
 
 @export var bgImages: Array[Texture2D]
+
+func _ready() -> void:
+	versionLabel.text = "v%s" % Config.newVer
 
 func _process(delta: float) -> void:
 	if p_layer.motion_offset != targetParaPos:

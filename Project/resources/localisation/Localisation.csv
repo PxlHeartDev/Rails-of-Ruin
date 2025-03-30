@@ -5,8 +5,11 @@ MENU_play,PLAY,JOUER,JUGAR,SPIELEN,GIOCA,JOGAR,JOGAR,ИГРАТЬ,ΠΑΙΞΕ,OYN
 MENU_settings,SETTINGS,OPTIONS,OPCIONES,OPTIONEN,OPZIONI,OPÇÕES,OPÇÕES,НАСТРОЙКИ,ΕΠΙΛΟΓΕΣ,AYARLAR,INDSTILLINGER,INNSTILLINGER,INSTÄLLNINGAR,INSTELLINGEN,USTAWIENIA,ASETUKSET,設定,设置,設置,설정,NASTAVENÍ,BEÁLLÍTÁSOK,PREFERINȚE,ตัวเลือก,НАСТРОЙКИ,אפשרויות,خيارات,OPCIJE
 MENU_quit,QUIT,QUITTER,CERRAR,BEENDEN,ESCI,SAIR,SAIR,ВЫХОД,ΈΞΟΔΟΣ,OYUNU KAPAT,AFSLUT,AVSLUTT,AVSLUTA,STOPPEN,WYJDŹ,LOPETA,終了する,退出,退出,종료,UKONČIT HRU,BEZÁRÁS,ÎNCHIDERE,ออก,ИЗХОД,הפסק,خروج,IZAĆI
 MENU_saveSelect,SAVE SELECT,Sauvegarder les données,Guardar partida,Spiel speichern,Salva dati,Salvar progresso,Guardar progresso,Сохранения,Αποθήκευση δεδομένων,Kaydet,Spildata,Spilldata,Spardata,Waarden opslaan,Zapisz dane,Tallenna tiedot,セーブデータ,保存数据,保存數據,저장된 데이터,Uložit nastavení,Adatok mentése,Salvează datele,บันทึกข้อมูล,Записване на данните,שמור נתונים,حفظ البيانات,Spremiti Podatke
+MENU_updated,Your settings have been reset\nGame updated from %s to %s,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 GENERIC_default,Default,,,,,,,,,,,,,,,,,,,,,,,,,,,
+GENERIC_sorry,Sorry!,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 SETTINGS_audio,Audio Settings,Options sonores,Opciones de sonido,Audioeinstellungen,Opzioni audio,Opções de Som,Opções de Som,Настройки звука,Επιλογές ήχου,Ses Ayarları,Lydinstillinger,Lydinnstillinger,Ljudinställningar,Geluidsinstellingen,Ustawienia Dźwieku,Ääniasetukset,サウンド設定,声音设置,聲音設置,소리 설정,Nastavení zvuku,Hangbeállítások,Preferințe sunet,ปรับเสียง,Настройки на звука,אפשרויות קול,خيارات الصوت,Postavke Zvuka
 SETTINGS_audioButton,AUDIO,Son,Sonido,Audio,Audio,Som,Som,Звук,Ήχος,Ses,Lyd,Lyd,Ljud,Geluid,Dźwiek,Ääni,サウンド,声音,聲音,음향,Zvuk,Hang,Sunet,เสียง,Звук,קול,صوت,Zvuk
@@ -43,6 +46,7 @@ GAME_lose.trainDie,THE TRAIN IS NO MORE…,,,,,,,,,,,,,,,,,,,,,,,,,,,
 GAME_lose.trainFuel,THE TRAIN HAS COME TO A STOP…,,,,,,,,,,,,,,,,,,,,,,,,,,,
 GAME_lose.again,AGAIN,,,,,,,,,,,,,,,,,,,,,,,,,,,
 GAME_lose.quit,TERMINATE,,,,,,,,,,,,,,,,,,,,,,,,,,,
+GAME_lose.quip0,Skill issue,,,,,,,,,,,,,,,,,,,,,,,,,,,
 GAME_lose.quip1,Ouch.,,,,,,,,,,,,,,,,,,,,,,,,,,,
 GAME_lose.quip2,Hey did you know that you died?,,,,,,,,,,,,,,,,,,,,,,,,,,,
 GAME_lose.quip3,Oof.,,,,,,,,,,,,,,,,,,,,,,,,,,,
@@ -54,4 +58,6 @@ GAME_lose.quip8,I think… You're dead!\n-Mario's father,,,,,,,,,,,,,,,,,,,,,,,,
 GAME_lose.quip9,"Mission failed,\nWe'll get 'em next time",,,,,,,,,,,,,,,,,,,,,,,,,,,
 GAME_lose.quip10,Try not dying next time,,,,,,,,,,,,,,,,,,,,,,,,,,,
 GAME_lose.quip11,Your dog would be disappointed,,,,,,,,,,,,,,,,,,,,,,,,,,,
-GAME_lose.quip12,Don't worry about it\n900th time's the charm,,,,,,,,,,,,,,,,,,,,,,,,,,,
+GAME_lose.quip12,Don't worry about it\nThat was only death #%s,,,,,,,,,,,,,,,,,,,,,,,,,,,
+GAME_lose.quip13,L + Ratio,,,,,,,,,,,,,,,,,,,,,,,,,,,
+GAME_lose.quip14,Bowomp,,,,,,,,,,,,,,,,,,,,,,,,,,,

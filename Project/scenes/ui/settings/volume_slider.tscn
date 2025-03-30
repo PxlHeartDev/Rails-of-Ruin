@@ -4,13 +4,16 @@
 [ext_resource type="Script" uid="uid://o8ye7h4xcqb1" path="res://scenes/ui/settings/volume_slider.gd" id="2_jygwm"]
 [ext_resource type="AudioStream" uid="uid://dlr22vboknoka" path="res://assets/sfx/bip2.wav" id="3_we1tx"]
 
-[node name="VolumeSlider" type="VBoxContainer"]
+[node name="VolumeSlider" type="VBoxContainer" node_paths=PackedStringArray("label", "slider", "feedback")]
 offset_right = 40.0
 offset_bottom = 40.0
 theme = ExtResource("1_u64dc")
 theme_override_constants/separation = -4
 script = ExtResource("2_jygwm")
 text = "SETTINGS_audio.master"
+label = NodePath("Label")
+slider = NodePath("HSlider")
+feedback = NodePath("Feedback")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 2

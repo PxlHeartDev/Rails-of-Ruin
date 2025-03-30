@@ -79,20 +79,19 @@ gradient = SubResource("Gradient_dmodm")
 width = 88
 height = 40
 
-[node name="LeftMenuButton" type="Button"]
-texture_filter = 2
+[node name="LeftMenuButton" type="Button" node_paths=PackedStringArray("anim")]
 custom_minimum_size = Vector2(0, 32)
-offset_left = 90.0
-offset_right = 386.0
+offset_right = 296.0
 offset_bottom = 40.0
 theme = ExtResource("1_rfmrf")
 text = "PLAY"
 alignment = 0
 script = ExtResource("1_nynly")
+anim = NodePath("AnimationPlayer")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_1hlc0")
+&"": SubResource("AnimationLibrary_1hlc0")
 }
 
 [node name="TextureRect" type="TextureRect" parent="."]

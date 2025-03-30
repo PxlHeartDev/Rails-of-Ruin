@@ -203,6 +203,7 @@ position = Vector2(0, -22)
 parent = NodePath("..")
 
 [node name="Health_Component" parent="ComponentManager" instance=ExtResource("9_1ht0i")]
+health = 10.0
 maxHealth = 10.0
 
 [node name="HitBox_Component" parent="ComponentManager" node_paths=PackedStringArray("healthComponent") instance=ExtResource("10_1yuy7")]

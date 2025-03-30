@@ -67,7 +67,6 @@ tracks/0/keys = {
 [sub_resource type="Animation" id="Animation_yja8m"]
 resource_name = "alert"
 length = 3.0
-step = 0.1
 tracks/0/type = "bezier"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -227,7 +226,7 @@ metadata/_snap_count = 100
 offsets = PackedFloat32Array(0, 0.689873, 1)
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
 
-[node name="GameUI" type="CanvasLayer" node_paths=PackedStringArray("completeLabel", "warningLabel", "gameOverLabel", "quipLabel", "againButton", "quitButton", "healthBar", "distanceIcon", "distanceLabel", "anomaliesIcon", "anomaliesLabel", "enemiesIcon", "enemiesLabel", "fuelGauge", "anomalyPass", "gameOverPanel", "anim_complete", "anim_warning", "anim_gameOver", "deathParticles")]
+[node name="GameUI" type="CanvasLayer" node_paths=PackedStringArray("completeLabel", "warningLabel", "gameOverLabel", "quipLabel", "againButton", "quitButton", "main", "bottomPanel", "anomalyPass", "gameOverPanel", "healthBar", "distanceIcon", "distanceLabel", "anomaliesIcon", "anomaliesLabel", "enemiesIcon", "enemiesLabel", "fuelGauge", "anim_complete", "anim_warning", "anim_gameOver", "deathParticles")]
 script = ExtResource("2_jqdkw")
 completeLabel = NodePath("Main/CentrePopup/CompleteLabel")
 warningLabel = NodePath("Main/Main/VBoxContainer2/Warning")
@@ -235,6 +234,10 @@ gameOverLabel = NodePath("GameOver/MarginContainer/VBoxContainer/GameOver")
 quipLabel = NodePath("GameOver/MarginContainer/VBoxContainer/Quip")
 againButton = NodePath("GameOver/MarginContainer/VBoxContainer/Again")
 quitButton = NodePath("GameOver/MarginContainer/VBoxContainer/Quit")
+main = NodePath("Main")
+bottomPanel = NodePath("BottomPanel")
+anomalyPass = NodePath("AnomalyPass")
+gameOverPanel = NodePath("GameOver")
 healthBar = NodePath("Main/Main/VBoxContainer/MarginContainer/HealthBar")
 distanceIcon = NodePath("BottomPanel/HBoxContainer/Center/Distance/Icon")
 distanceLabel = NodePath("BottomPanel/HBoxContainer/Center/Distance/Label")
@@ -243,8 +246,6 @@ anomaliesLabel = NodePath("BottomPanel/HBoxContainer/Right/HBoxContainer/VBoxCon
 enemiesIcon = NodePath("BottomPanel/HBoxContainer/Right/HBoxContainer/VBoxContainer/Progress/Icons/Enemies")
 enemiesLabel = NodePath("BottomPanel/HBoxContainer/Right/HBoxContainer/VBoxContainer/Progress/Numbers/Enemies")
 fuelGauge = NodePath("BottomPanel/HBoxContainer/Right/HBoxContainer/VBoxContainer/FuelGauge/FuelBar")
-anomalyPass = NodePath("AnomalyPass")
-gameOverPanel = NodePath("GameOver")
 anim_complete = NodePath("Main/CentrePopup/AnimationPlayer")
 anim_warning = NodePath("Main/Main/VBoxContainer2/Warning/AnimationPlayer")
 anim_gameOver = NodePath("GameOver/AnimationPlayer")

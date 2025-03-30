@@ -141,7 +141,7 @@ border_width_left = 360
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jv2ai"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r3cdw"]
-bg_color = Color(0.847059, 0.376471, 0.254902, 0.247059)
+bg_color = Color(0.847059, 0.376471, 0.254902, 0.72549)
 corner_radius_top_right = 16
 corner_radius_bottom_left = 16
 corner_detail = 1
@@ -179,6 +179,7 @@ OptionButton/styles/normal = SubResource("StyleBoxFlat_vay2y")
 OptionButton/styles/pressed = SubResource("StyleBoxFlat_jillx")
 Panel/styles/panel = SubResource("StyleBoxFlat_4xvx4")
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_5o77p")
+PopupMenu/colors/font_color = Color(0.94902, 0.572549, 0.47451, 1)
 PopupMenu/font_sizes/font_size = 20
 PopupMenu/fonts/font = ExtResource("1_35bf1")
 PopupMenu/icons/radio_checked = ExtResource("3_yq2wk")

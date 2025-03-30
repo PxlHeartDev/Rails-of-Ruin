@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bu02uqhr4plgt" path="res://scenes/ui/ui.gd" id="1_s5oq1"]
 [ext_resource type="Texture2D" uid="uid://nevnuwvn7ade" path="res://assets/images/backgrounds/skull.png" id="2_w0soq"]
 [ext_resource type="Texture2D" uid="uid://c4n3qxjfxtj4p" path="res://assets/images/menu/cover.png" id="3_aebn4"]
-[ext_resource type="Texture2D" uid="uid://dqkqjcypg3cb0" path="res://assets/images/backgrounds/skull2.png" id="3_cvvfw"]
+[ext_resource type="Texture2D" uid="uid://cvjwnwlqruy6w" path="res://assets/images/backgrounds/skull2.png" id="3_cvvfw"]
 [ext_resource type="Material" uid="uid://cdvxwyxsp7yhc" path="res://assets/materials/cover_wobble.tres" id="4_bh0ug"]
 [ext_resource type="Theme" uid="uid://dwimkpe573wse" path="res://assets/themes/menu.tres" id="6_7b0tj"]
 
@@ -11,10 +11,12 @@
 offsets = PackedFloat32Array(0, 0.0715631, 0.896422, 1)
 colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
 
-[node name="UI" type="CanvasLayer" node_paths=PackedStringArray("bg", "fade")]
+[node name="UI" type="CanvasLayer" node_paths=PackedStringArray("versionLabel", "bg", "fade", "p_layer")]
 script = ExtResource("1_s5oq1")
+versionLabel = NodePath("Version")
 bg = NodePath("ParallaxBackground/ParallaxLayer/BG")
 fade = NodePath("Fade")
+p_layer = NodePath("ParallaxBackground/ParallaxLayer")
 bgImages = Array[Texture2D]([ExtResource("2_w0soq"), ExtResource("3_cvvfw")])
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
@@ -57,7 +59,7 @@ texture = ExtResource("3_aebn4")
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 position = Vector2(480, 270)
-amount = 32
+amount = 64
 lifetime = 8.0
 preprocess = 8.0
 fixed_fps = 30
@@ -79,7 +81,7 @@ angle_min = -720.0
 angle_max = 720.0
 scale_amount_min = 2.0
 scale_amount_max = 6.0
-color = Color(0.834614, 0.834614, 0.834614, 1)
+color = Color(0.692049, 0.43742, 0.959794, 1)
 color_ramp = SubResource("Gradient_fuotc")
 
 [node name="Credit" type="Label" parent="."]
@@ -90,6 +92,16 @@ size_flags_vertical = 10
 theme = ExtResource("6_7b0tj")
 theme_override_font_sizes/font_size = 20
 text = " Rian Young, Nerve Centre GDA 2025"
+
+[node name="Version" type="Label" parent="."]
+custom_minimum_size = Vector2(200, 0)
+offset_left = 756.0
+offset_top = 489.0
+offset_right = 956.0
+offset_bottom = 543.0
+theme = ExtResource("6_7b0tj")
+text = "v0.0.1"
+horizontal_alignment = 2
 
 [node name="BGCycling" type="Timer" parent="."]
 wait_time = 5.0

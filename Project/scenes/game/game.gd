@@ -1,46 +1,49 @@
 extends Node2D
 
-signal waveComplete
+## Sequence signals
 signal anomalyProcessed
 signal anomalyIncoming
+signal died
 
-# Value signals
+## Value signals
 signal speedUpdated(newSpeed: float)
 signal distanceUpdated(newDistance: float)
 signal anomalySurvived(newCount: int)
 signal enemyKilled(newCount: int)
 signal fuelUpdated(newFuel: float)
 
+## Exports
 @export_group("Nodes")
 @export var cam: Camera2D
 @export var player: Player
 @export var gameUI: CanvasLayer
 @export var enemies: Node2D
-@export var anomalyManager: Node2D
+@export var anomalyManager: AnomalyManager
 @export var gameSpace: Node2D
 
 @export_group("Details")
 @export var saveNum: 	int
 
-var isGravityFlipped: bool = false
 
 ####################
 ## Game Variables ##
 ####################
 
+var isGravityFlipped: bool = false
+
 var anomalyCount: int:
 	set(val):
 		anomalyCount = val
 		anomalySurvived.emit(val)
-var distance: float = 0:
+var distance: float = 0.0:
 	set(val):
 		distance = val
 		distanceUpdated.emit(val)
-var fuel: float = 0:
+var fuel: float = 0.0:
 	set(val):
 		fuel = val
 		fuelUpdated.emit(val)
-var speed: float = 1.666:
+var speed: float = 100.0:
 	set(val):
 		speed = val
 		speedUpdated.emit(val)
@@ -48,27 +51,36 @@ var enemiesKilled: int = 0:
 	set(val):
 		enemiesKilled = val
 		enemyKilled.emit(val)
+
 var turbo: bool = false
 
 var enemyCount: int = 0:
 	set(val):
-		enemyCount = val
-		if val == 0:
-			waveComplete.emit()
+		if val == -1:
+			enemyCount = 0
+		elif val == 0:
+			enemyCount = 0
+			wave += 1
+		else:
+			enemyCount = val
 
+var wave: int = 0:
+	set(val):
+		if val == -1:
+			wave = 1
+			anomalySurvived.emit(1)
+		else:
+			wave = val
+			anomalySurvived.emit(val)
 var wavesLeft: int = 0
 var level: int = 0
 
 func _ready() -> void:
-	player.game = self
 	#loadLevel(load("res://scenes/game/levels/level.tscn"))
 	
-	# Game signals
-	player.healthComponent.healthChanged.connect(gameUI.healthBar.changed)
-	player.healthComponent.maxHealthChanged.connect(gameUI.healthBar.maxChanged)
-	player.died.connect(playerDied)
+	setupPlayer()
 	
-	# UI signals
+	## UI signals
 	anomalyIncoming.connect(gameUI.anomalyAlert)
 	distanceUpdated.connect(gameUI.distanceUpdated)
 	speedUpdated.connect(gameUI.speedUpdated)
@@ -76,20 +88,46 @@ func _ready() -> void:
 	enemyKilled.connect(gameUI.enemyKilled)
 	fuelUpdated.connect(gameUI.fuelUpdated)
 	
+	gameUI.completeLabelDone.connect(anomalyManager.timer.start)
+	
+	died.connect(gameUI.died)
+	
 	gameUI.anomalyCoveredScreen.connect(processAnomaly)
 	anomalyProcessed.connect(gameUI.anomalyProcessingComplete.emit)
 	
-	# Anomaly manager signals
+	## Anomaly manager signals
 	anomalyManager.spawnEnemy.connect(spawnEnemy)
+	anomalyManager.timer.timeout.connect(anomalyIncoming.emit)
+	anomalySurvived.connect(anomalyManager.anomalySurvived)
 	
-	anomalyCount = 1
-	await get_tree().create_timer(2.0).timeout
-	#anomalyIncoming.emit()
-	
-	anomalyManager.chooseAnomaly().call()
+	resetValues()
+
+func _process(delta: float) -> void:
+	distance += (speed * delta)/1000.0
 
 func playerDied() -> void:
 	gameUI.gameOver()
+	died.emit()
+
+func setupPlayer() -> void:
+	player.game = self
+	
+	## Signals
+	player.healthComponent.healthChanged.connect(gameUI.healthBar.changed)
+	player.healthComponent.maxHealthChanged.connect(gameUI.healthBar.maxChanged)
+	player.died.connect(playerDied)
+
+func resetValues() -> void:
+	anomalyCount = 0
+	distance = 0.0
+	fuel = 0.0
+	speed = 100.0
+	enemiesKilled = 0
+	turbo = false
+	enemyCount = -1
+	wavesLeft = 0
+	level = 0
+	wave = -1
 
 func loadLevel(levelScene: PackedScene) -> void:
 	if !levelScene or !levelScene.can_instantiate():
@@ -100,7 +138,8 @@ func loadLevel(levelScene: PackedScene) -> void:
 	gameUI.levelChanged(level)
 
 func processAnomaly() -> void:
-	await get_tree().create_timer(0.5).timeout
+	anomalyManager.chooseAnomaly().call()
+	anomalyManager.spawnEnemies().call()
 	anomalyProcessed.emit()
 
 func nextLevel() -> void:
@@ -119,9 +158,13 @@ func spawnEnemy(enemy: Enemy) -> void:
 	enemy.died.connect(enemyDied)
 	enemyCount += 1
 	enemy.player = player
-	enemy.position.x = randi_range(anomalyManager.validSpawnMin.x, anomalyManager.validSpawnMax.x)
-	enemy.position.y = randi_range(anomalyManager.validSpawnMin.y, anomalyManager.validSpawnMax.y)
+	enemy.position.x = randf_range(anomalyManager.validSpawnMin.x, anomalyManager.validSpawnMax.x)
+	enemy.position.y = randf_range(anomalyManager.validSpawnMin.y, anomalyManager.validSpawnMax.y)
 	enemies.add_child(enemy)
+
+func reAddGameSpace() -> void:
+	gameSpace = load("res://scenes/game/game_space.tscn").instantiate()
+	add_child(gameSpace)
 
 func saveGame() -> void:
 	var saveFile = FileAccess.open("user://save%s.save" % saveNum, FileAccess.WRITE)
@@ -176,3 +219,14 @@ func loadGame() -> void:
 
 func _on_game_ui_particles_complete() -> void:
 	gameSpace.queue_free()
+
+func _on_game_ui_again_pressed() -> void:
+	resetValues()
+	reAddGameSpace()
+	player = gameSpace.get_child(0)
+	setupPlayer()
+
+func _on_game_ui_quit_pressed() -> void:
+	get_tree().root.add_child(load("res://globals/main.tscn").instantiate())
+	await gameUI.quitFadeComplete
+	queue_free()

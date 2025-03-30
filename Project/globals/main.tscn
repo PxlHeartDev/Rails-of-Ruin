@@ -1,16 +1,30 @@
-[gd_scene load_steps=6 format=3 uid="uid://1phvjvw2x3n3"]
+[gd_scene load_steps=10 format=3 uid="uid://1phvjvw2x3n3"]
 
 [ext_resource type="Script" uid="uid://cf1prp0o2jcno" path="res://globals/main.gd" id="1_52jw2"]
 [ext_resource type="PackedScene" uid="uid://hrn80kjjh30a" path="res://scenes/ui/ui.tscn" id="2_ynlqn"]
 [ext_resource type="PackedScene" uid="uid://cvkgrcljhxs0s" path="res://scenes/ui/mainMenu/mainMenu.tscn" id="3_r0s5u"]
 [ext_resource type="PackedScene" uid="uid://dtnefs3450n7y" path="res://scenes/ui/mainMenu/game_selection.tscn" id="4_4huwg"]
 [ext_resource type="PackedScene" uid="uid://bn0ral7va1m3p" path="res://scenes/ui/settings/settings.tscn" id="4_302gh"]
+[ext_resource type="Theme" uid="uid://dwimkpe573wse" path="res://assets/themes/menu.tres" id="6_7kagt"]
+[ext_resource type="Theme" uid="uid://bstup10hd438g" path="res://assets/themes/game_ui.tres" id="7_bytgg"]
 
-[node name="Main" type="Node2D" node_paths=PackedStringArray("ui", "fade", "screen")]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_bytgg"]
+load_path = "res://.godot/imported/simple.png-d068707814cb2e811ee0fa443a156774.ctex"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_702u3"]
+texture = SubResource("CompressedTexture2D_bytgg")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+
+[node name="Main" type="Node2D" node_paths=PackedStringArray("ui", "fade", "screen", "updateAlert", "updateAlertText")]
 script = ExtResource("1_52jw2")
 ui = NodePath("UI")
-fade = NodePath("Fade")
+fade = NodePath("CanvasLayer/Fade")
 screen = NodePath("ScreenShader")
+updateAlert = NodePath("UI/UpdateAlert")
+updateAlertText = NodePath("UI/UpdateAlert/Panel/VBoxContainer/Label2")
 
 [node name="UI" parent="." node_paths=PackedStringArray("mainMenu", "saveSelect", "settings") instance=ExtResource("2_ynlqn")]
 mainMenu = NodePath("MainMenu")
@@ -43,14 +57,59 @@ offset_bottom = 540.0
 grow_horizontal = 1
 grow_vertical = 1
 
-[node name="Fade" type="ColorRect" parent="."]
+[node name="UpdateAlert" type="MarginContainer" parent="UI"]
 visible = false
-z_index = 1
-custom_minimum_size = Vector2(960, 540)
-offset_right = 1920.0
-offset_bottom = 1080.0
-mouse_filter = 2
-color = Color(0, 0, 0, 1)
+z_index = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("6_7kagt")
+
+[node name="Panel" type="Panel" parent="UI/UpdateAlert"]
+custom_minimum_size = Vector2(600, 300)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxTexture_702u3")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/UpdateAlert/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -72.0
+offset_top = -56.0
+offset_right = 72.0
+offset_bottom = 56.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="UI/UpdateAlert/Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "GENERIC_sorry"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="UI/UpdateAlert/Panel/VBoxContainer"]
+custom_minimum_size = Vector2(580, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Your settings have been reset
+Game updated from 0.0.1 to 0.0.2"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Button" type="Button" parent="UI/UpdateAlert/Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme = ExtResource("7_bytgg")
+theme_override_font_sizes/font_size = 20
+text = "OK :["
 
 [node name="ScreenShader" type="ColorRect" parent="."]
 visible = false
@@ -60,3 +119,19 @@ offset_right = 1920.0
 offset_bottom = 1080.0
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="Fade" type="ColorRect" parent="CanvasLayer"]
+visible = false
+z_index = 10
+custom_minimum_size = Vector2(9600, 5400)
+offset_left = -4800.0
+offset_top = -2700.0
+offset_right = 4800.0
+offset_bottom = 2700.0
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[connection signal="pressed" from="UI/UpdateAlert/Panel/VBoxContainer/Button" to="." method="_on_update_ok_button_pressed"]

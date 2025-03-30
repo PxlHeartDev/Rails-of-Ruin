@@ -9,7 +9,7 @@ texture_margin_left = 4.0
 texture_margin_top = 4.0
 texture_margin_right = 4.0
 texture_margin_bottom = 4.0
-modulate_color = Color(0.822284, 0.546988, 0.531831, 1)
+modulate_color = Color(0.881129, 0.662096, 0.647807, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xpb4n"]
 

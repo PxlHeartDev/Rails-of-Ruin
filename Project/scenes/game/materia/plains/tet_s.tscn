@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://bxg61u6kw30mw"]
+
+[ext_resource type="PackedScene" uid="uid://dfctg17eoujpu" path="res://scenes/game/materia/materia.tscn" id="1_pm1s8"]
+
+[node name="TetS" instance=ExtResource("1_pm1s8")]
+boundingCircleRadius = 28.0
+
+[node name="Blocks" parent="." index="0"]
+position = Vector2(8, 0)
+tile_map_data = PackedByteArray(0, 0, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 255, 255, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 254, 255, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0)

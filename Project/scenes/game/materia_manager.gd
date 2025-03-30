@@ -8,6 +8,7 @@ const MATERIA_PATH = "res://scenes/game/materia/"
 const materias: Dictionary[String, Array] = {
 	"plains": [
 		"2x2",
+		"tet_s",
 	],
 	"dessert": [
 		"2x2",
@@ -43,10 +44,8 @@ func attemptSpawn(region: AnomalyManager.Region) -> Materia:
 			materia.queue_free()
 			return null
 	
+	materia.setParticleRegion(region)
 	existingMateria.get_or_add(str(materia), materiaBounds)
-	
-	#for m in existingMateria.values():
-		#print("%s, %s" % [m.pos, m.rad])
 	
 	add_child(materia)
 	return materia

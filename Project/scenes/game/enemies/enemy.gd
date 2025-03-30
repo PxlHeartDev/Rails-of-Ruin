@@ -24,22 +24,21 @@ signal died(fuelVal)
 var player: Player
 
 func _ready() -> void:
-	stateMachine.states["dying"].faded.connect(dieFade)
+	pass
 
 func damage(attack: Attack_Obj) -> void:
 	if attack.damage > 0:
 		damageFlash()
 
 func die() -> void:
+	deathParticles.emitting = true
+	sprite.hide()
 	damageFlash()
 	died.emit(fuelValue)
 	stateMachine.die()
 	attackComponent.disable()
 	hitBoxComponent.disable()
 	col.set_deferred("disabled", true)
-
-func dieFade() -> void:
-	deathParticles.emitting = true
 
 func stun(time: float) -> void:
 	stunTimer.start(time)

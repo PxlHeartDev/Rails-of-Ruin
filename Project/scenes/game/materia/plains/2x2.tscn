@@ -3,10 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://dfctg17eoujpu" path="res://scenes/game/materia/materia.tscn" id="1_seqgr"]
 
 [node name="Materia" instance=ExtResource("1_seqgr")]
-randomRest = null
 initRot = 0.0
-randomPos = null
-initPos = Vector2i(0, 0)
 
 [node name="Blocks" parent="." index="0"]
 tile_map_data = PackedByteArray(0, 0, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 255, 255, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0)

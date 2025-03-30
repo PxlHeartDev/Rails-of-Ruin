@@ -263,7 +263,7 @@ _data = {
 &"show": SubResource("Animation_05db1")
 }
 
-[node name="GameSelection" type="MarginContainer"]
+[node name="GameSelection" type="MarginContainer" node_paths=PackedStringArray("save1", "save2", "save3", "save4", "backButton", "anim")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -271,6 +271,12 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_jkqv4")
 script = ExtResource("2_y52au")
+save1 = NodePath("H/1/1")
+save2 = NodePath("H/1/2")
+save3 = NodePath("H/1/3")
+save4 = NodePath("H/1/4")
+backButton = NodePath("H/1/Back")
+anim = NodePath("AnimationPlayer")
 
 [node name="H" type="HBoxContainer" parent="."]
 layout_mode = 2
@@ -337,7 +343,7 @@ size_flags_horizontal = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_dld3b")
+&"": SubResource("AnimationLibrary_dld3b")
 }
 
 [node name="Bip" type="AudioStreamPlayer" parent="."]

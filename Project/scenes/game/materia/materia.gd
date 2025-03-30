@@ -14,6 +14,9 @@ enum ROTATIONMODES {
 @export var minPos: Vector2i = Vector2i.ZERO
 @export var maxPos: Vector2i = Vector2i.ONE
 
+# 0.0 = 100% 1 / 1.0 = 100% 2
+@export var particleRatio: float = 0.0
+
 @export_category("Movement Parameters")
 @export var randomRest: bool = true
 @export_group("Rotation")
@@ -27,6 +30,12 @@ enum ROTATIONMODES {
 @export var initPos: Vector2i = Vector2i(0, 0)
 @export var hoverRange: Vector2 = Vector2(2.0, 2.0)
 @export var hoverSpeed: float = 1.0
+
+@export_category("Nodes")
+@export var blocksTileMap: TileMapLayer
+@export var healthComponent: Health_Component
+@export var breakParticles: CPUParticles2D
+@export var breakParticles2: CPUParticles2D
 
 var timeRand: float
 
@@ -43,10 +52,14 @@ func _ready() -> void:
 		randomizeRotSpeed()
 		randomizeHover()
 		randomizeHoverSpeed()
+	
+	breakParticles.amount = int(boundingCircleRadius * (1.0 - particleRatio))
+	breakParticles2.amount = int(boundingCircleRadius * particleRatio)
+	breakParticles.emission_sphere_radius = boundingCircleRadius * 0.8
 
 var rotFlag: bool = false
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if Engine.is_editor_hint():
 		return
 	position.x = (initPos.x + 
@@ -80,6 +93,20 @@ func _draw() -> void:
 	if Engine.is_editor_hint():
 		draw_circle(Vector2.ZERO, boundingCircleRadius, Color(0.584, 0.871, 0.875, 0.396))
 
+func setParticleRegion(region: AnomalyManager.Region) -> void:
+	match region:
+		AnomalyManager.Region.PLAINS:
+			particleRatio = 0.2
+			breakParticles2.color = Color("56b415")
+		AnomalyManager.Region.DESSERT:
+			pass
+		AnomalyManager.Region.TUNDRA:
+			pass
+		AnomalyManager.Region.OCEAN:
+			pass
+		AnomalyManager.Region.ANOMALY:
+			pass
+
 func randomizeRot(minR: float = -PI, maxR: float = PI) -> void:
 	initRot = randf_range(minR, maxR) + initRot
 	rotation = initRot
@@ -98,3 +125,14 @@ func randomizeHover(minH: float = 0.0, maxH: float = 2.0) -> void:
 
 func randomizeHoverSpeed(minS: float = 0.0, maxS: float = 1.0) -> void:
 	hoverSpeed = randf_range(minS, maxS)
+
+func damage(attack: Attack_Obj) -> void:
+	healthComponent.damage(attack.damage)
+
+func die() -> void:
+	breakParticles.emitting = true
+	breakParticles2.emitting = true
+	blocksTileMap.hide()
+	blocksTileMap.collision_enabled = false
+	await breakParticles.finished
+	queue_free()

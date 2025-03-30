@@ -1,7 +1,7 @@
 extends ProgressBar
 
-@onready var dmgTimer: Timer = $DamageDelay
-@onready var dmgBar: ProgressBar = $RecentDamageBar
+@export var dmgTimer: Timer
+@export var dmgBar: ProgressBar
 
 var tween: Tween
 

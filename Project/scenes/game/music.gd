@@ -1,6 +1,6 @@
 extends AudioStreamPlayer
 
-@onready var timer: Timer = $Timer
+@export var timer: Timer
 
 @export var delayBetweenSongs: int = 30
 

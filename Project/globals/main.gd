@@ -12,6 +12,8 @@ var state: STATE = STATE.MENU
 @export var ui: UI
 @export var fade: ColorRect
 @export var screen: ColorRect
+@export var updateAlert: MarginContainer
+@export var updateAlertText: Label
 
 var fadeTween: Tween
 
@@ -25,14 +27,24 @@ func _ready() -> void:
 	
 	ui.settings.back.connect(ui.mainMenu.settings_back)
 	ui.saveSelect.back.connect(ui.mainMenu.play_back)
+	
+	if Config.updated:
+		updateAlert.show()
+		updateAlertText.text = tr("MENU_updated") % [Config.oldVer, Config.newVer]
 
 func play() -> void:
-	ui.saveSelect.open()
-	await ui.mainMenu.anim.animation_finished
-	ui.saveSelect.anim.play("show")
-	#state = STATE.GAME
-	#fadeOut(0.5)
-	#ui.updateBG(load("res://assets/images/backgrounds/triton.jpg"))
+	fadeOut(1.0)
+	await fadeTween.finished
+	await get_tree().process_frame
+	ui.hide()
+	get_tree().root.add_child(load("res://scenes/game/game.tscn").instantiate())
+	fadeIn(1.0)
+	await fadeTween.finished
+	queue_free()
+	
+	#ui.saveSelect.open()
+	#await ui.mainMenu.anim.animation_finished
+	#ui.saveSelect.anim.play("show")
 
 func settings() -> void:
 	ui.settings.open()
@@ -54,3 +66,6 @@ func fadeOut(time: float) -> void:
 		fadeTween.stop()
 	fadeTween = create_tween()
 	fadeTween.tween_property(fade, "modulate:a", 1.0, time)
+
+func _on_update_ok_button_pressed() -> void:
+	updateAlert.hide()

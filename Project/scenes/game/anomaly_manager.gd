@@ -12,6 +12,16 @@ enum Region {
 }
 
 @export var materiaManager: MateriaManager
+@export var timer: Timer
+
+var wave: int = 1
+
+func anomalySurvived(newCount: int) -> void:
+	wave = newCount
+
+#############################
+## Anomaly selection stuff ##
+#############################
 
 var validSpawnMin: Vector2 = Vector2(-800, -360)
 var validSpawnMax: Vector2 = Vector2(320, -180)
@@ -19,7 +29,12 @@ var validSpawnMax: Vector2 = Vector2(320, -180)
 # Ranges reasonably from 0 to 30, numbers quickly approach infinity at 80
 var difficulty: int = 30
 
-var wave: int = 50
+
+var enemySpawnList: Array[String] = [
+	"enemies_easy",
+	"enemies_mid",
+	"enemies_hard",
+]
 
 var anomalyList: Dictionary[String, Callable] = {
 	"enemies_easy": summonEnemies.bind(1.5),
@@ -36,8 +51,14 @@ var enemies: Array[Dictionary] = [
 
 var totalWeight: float
 
+func spawnEnemies() -> Callable:
+	return anomalyList[enemySpawnList.pick_random()]
+
 func chooseAnomaly() -> Callable:
-	return anomalyList[anomalyList.keys().pick_random()]
+	var chosen: String
+	while !chosen or "enemies" in chosen:
+		chosen = anomalyList.keys().pick_random()
+	return anomalyList[chosen]
 
 func chooseEnemy() -> Enemy:
 	if !totalWeight:
@@ -64,5 +85,9 @@ func summonEnemies(diff: float) -> void:
 		spawnEnemy.emit(chooseEnemy())
 
 func spawnMateria() -> void:
-	for i in 50:
+	for i in int(wave ** 0.5):
 		materiaManager.attemptSpawn(Region.PLAINS)
+
+
+func _on_timer_timeout() -> void:
+	pass

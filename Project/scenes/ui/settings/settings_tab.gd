@@ -3,8 +3,8 @@ extends MarginContainer
 
 @export var bip2: AudioStreamPlayer
 
-@onready var backButton: TextureButton = $VBoxContainer/Title/Button/Back
-@onready var anim: AnimationPlayer = $AnimationPlayer
+@export var backButton: TextureButton
+@export var anim: AnimationPlayer
 
 signal back
 

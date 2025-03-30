@@ -1,0 +1,59 @@
+[gd_scene load_steps=7 format=4 uid="uid://bgmg4upabiqra"]
+
+[ext_resource type="Texture2D" uid="uid://e3q1msyqr13n" path="res://assets/sprites/environment/trainEngine.png" id="1_wlb74"]
+[ext_resource type="Texture2D" uid="uid://b78bxb3lxt5vn" path="res://assets/tilesets/bg.png" id="2_8oqen"]
+[ext_resource type="Texture2D" uid="uid://cp4qh1x2ncd7a" path="res://assets/sprites/environment/trainEngineFG.png" id="2_wf8at"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8oqen"]
+size = Vector2(128, 8)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wf8at"]
+texture = ExtResource("2_8oqen")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_hn3aj"]
+tile_size = Vector2i(32, 32)
+sources/0 = SubResource("TileSetAtlasSource_wf8at")
+
+[node name="TrainEngine" type="Node2D"]
+
+[node name="BG" type="Sprite2D" parent="."]
+position = Vector2(0, -88)
+texture = ExtResource("1_wlb74")
+
+[node name="FG" type="Sprite2D" parent="."]
+z_index = 4
+position = Vector2(0, -88)
+texture = ExtResource("2_wf8at")
+
+[node name="Floor" type="StaticBody2D" parent="." groups=["nav_ob"]]
+position = Vector2(0, -16)
+collision_mask = 18
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Floor"]
+polygon = PackedVector2Array(-128, -16, -116, -16, -96, -30, 16, -30, 16, -64, 108, -64, 108, 16, -128, 16)
+
+[node name="Ceiling" type="StaticBody2D" parent="."]
+position = Vector2(0, -162)
+collision_layer = 64
+collision_mask = 18
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ceiling"]
+z_index = 1
+position = Vector2(-48, 22)
+shape = SubResource("RectangleShape2D_8oqen")
+one_way_collision = true
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+z_index = -2
+position = Vector2(-16, 0)
+tile_map_data = PackedByteArray("AAD9//z/AAAAAAAAAAAAAPz/AAAAAAAAAAD9//3/AAAAAAAAAAD+//z/AAAAAAAAAAD///z/AAAAAAAAAAAAAP3/AAAAAAAAAAA=")
+tile_set = SubResource("TileSet_hn3aj")

@@ -143,7 +143,7 @@ _data = {
 &"show": SubResource("Animation_rjk8p")
 }
 
-[node name="MainMenu" type="MarginContainer"]
+[node name="MainMenu" type="MarginContainer" node_paths=PackedStringArray("playButton", "settingsButton", "quitButton", "bip2", "music", "anim")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -151,6 +151,12 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_j2jlu")
 script = ExtResource("1_a7jkm")
+playButton = NodePath("H/1/Play")
+settingsButton = NodePath("H/1/Settings")
+quitButton = NodePath("H/1/Quit")
+bip2 = NodePath("Bip2")
+music = NodePath("Music")
+anim = NodePath("AnimationPlayer")
 
 [node name="H" type="HBoxContainer" parent="."]
 layout_mode = 2
@@ -213,7 +219,7 @@ bus = &"Music"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_yrqgl")
+&"": SubResource("AnimationLibrary_yrqgl")
 }
 
 [connection signal="pressed" from="H/1/Play" to="." method="_on_play_pressed"]

@@ -4,7 +4,7 @@ var locked: bool = false:
 	set(val):
 		locked = val
 
-@onready var anim: AnimationPlayer = $AnimationPlayer
+@export var anim: AnimationPlayer
 
 @export var bip: AudioStreamPlayer
 

@@ -5,8 +5,9 @@
 [ext_resource type="PackedScene" uid="uid://bnsrxoqt4w57u" path="res://scenes/ui/settings/volume_slider.tscn" id="2_7c85j"]
 [ext_resource type="Texture2D" uid="uid://byse7t6kh80ic" path="res://assets/ui/icons/audio.png" id="2_8d8te"]
 
-[node name="Audio" instance=ExtResource("1_fi8qt")]
+[node name="Audio" node_paths=PackedStringArray("output") instance=ExtResource("1_fi8qt")]
 script = ExtResource("2_1wdfy")
+output = NodePath("VBoxContainer/Content/MarginContainer/VBoxContainer/Output")
 
 [node name="Button" parent="VBoxContainer/Title" index="0"]
 text = "SETTINGS_audio"
@@ -41,6 +42,7 @@ theme_override_font_sizes/font_size = 20
 text = "SETTINGS_audio.output"
 
 [node name="Output" type="OptionButton" parent="VBoxContainer/Content/MarginContainer/VBoxContainer" index="5"]
+texture_filter = 1
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 theme_override_constants/arrow_margin = 740

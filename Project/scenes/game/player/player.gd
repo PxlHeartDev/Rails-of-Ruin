@@ -251,11 +251,13 @@ func die() -> void:
 	if state == State.DIE:
 		return
 	disableInput = true
+	weapon.disabled = true
 	state = State.DIE
 	if healthComponent.health > 0:
 		healthComponent.health = 0
 	var camTween: Tween = create_tween()
 	camTween.tween_property(cam, "zoom", Vector2(3.0, 3.0), 2.0).set_trans(Tween.TRANS_SINE)
+	target.set_deferred("process_mode", PROCESS_MODE_DISABLED)
 
 var onRails: bool = false
 
@@ -263,7 +265,7 @@ func hitRails() -> void:
 	onRails = true
 
 func doRailsMovement(delta: float) -> void:
-	position.x -= game.speed * 59 * delta
+	position.x -= game.speed * delta
 
 func _on_sprite_animation_finished() -> void:
 	if sprite.animation == "die":
@@ -320,4 +322,3 @@ func _on_right_wall_body_exited(_body: Node2D) -> void:
 	if state == State.DIE:
 		return
 	rightWall = false
-		
