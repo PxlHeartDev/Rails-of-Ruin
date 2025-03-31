@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://8tr7ww2dfvhn"]
+[gd_scene load_steps=32 format=3 uid="uid://8tr7ww2dfvhn"]
 
 [ext_resource type="Theme" uid="uid://bstup10hd438g" path="res://assets/themes/game_ui.tres" id="1_hskbh"]
 [ext_resource type="Script" uid="uid://cp5cjmfaoryfx" path="res://scenes/ui/game_ui/game_ui.gd" id="2_jqdkw"]
@@ -13,6 +13,8 @@
 [ext_resource type="Texture2D" uid="uid://ujejcrpjiklk" path="res://assets/sprites/ui/panel/fuelGauge/fill.png" id="7_50fd7"]
 [ext_resource type="Shader" uid="uid://bhbqnyue7fy5q" path="res://assets/shaders/anomaly_pass.gdshader" id="12_80ngf"]
 [ext_resource type="Texture2D" uid="uid://ya1hq31uhfj1" path="res://assets/images/noise/anomaly_pass.tres" id="13_mudp5"]
+[ext_resource type="AudioStream" uid="uid://bih47sqls24lg" path="res://assets/sfx/bip.wav" id="14_8jg32"]
+[ext_resource type="AudioStream" uid="uid://dlr22vboknoka" path="res://assets/sfx/bip2.wav" id="15_3s8aq"]
 
 [sub_resource type="Animation" id="Animation_dpj12"]
 length = 0.001
@@ -226,7 +228,7 @@ metadata/_snap_count = 100
 offsets = PackedFloat32Array(0, 0.689873, 1)
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
 
-[node name="GameUI" type="CanvasLayer" node_paths=PackedStringArray("completeLabel", "warningLabel", "gameOverLabel", "quipLabel", "againButton", "quitButton", "main", "bottomPanel", "anomalyPass", "gameOverPanel", "healthBar", "distanceIcon", "distanceLabel", "anomaliesIcon", "anomaliesLabel", "enemiesIcon", "enemiesLabel", "fuelGauge", "anim_complete", "anim_warning", "anim_gameOver", "deathParticles")]
+[node name="GameUI" type="CanvasLayer" node_paths=PackedStringArray("completeLabel", "warningLabel", "gameOverLabel", "quipLabel", "againButton", "quitButton", "main", "bottomPanel", "anomalyPass", "gameOverPanel", "healthBar", "distanceIcon", "distanceLabel", "anomaliesIcon", "anomaliesLabel", "enemiesIcon", "enemiesLabel", "fuelGauge", "anim_complete", "anim_warning", "anim_gameOver", "deathParticles", "bip", "bip2")]
 script = ExtResource("2_jqdkw")
 completeLabel = NodePath("Main/CentrePopup/CompleteLabel")
 warningLabel = NodePath("Main/Main/VBoxContainer2/Warning")
@@ -250,6 +252,8 @@ anim_complete = NodePath("Main/CentrePopup/AnimationPlayer")
 anim_warning = NodePath("Main/Main/VBoxContainer2/Warning/AnimationPlayer")
 anim_gameOver = NodePath("GameOver/AnimationPlayer")
 deathParticles = NodePath("GameOver/DeathParticles")
+bip = NodePath("GameOver/Bip")
+bip2 = NodePath("GameOver/Bip2")
 
 [node name="Main" type="MarginContainer" parent="."]
 anchors_preset = 15
@@ -537,6 +541,22 @@ scale_amount_max = 6.0
 color = Color(0.762504, 0.360526, 0.968003, 1)
 color_ramp = SubResource("Gradient_vjxrc")
 
+[node name="Bip" type="AudioStreamPlayer" parent="GameOver"]
+stream = ExtResource("14_8jg32")
+volume_db = -12.0
+max_polyphony = 16
+bus = &"Menu SFX"
+
+[node name="Bip2" type="AudioStreamPlayer" parent="GameOver"]
+stream = ExtResource("15_3s8aq")
+volume_db = -12.0
+max_polyphony = 4
+bus = &"Menu SFX"
+
+[connection signal="mouse_entered" from="GameOver/MarginContainer/VBoxContainer/Again" to="." method="_on_mouse_entered"]
 [connection signal="pressed" from="GameOver/MarginContainer/VBoxContainer/Again" to="." method="_on_again_pressed"]
+[connection signal="pressed" from="GameOver/MarginContainer/VBoxContainer/Again" to="." method="_on_pressed"]
+[connection signal="mouse_entered" from="GameOver/MarginContainer/VBoxContainer/Quit" to="." method="_on_mouse_entered"]
 [connection signal="pressed" from="GameOver/MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="GameOver/MarginContainer/VBoxContainer/Quit" to="." method="_on_pressed"]
 [connection signal="finished" from="GameOver/DeathParticles" to="." method="_on_death_particles_finished"]

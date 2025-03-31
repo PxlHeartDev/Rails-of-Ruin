@@ -20,6 +20,7 @@ signal fuelUpdated(newFuel: float)
 @export var enemies: Node2D
 @export var anomalyManager: AnomalyManager
 @export var gameSpace: Node2D
+@export var music: AudioStreamPlayer
 
 @export_group("Details")
 @export var saveNum: 	int
@@ -108,6 +109,7 @@ func _process(delta: float) -> void:
 func playerDied() -> void:
 	gameUI.gameOver()
 	died.emit()
+	music.died()
 
 func setupPlayer() -> void:
 	player.game = self
@@ -225,8 +227,13 @@ func _on_game_ui_again_pressed() -> void:
 	reAddGameSpace()
 	player = gameSpace.get_child(0)
 	setupPlayer()
+	
+	music.again()
 
 func _on_game_ui_quit_pressed() -> void:
 	get_tree().root.add_child(load("res://globals/main.tscn").instantiate())
+	
+	music.quit()
+	
 	await gameUI.quitFadeComplete
 	queue_free()

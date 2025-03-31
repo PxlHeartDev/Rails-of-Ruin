@@ -50,6 +50,10 @@ signal quitFadeComplete
 @export_group("Misc Nodes")
 @export var deathParticles: CPUParticles2D
 
+@export_group("Audio Nodes")
+@export var bip: AudioStreamPlayer
+@export var bip2: AudioStreamPlayer
+
 func _ready() -> void:
 	anomalySurvived(0)
 	enemyKilled(0)
@@ -70,7 +74,7 @@ func anomalySurvived(newCount: int) -> void:
 	anomaliesIcon.tooltip_text = tr("GAME_anomaliesSurvived") % newCount
 	anomaliesLabel.text = str(newCount)
 	
-	if newCount == -1:
+	if newCount <= 0:
 		return
 	
 	anomaliesLabel.position.x =  10
@@ -150,14 +154,14 @@ func gameOver() -> void:
 func _on_again_pressed() -> void:
 	againPressed.emit()
 	var tween: Tween = create_tween()
-	tween.tween_property(gameOverPanel, "modulate:a", 0.0, 1.0)
+	tween.tween_property(gameOverPanel, "modulate:a", 0.0, 1.2)
 	againButton.release_focus()
 	toggleButtons(false)
 
 func _on_quit_pressed() -> void:
 	quitPressed.emit()
 	var tween: Tween = create_tween()
-	tween.tween_property(gameOverPanel, "modulate:a", 0.0, 1.0)
+	tween.tween_property(gameOverPanel, "modulate:a", 0.0, 1.2)
 	
 	main.hide()
 	bottomPanel.hide()
@@ -183,3 +187,9 @@ func _notification(what: int) -> void:
 
 func _on_death_particles_finished() -> void:
 	particlesComplete.emit()
+
+func _on_mouse_entered() -> void:
+	bip.play()
+
+func _on_pressed() -> void:
+	bip2.play()

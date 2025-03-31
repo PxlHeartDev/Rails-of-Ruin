@@ -2,22 +2,23 @@
 
 [ext_resource type="Script" uid="uid://bgil2oa0dmn6o" path="res://scenes/game/game.gd" id="1_lxapy"]
 [ext_resource type="PackedScene" uid="uid://bppkk7lgjo0ps" path="res://scenes/game/game_space.tscn" id="2_lfrn8"]
+[ext_resource type="AudioStream" uid="uid://ph7xx0s0ju6m" path="res://assets/music/Battle3.wav" id="3_lfrn8"]
 [ext_resource type="Script" uid="uid://dymmxs8tak1r4" path="res://scenes/game/music.gd" id="6_n7rr2"]
-[ext_resource type="AudioStream" uid="uid://bx5mp58ho88r3" path="res://assets/music/14470LS.wav" id="7_0xqkn"]
 [ext_resource type="PackedScene" uid="uid://8tr7ww2dfvhn" path="res://scenes/ui/game_ui/game_ui.tscn" id="8_desc7"]
 
-[node name="Game" type="Node2D" node_paths=PackedStringArray("player", "gameUI", "enemies", "anomalyManager", "gameSpace")]
+[node name="Game" type="Node2D" node_paths=PackedStringArray("player", "gameUI", "enemies", "anomalyManager", "gameSpace", "music")]
 script = ExtResource("1_lxapy")
 player = NodePath("GameSpace/Player")
 gameUI = NodePath("GameUI")
 enemies = NodePath("GameSpace/Enemies")
 anomalyManager = NodePath("GameSpace/AnomalyManager")
 gameSpace = NodePath("GameSpace")
+music = NodePath("Music")
 
 [node name="GameSpace" parent="." instance=ExtResource("2_lfrn8")]
 
 [node name="Music" type="AudioStreamPlayer" parent="." node_paths=PackedStringArray("timer")]
-stream = ExtResource("7_0xqkn")
+stream = ExtResource("3_lfrn8")
 volume_db = -6.0
 autoplay = true
 bus = &"Music"
@@ -30,7 +31,6 @@ one_shot = true
 [node name="GameUI" parent="." instance=ExtResource("8_desc7")]
 
 [connection signal="finished" from="Music" to="Music" method="_on_finished"]
-[connection signal="timeout" from="Music/Timer" to="Music" method="_on_timer_timeout"]
 [connection signal="againPressed" from="GameUI" to="." method="_on_game_ui_again_pressed"]
 [connection signal="particlesComplete" from="GameUI" to="." method="_on_game_ui_particles_complete"]
 [connection signal="quitPressed" from="GameUI" to="." method="_on_game_ui_quit_pressed"]
