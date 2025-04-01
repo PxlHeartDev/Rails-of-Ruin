@@ -158,6 +158,7 @@ func spawnEnemy(enemy: Enemy) -> void:
 	if enemy == null:
 		return
 	enemy.died.connect(enemyDied)
+	enemy.died_sound.connect(gameSpace.enemyDied)
 	enemyCount += 1
 	enemy.player = player
 	enemy.position.x = randf_range(anomalyManager.validSpawnMin.x, anomalyManager.validSpawnMax.x)

@@ -1,7 +1,9 @@
-[gd_scene load_steps=11 format=4 uid="uid://bppkk7lgjo0ps"]
+[gd_scene load_steps=13 format=4 uid="uid://bppkk7lgjo0ps"]
 
+[ext_resource type="Script" uid="uid://d3dkv7udq855m" path="res://scenes/game/game_space.gd" id="1_3trum"]
 [ext_resource type="PackedScene" uid="uid://bj6r5tpn7kxqq" path="res://scenes/game/player/player.tscn" id="1_371jw"]
 [ext_resource type="Texture2D" uid="uid://c8a03ml3qsr6l" path="res://assets/sprites/environment/rail.png" id="2_b2iw8"]
+[ext_resource type="PackedScene" uid="uid://dx1d5jhtmtn8k" path="res://scenes/game/enemies/audio_manager.tscn" id="3_qongr"]
 [ext_resource type="Texture2D" uid="uid://bjgwhg1fg7t3o" path="res://assets/tilesets/world/grass.png" id="3_tkiw3"]
 [ext_resource type="PackedScene" uid="uid://cpuwua8t6v2dk" path="res://scenes/game/train_car.tscn" id="4_3trum"]
 [ext_resource type="PackedScene" uid="uid://co0ag6polcqg3" path="res://scenes/game/anomaly_manager.tscn" id="5_qongr"]
@@ -27,13 +29,17 @@ source_geometry_mode = 2
 source_geometry_group_name = &"nav_ob"
 agent_radius = 31.0
 
-[node name="GameSpace" type="Node2D"]
+[node name="GameSpace" type="Node2D" node_paths=PackedStringArray("audioManager")]
+script = ExtResource("1_3trum")
+audioManager = NodePath("AudioManager")
 
 [node name="Player" parent="." instance=ExtResource("1_371jw")]
 position = Vector2(0, -32)
 
 [node name="Enemies" type="Node2D" parent="."]
 z_index = 2
+
+[node name="AudioManager" parent="." instance=ExtResource("3_qongr")]
 
 [node name="BG" type="ParallaxBackground" parent="."]
 

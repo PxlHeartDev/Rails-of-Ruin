@@ -2,6 +2,7 @@ class_name Enemy
 extends CharacterBody2D
 
 signal died(fuelVal)
+signal died_sound(pos)
 
 @export_group("Stats")
 @export var speed: 			float = 50.0
@@ -35,6 +36,7 @@ func die() -> void:
 	sprite.hide()
 	damageFlash()
 	died.emit(fuelValue)
+	died_sound.emit(position)
 	stateMachine.die()
 	attackComponent.disable()
 	hitBoxComponent.disable()
