@@ -110,6 +110,8 @@ func playerDied() -> void:
 	gameUI.gameOver()
 	died.emit()
 	music.died()
+	
+	Engine.time_scale = 1.0
 
 func setupPlayer() -> void:
 	player.game = self
@@ -118,8 +120,12 @@ func setupPlayer() -> void:
 	player.healthComponent.healthChanged.connect(gameUI.healthBar.changed)
 	player.healthComponent.maxHealthChanged.connect(gameUI.healthBar.maxChanged)
 	player.died.connect(playerDied)
+	
+	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 
 func resetValues() -> void:
+	Engine.time_scale = 1.0
+	
 	anomalyCount = 0
 	distance = 0.0
 	fuel = 0.0
@@ -222,6 +228,7 @@ func loadGame() -> void:
 
 func _on_game_ui_particles_complete() -> void:
 	gameSpace.queue_free()
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 func _on_game_ui_again_pressed() -> void:
 	resetValues()

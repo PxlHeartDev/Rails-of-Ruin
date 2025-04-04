@@ -4,10 +4,14 @@
 [ext_resource type="Texture2D" uid="uid://sxywjylvskiw" path="res://assets/sprites/weapons/pistol.png" id="2_5xi5u"]
 [ext_resource type="PackedScene" uid="uid://dyo27ei5sytnt" path="res://scenes/game/weapons/bullet.tscn" id="2_aapvd"]
 
-[node name="Weapon" type="Node2D" node_paths=PackedStringArray("sprite")]
+[node name="Weapon" type="Node2D" node_paths=PackedStringArray("sprite", "cooldown")]
 script = ExtResource("1_jmhhu")
 sprite = NodePath("Sprite2D")
+cooldown = NodePath("Cooldown")
 bullet = ExtResource("2_aapvd")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_5xi5u")
+
+[node name="Cooldown" type="Timer" parent="."]
+one_shot = true

@@ -144,23 +144,25 @@ func gameOver() -> void:
 		_:
 			quipLabel.text += tr("GAME_lose.quip%s" % chosenQuip)
 	
-	toggleButtons(true)
+	toggleButtons(false)
 	anim_gameOver.play("show")
 	gameOverPanel.modulate.a = 1.0
 	await get_tree().process_frame
 	gameOverPanel.show()
 	deathParticles.emitting = true
+	await anim_gameOver.animation_finished
+	toggleButtons(true)
 
 func _on_again_pressed() -> void:
 	againPressed.emit()
-	var tween: Tween = create_tween()
+	var tween := create_tween()
 	tween.tween_property(gameOverPanel, "modulate:a", 0.0, 1.2)
 	againButton.release_focus()
 	toggleButtons(false)
 
 func _on_quit_pressed() -> void:
 	quitPressed.emit()
-	var tween: Tween = create_tween()
+	var tween := create_tween()
 	tween.tween_property(gameOverPanel, "modulate:a", 0.0, 1.2)
 	
 	main.hide()
@@ -189,7 +191,8 @@ func _on_death_particles_finished() -> void:
 	particlesComplete.emit()
 
 func _on_mouse_entered() -> void:
-	bip.play()
+	if !againButton.disabled:
+		bip.play()
 
 func _on_pressed() -> void:
 	bip2.play()

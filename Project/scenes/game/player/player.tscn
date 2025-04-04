@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://bj6r5tpn7kxqq"]
+[gd_scene load_steps=37 format=3 uid="uid://bj6r5tpn7kxqq"]
 
 [ext_resource type="Script" uid="uid://b5yoccrr3yuk4" path="res://scenes/game/player/player.gd" id="1_53xdg"]
 [ext_resource type="Texture2D" uid="uid://bnaj6if6ath1h" path="res://assets/sprites/player/idle.png" id="2_u36vw"]
@@ -12,6 +12,16 @@
 [ext_resource type="PackedScene" uid="uid://d3o31trh0j3gs" path="res://scenes/components/manager.tscn" id="8_dl8hj"]
 [ext_resource type="PackedScene" uid="uid://cid3fdyllr67t" path="res://scenes/components/health.tscn" id="9_1ht0i"]
 [ext_resource type="PackedScene" uid="uid://cfmxx0q28naxb" path="res://scenes/components/hitBox.tscn" id="10_1yuy7"]
+[ext_resource type="AudioStream" uid="uid://b4mw48e6qncet" path="res://assets/sfx/player/hurt.wav" id="13_ixkur"]
+[ext_resource type="Script" uid="uid://cj5r3nop5vdl8" path="res://scenes/game/player/sounds.gd" id="13_jvpd5"]
+[ext_resource type="AudioStream" uid="uid://df6146k8go1l4" path="res://assets/sfx/player/shoot.wav" id="14_jvpd5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i0dnl"]
+bg_color = Color(0.239216, 0.239216, 0.239216, 0.427451)
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sxkrj"]
+bg_color = Color(1, 1, 1, 1)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3g7mv"]
 radius = 12.0
@@ -179,12 +189,29 @@ hitBoxComponent = NodePath("ComponentManager/HitBox_Component")
 position = Vector2(0, -22)
 limit_bottom = 130
 
-[node name="Target" type="Node2D" parent="Camera2D"]
+[node name="Target" type="Node2D" parent="Camera2D" node_paths=PackedStringArray("prog")]
 z_index = 1
 script = ExtResource("4_wgsib")
+prog = NodePath("ProgressBar")
 
 [node name="Sprite2D" type="Sprite2D" parent="Camera2D/Target"]
 texture = ExtResource("4_uheth")
+
+[node name="ProgressBar" type="ProgressBar" parent="Camera2D/Target"]
+custom_minimum_size = Vector2(16, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -8.0
+offset_top = 9.0
+offset_right = 8.0
+offset_bottom = 11.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_i0dnl")
+theme_override_styles/fill = SubResource("StyleBoxFlat_sxkrj")
+max_value = 1.0
+show_percentage = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -22)
@@ -243,7 +270,28 @@ one_shot = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
+[node name="Sounds" type="Node2D" parent="." node_paths=PackedStringArray("hurt", "shoot")]
+script = ExtResource("13_jvpd5")
+hurt = NodePath("Hurt")
+shoot = NodePath("Shoot")
+
+[node name="Hurt" type="AudioStreamPlayer2D" parent="Sounds"]
+position = Vector2(0, -22)
+stream = ExtResource("13_ixkur")
+volume_db = -3.0
+max_polyphony = 4
+bus = &"Game SFX"
+
+[node name="Shoot" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("14_jvpd5")
+volume_db = -5.0
+max_polyphony = 4
+bus = &"Game SFX"
+
+[connection signal="damaged" from="." to="Sounds" method="gotHit"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_sprite_animation_finished"]
+[connection signal="cdTimeUpdated" from="Weapon" to="Camera2D/Target" method="updateCooldownReticle"]
+[connection signal="shot" from="Weapon" to="Sounds" method="shot"]
 [connection signal="body_entered" from="LeftWall" to="." method="_on_left_wall_body_entered"]
 [connection signal="body_exited" from="LeftWall" to="." method="_on_left_wall_body_exited"]
 [connection signal="body_entered" from="RightWall" to="." method="_on_right_wall_body_entered"]

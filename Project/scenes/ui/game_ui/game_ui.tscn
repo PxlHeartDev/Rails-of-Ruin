@@ -165,7 +165,7 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id="Animation_vjxrc"]
 resource_name = "show"
-length = 5.0
+length = 3.5
 tracks/0/type = "bezier"
 tracks/0/imported = false
 tracks/0/enabled = true

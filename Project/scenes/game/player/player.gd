@@ -1,6 +1,7 @@
 class_name Player
 extends CharacterBody2D
 
+signal damaged(amount: float)
 signal died
 
 enum State {
@@ -241,8 +242,8 @@ func damage(attack: Attack_Obj) -> void:
 	if attack.damage > 0:
 		iFrames.start()
 		hitBoxComponent.disable()
-		# TODO: Take damage anim
-		pass
+		
+		damaged.emit(attack.damage)
 
 func _on_i_frames_timeout() -> void:
 	hitBoxComponent.enable()
@@ -255,8 +256,12 @@ func die() -> void:
 	state = State.DIE
 	if healthComponent.health > 0:
 		healthComponent.health = 0
-	var camTween: Tween = create_tween()
+	var camTween := create_tween()
 	camTween.tween_property(cam, "zoom", Vector2(3.0, 3.0), 2.0).set_trans(Tween.TRANS_SINE)
+	
+	var speedTween := create_tween()
+	speedTween.tween_property(Engine, "time_scale", 0.4, 1.5)
+	
 	target.set_deferred("process_mode", PROCESS_MODE_DISABLED)
 
 var onRails: bool = false

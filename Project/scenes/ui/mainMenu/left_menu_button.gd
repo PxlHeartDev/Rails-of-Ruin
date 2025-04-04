@@ -19,7 +19,7 @@ func _on_mouse_exited() -> void:
 		doTween(0)
 
 func doTween(xPos: int, time: float = 0.2) -> Tween:
-	var tween: Tween = create_tween()
+	var tween := create_tween()
 	tween.tween_property(self, "position:x", xPos, time)
 	curTween = tween
 	return tween
