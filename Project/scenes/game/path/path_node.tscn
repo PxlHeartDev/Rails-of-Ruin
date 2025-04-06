@@ -1,0 +1,49 @@
+[gd_scene load_steps=7 format=3 uid="uid://br04ltg6qubmq"]
+
+[ext_resource type="Script" uid="uid://dvxt7t5nyiu7y" path="res://scenes/game/path/path_node.gd" id="1_fux2d"]
+[ext_resource type="Texture2D" uid="uid://dtm3s2287og7o" path="res://assets/sprites/pathNodes/start.png" id="2_1m1ad"]
+[ext_resource type="Shader" uid="uid://yohj15cq606l" path="res://assets/shaders/crack.gdshader" id="3_n4rhg"]
+[ext_resource type="Texture2D" uid="uid://3nagn6c3gdp7" path="res://assets/sprites/decals/crack1.png" id="4_h4si1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1m1ad"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tdnus"]
+shader = ExtResource("3_n4rhg")
+shader_parameter/refractionOffset = Vector2(16, -16)
+shader_parameter/reflectionOffset = Vector2(1, -1)
+shader_parameter/reflectionColour = Color(1, 0.760784, 1, 0.8)
+
+[node name="PathNode" type="Node2D" node_paths=PackedStringArray("button", "sprite", "lines", "crack")]
+script = ExtResource("1_fux2d")
+button = NodePath("Button")
+sprite = NodePath("Sprite2D")
+lines = NodePath("Lines")
+crack = NodePath("Crack")
+
+[node name="Button" type="Button" parent="."]
+custom_minimum_size = Vector2(32, 32)
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+theme_override_font_sizes/font_size = 10
+theme_override_styles/focus = SubResource("StyleBoxEmpty_1m1ad")
+flat = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 1
+texture = ExtResource("2_1m1ad")
+
+[node name="Lines" type="Node2D" parent="."]
+
+[node name="Crack" type="Sprite2D" parent="."]
+visible = false
+z_index = 10
+material = SubResource("ShaderMaterial_tdnus")
+texture = ExtResource("4_h4si1")
+
+[connection signal="focus_entered" from="Button" to="." method="_hovered"]
+[connection signal="focus_exited" from="Button" to="." method="_unhovered"]
+[connection signal="mouse_entered" from="Button" to="." method="_hovered"]
+[connection signal="mouse_exited" from="Button" to="." method="_unhovered"]
+[connection signal="pressed" from="Button" to="." method="_clicked"]

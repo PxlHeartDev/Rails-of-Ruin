@@ -1,0 +1,235 @@
+[gd_scene load_steps=14 format=3 uid="uid://b7sohbdkxwa66"]
+
+[ext_resource type="Script" uid="uid://cotayv7qevhkc" path="res://scenes/game/path/path_selection.gd" id="1_y5ytx"]
+[ext_resource type="PackedScene" uid="uid://br04ltg6qubmq" path="res://scenes/game/path/path_node.tscn" id="2_c5nmv"]
+[ext_resource type="Texture2D" uid="uid://lul1sohl5ewj" path="res://assets/sprites/pathNodes/clickEffect.png" id="3_akxqn"]
+[ext_resource type="AudioStream" uid="uid://8lrwwdixalsb" path="res://assets/sfx/ui/pathSelection/boom.wav" id="4_dknhe"]
+
+[sub_resource type="Animation" id="Animation_dknhe"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Stuff/ClickEffect:scale:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1e-05, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Stuff/ClickEffect:scale:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1e-05, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Stuff/ClickEffect:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Stuff/ClickEffect:modulate:a")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_akxqn"]
+resource_name = "click"
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Stuff/ClickEffect:scale:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(1e-05, -0.25, 0, 0.2, 15.0033, 5, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Stuff/ClickEffect:scale:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(1e-05, -0.25, 0, 0.2, 15.0033, 5, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Stuff/ClickEffect:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 2, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Stuff/ClickEffect:modulate:a")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.933, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_q0lga"]
+_data = {
+&"RESET": SubResource("Animation_dknhe"),
+&"click": SubResource("Animation_akxqn")
+}
+
+[sub_resource type="Animation" id="Animation_q0lga"]
+resource_name = "show"
+length = 1.06667
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Fade:modulate:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+
+[sub_resource type="Animation" id="Animation_agv51"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Fade:modulate:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_s5ay6"]
+resource_name = "hide"
+length = 1.06667
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Fade:modulate:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_s5ay6"]
+_data = {
+&"RESET": SubResource("Animation_agv51"),
+&"hide": SubResource("Animation_s5ay6"),
+&"show": SubResource("Animation_q0lga")
+}
+
+[sub_resource type="Gradient" id="Gradient_1m1ad"]
+offsets = PackedFloat32Array(0.066474, 0.638728)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_akxqn"]
+gradient = SubResource("Gradient_1m1ad")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0, 0)
+
+[node name="PathSelection" type="CanvasLayer" node_paths=PackedStringArray("stuff", "clickEffect", "nodes", "startNode", "light", "fade", "audio", "anim_click", "anim_show")]
+layer = 3
+script = ExtResource("1_y5ytx")
+stuff = NodePath("Stuff")
+clickEffect = NodePath("Stuff/ClickEffect")
+nodes = NodePath("Stuff/Nodes")
+startNode = NodePath("Stuff/Nodes/PathNode")
+light = NodePath("Stuff/PointLight2D")
+fade = NodePath("Fade")
+audio = NodePath("AudioStreamPlayer")
+anim_click = NodePath("ClickAnim")
+anim_show = NodePath("ShowAnim")
+
+[node name="Fade" type="ColorRect" parent="."]
+modulate = Color(1, 1, 1, 0)
+z_index = 16
+offset_left = -480.0
+offset_top = -270.0
+offset_right = 1440.0
+offset_bottom = 810.0
+color = Color(0, 0, 0, 1)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_dknhe")
+volume_db = -3.0
+
+[node name="ClickAnim" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_q0lga")
+}
+
+[node name="ShowAnim" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_s5ay6")
+}
+
+[node name="Stuff" type="Node2D" parent="."]
+visible = false
+
+[node name="BG" type="ColorRect" parent="Stuff"]
+z_index = -10
+custom_minimum_size = Vector2(1920, 1080)
+offset_left = -480.0
+offset_top = -270.0
+offset_right = 1440.0
+offset_bottom = 810.0
+color = Color(0.167451, 0.167451, 0.167451, 1)
+
+[node name="ClickEffect" type="Sprite2D" parent="Stuff"]
+modulate = Color(0.913725, 0.682353, 0.894118, 1)
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("3_akxqn")
+
+[node name="Nodes" type="Node2D" parent="Stuff"]
+
+[node name="PathNode" parent="Stuff/Nodes" instance=ExtResource("2_c5nmv")]
+position = Vector2(64, 270)
+
+[node name="PointLight2D" type="PointLight2D" parent="Stuff"]
+color = Color(0.913725, 0.682353, 0.894118, 1)
+energy = 0.0
+range_z_max = -2
+range_layer_min = 3
+range_layer_max = 3
+texture = SubResource("GradientTexture2D_akxqn")
+
+[connection signal="clicked" from="Stuff/Nodes/PathNode" to="." method="nodeClicked"]

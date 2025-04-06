@@ -3,7 +3,7 @@
 [ext_resource type="Theme" uid="uid://dwimkpe573wse" path="res://assets/themes/menu.tres" id="1_jkqv4"]
 [ext_resource type="Script" uid="uid://bkq5hlb5wpwgv" path="res://scenes/ui/mainMenu/game_selection.gd" id="2_y52au"]
 [ext_resource type="PackedScene" uid="uid://baajq84gj2rpv" path="res://scenes/ui/mainMenu/leftMenuButton.tscn" id="3_e2xxp"]
-[ext_resource type="AudioStream" uid="uid://bih47sqls24lg" path="res://assets/sfx/bip.wav" id="4_nwjh4"]
+[ext_resource type="AudioStream" uid="uid://bih47sqls24lg" path="res://assets/sfx/ui/bip.wav" id="4_nwjh4"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xppvd"]
 content_margin_left = 74.0

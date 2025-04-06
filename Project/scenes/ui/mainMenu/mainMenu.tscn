@@ -3,9 +3,9 @@
 [ext_resource type="Script" uid="uid://bscwv3tbi4d65" path="res://scenes/ui/mainMenu/mainMenu.gd" id="1_a7jkm"]
 [ext_resource type="Theme" uid="uid://dwimkpe573wse" path="res://assets/themes/menu.tres" id="1_j2jlu"]
 [ext_resource type="Texture2D" uid="uid://chpbdqlig4aax" path="res://assets/images/menu/title.png" id="2_djqdx"]
-[ext_resource type="AudioStream" uid="uid://bih47sqls24lg" path="res://assets/sfx/bip.wav" id="5_6ipnm"]
+[ext_resource type="AudioStream" uid="uid://bih47sqls24lg" path="res://assets/sfx/ui/bip.wav" id="5_6ipnm"]
 [ext_resource type="PackedScene" uid="uid://baajq84gj2rpv" path="res://scenes/ui/mainMenu/leftMenuButton.tscn" id="5_i2wgw"]
-[ext_resource type="AudioStream" uid="uid://dlr22vboknoka" path="res://assets/sfx/bip2.wav" id="6_5qh5h"]
+[ext_resource type="AudioStream" uid="uid://dlr22vboknoka" path="res://assets/sfx/ui/bip2.wav" id="6_5qh5h"]
 [ext_resource type="AudioStream" uid="uid://dm3eqs4bkokin" path="res://assets/music/MainMenu.wav" id="7_q0q0r"]
 
 [sub_resource type="Animation" id="Animation_i1ijx"]

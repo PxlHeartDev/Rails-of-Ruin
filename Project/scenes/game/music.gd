@@ -9,6 +9,7 @@ var musicList: Dictionary[String, Dictionary] = {
 	"death": {"file": "Death.wav", "volume": 0.0},
 	"plains": {"file": "Plains.wav", "volume": -10.0},
 	"plains_boss": {"file": "Plains_Boss.wav", "volume": -8.0},
+	"pipe": {"file": "BattlePipe.wav", "volume": -12.0}
 }
 
 func _ready() -> void:
@@ -25,7 +26,7 @@ func playSong(name: String) -> void:
 	play()
 
 var volTween: Tween
-func fadeVol(vol: float, time: float = 0.5) -> void:
+func fadeVol(vol: float, time: float = 0.0) -> void:
 	if volTween and volTween.is_running():
 		volTween.stop()
 	if time:
@@ -35,7 +36,7 @@ func fadeVol(vol: float, time: float = 0.5) -> void:
 		volume_db = vol
 
 var pitchTween: Tween
-func fadePitch(pitch: float, time: float = 0.5) -> void:
+func fadePitch(pitch: float, time: float = 0.0) -> void:
 	if pitchTween and pitchTween.is_running():
 		pitchTween.stop()
 	if time:
@@ -45,7 +46,7 @@ func fadePitch(pitch: float, time: float = 0.5) -> void:
 		pitch_scale = pitch
 
 var filterTween: Tween
-func lowPassFilter(freq: float, time: float = 0.5) -> void:
+func lowPassFilter(freq: float, time: float = 0.0) -> void:
 	var eff := AudioServer.get_bus_effect(AudioServer.get_bus_index("Music"), 0) as AudioEffectLowPassFilter
 	if filterTween and filterTween.is_running():
 		filterTween.stop()

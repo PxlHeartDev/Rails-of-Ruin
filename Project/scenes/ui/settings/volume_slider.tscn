@@ -2,7 +2,7 @@
 
 [ext_resource type="Theme" uid="uid://dwimkpe573wse" path="res://assets/themes/menu.tres" id="1_u64dc"]
 [ext_resource type="Script" uid="uid://o8ye7h4xcqb1" path="res://scenes/ui/settings/volume_slider.gd" id="2_jygwm"]
-[ext_resource type="AudioStream" uid="uid://dlr22vboknoka" path="res://assets/sfx/bip2.wav" id="3_we1tx"]
+[ext_resource type="AudioStream" uid="uid://dlr22vboknoka" path="res://assets/sfx/ui/bip2.wav" id="3_we1tx"]
 
 [node name="VolumeSlider" type="VBoxContainer" node_paths=PackedStringArray("label", "slider", "feedback")]
 offset_right = 40.0

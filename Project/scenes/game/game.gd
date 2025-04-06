@@ -20,6 +20,7 @@ signal fuelUpdated(newFuel: float)
 @export var enemies: Node2D
 @export var anomalyManager: AnomalyManager
 @export var gameSpace: Node2D
+@export var pathSelection: PathSelection
 @export var music: AudioStreamPlayer
 
 @export_group("Details")
@@ -174,6 +175,9 @@ func spawnEnemy(enemy: Enemy) -> void:
 func reAddGameSpace() -> void:
 	gameSpace = load("res://scenes/game/game_space.tscn").instantiate()
 	add_child(gameSpace)
+
+func showPathSelection() -> void:
+	pathSelection.showStuff()
 
 func saveGame() -> void:
 	var saveFile = FileAccess.open("user://save%s.save" % saveNum, FileAccess.WRITE)

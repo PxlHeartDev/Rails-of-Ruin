@@ -13,8 +13,8 @@
 [ext_resource type="Texture2D" uid="uid://ujejcrpjiklk" path="res://assets/sprites/ui/panel/fuelGauge/fill.png" id="7_50fd7"]
 [ext_resource type="Shader" uid="uid://bhbqnyue7fy5q" path="res://assets/shaders/anomaly_pass.gdshader" id="12_80ngf"]
 [ext_resource type="Texture2D" uid="uid://ya1hq31uhfj1" path="res://assets/images/noise/anomaly_pass.tres" id="13_mudp5"]
-[ext_resource type="AudioStream" uid="uid://bih47sqls24lg" path="res://assets/sfx/bip.wav" id="14_8jg32"]
-[ext_resource type="AudioStream" uid="uid://dlr22vboknoka" path="res://assets/sfx/bip2.wav" id="15_3s8aq"]
+[ext_resource type="AudioStream" uid="uid://bih47sqls24lg" path="res://assets/sfx/ui/bip.wav" id="14_8jg32"]
+[ext_resource type="AudioStream" uid="uid://dlr22vboknoka" path="res://assets/sfx/ui/bip2.wav" id="15_3s8aq"]
 
 [sub_resource type="Animation" id="Animation_dpj12"]
 length = 0.001
@@ -557,6 +557,6 @@ bus = &"Menu SFX"
 [connection signal="pressed" from="GameOver/MarginContainer/VBoxContainer/Again" to="." method="_on_again_pressed"]
 [connection signal="pressed" from="GameOver/MarginContainer/VBoxContainer/Again" to="." method="_on_pressed"]
 [connection signal="mouse_entered" from="GameOver/MarginContainer/VBoxContainer/Quit" to="." method="_on_mouse_entered"]
-[connection signal="pressed" from="GameOver/MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
 [connection signal="pressed" from="GameOver/MarginContainer/VBoxContainer/Quit" to="." method="_on_pressed"]
+[connection signal="pressed" from="GameOver/MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
 [connection signal="finished" from="GameOver/DeathParticles" to="." method="_on_death_particles_finished"]
