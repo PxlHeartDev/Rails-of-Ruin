@@ -17,11 +17,17 @@ const DIMMED = Color(0.342, 0.342, 0.342) #575757
 
 var nodeLayer: int = 0
 
+var anomaly: Anomaly
+
 var disabled: bool = false
 var dimmed: bool = false
 var selected: bool = false
 
 var connections: Dictionary[PathNode, Line2D]
+
+# This code was written a while ago when I was really tired
+# It's horribly inefficient a mess of spaghetti
+# I'll have to redo it at some point, especially the code for colouring
 
 func connectTo(node: PathNode) -> void:
 	connections.merge({node: drawLine(null, node.position)})
@@ -29,6 +35,10 @@ func connectTo(node: PathNode) -> void:
 func updateConnections() -> void:
 	for i in connections.keys():
 		drawLine(connections[i], i.position)
+
+func attachAnomaly(anom: Anomaly) -> void:
+	anomaly = anom
+	sprite.texture = anom.getImg()
 
 func updateLineColours() -> void:
 	if disabled:

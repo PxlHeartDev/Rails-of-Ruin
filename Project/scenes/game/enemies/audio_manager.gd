@@ -60,7 +60,7 @@ class Sound:
 	func _init(
 		_soundFile: String,
 		_channels: int = 4,
-	):
+	) -> void:
 		soundFile = load(_soundFile)
 		channels = _channels
 		players.resize(channels)

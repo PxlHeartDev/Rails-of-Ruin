@@ -33,7 +33,6 @@ one_shot = true
 [node name="GameUI" parent="." instance=ExtResource("8_desc7")]
 
 [node name="PathSelection" parent="." instance=ExtResource("6_5i0tg")]
-visible = false
 
 [connection signal="finished" from="Music" to="Music" method="_on_finished"]
 [connection signal="againPressed" from="GameUI" to="." method="_on_game_ui_again_pressed"]

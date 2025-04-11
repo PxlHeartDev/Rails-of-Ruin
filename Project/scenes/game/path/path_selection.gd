@@ -1,6 +1,8 @@
 class_name PathSelection
 extends CanvasLayer
 
+signal hided
+
 @export_group("Nodes")
 @export var stuff: Node2D
 @export var clickEffect: Sprite2D
@@ -14,7 +16,9 @@ extends CanvasLayer
 @export var anim_click: AnimationPlayer
 @export var anim_show: AnimationPlayer
 
-# Layer: PathNode list
+@onready var game: Game = get_parent()
+
+# int LayerNumber: Array of PathNode
 var pathNodes: Dictionary[int, Array] = {}
 
 var pathNode: PackedScene = preload("res://scenes/game/path/path_node.tscn")
@@ -24,8 +28,6 @@ var lastSelectedNode: PathNode
 
 func _ready() -> void:
 	startNode.clickedVis()
-	reset()
-	showStuff()
 
 func showStuff() -> void:
 	anim_show.play("hide")
@@ -50,6 +52,16 @@ func showStuff() -> void:
 	stuff.show()
 	anim_show.play("show")
 
+func forceUpdateDisabledNodes() -> void:
+	var p = pathNodes.keys()
+	p.reverse()
+	for i in p:
+		for j in pathNodes[i]:
+			if i > currentNodeLayer:
+				j.toggle(false)
+			elif i == currentNodeLayer:
+				j.toggle(true)
+
 func reset() -> void:
 	currentNodeLayer = 1
 	for i in pathNodes.keys():
@@ -59,15 +71,18 @@ func reset() -> void:
 			j.queue_free()
 		pathNodes[i] = []
 	startNode.connections = {}
+	for l in startNode.lines.get_children():
+		l.queue_free()
 	pathNodes.get_or_add(0, [startNode])
 	lastSelectedNode = startNode
 	generatePathNodes()
+	forceUpdateDisabledNodes()
 	for i in pathNodes.values():
 		for j in i:
 			j.updateConnections()
 
 func generatePathNodes() -> void:
-	for i in 20:
+	for i in range(0, 20):
 		generateNextLayer(i)
 	for i in pathNodes.keys():
 		yOffsetNodesInLayer(i)
@@ -96,8 +111,7 @@ func generateNextLayer(curLayer: int) -> Array[PathNode]:
 		for j in newNodes:
 			i.connectTo(j)
 	
-	return []
-	
+	return newNodes
 
 func createNode(nodeLayer: int) -> PathNode:
 	var newNode
@@ -107,6 +121,7 @@ func createNode(nodeLayer: int) -> PathNode:
 	newNode.clicked.connect(nodeClicked)
 	newNode.hovered.connect(nodeHovered)
 	newNode.unhovered.connect(nodeUnhovered)
+	newNode.attachAnomaly(game.anomalyManager.chooseAnomaly())
 	pathNodes.get_or_add(nodeLayer, []).append(newNode)
 	nodes.add_child(newNode)
 	
@@ -152,8 +167,7 @@ func nodeClicked(node: PathNode) -> void:
 	lastSelectedNode = node
 	stuff.hide()
 	anim_show.play("show")
-	await get_tree().create_timer(1.0).timeout
-	showStuff()
+	hided.emit()
 
 var lightTween: Tween
 func tweenLight(val: float) -> void:

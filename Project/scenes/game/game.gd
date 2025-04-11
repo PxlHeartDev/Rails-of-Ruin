@@ -1,3 +1,4 @@
+class_name Game
 extends Node2D
 
 ## Sequence signals
@@ -90,7 +91,7 @@ func _ready() -> void:
 	enemyKilled.connect(gameUI.enemyKilled)
 	fuelUpdated.connect(gameUI.fuelUpdated)
 	
-	gameUI.completeLabelDone.connect(anomalyManager.timer.start)
+	gameUI.completeLabelDone.connect(showPathSelection)
 	
 	died.connect(gameUI.died)
 	
@@ -98,19 +99,24 @@ func _ready() -> void:
 	anomalyProcessed.connect(gameUI.anomalyProcessingComplete.emit)
 	
 	## Anomaly manager signals
-	anomalyManager.spawnEnemy.connect(spawnEnemy)
-	anomalyManager.timer.timeout.connect(anomalyIncoming.emit)
-	anomalySurvived.connect(anomalyManager.anomalySurvived)
+	setupGameSpaceSignals()
+	
+	## Path selection signals
+	pathSelection.hided.connect(nextAnomaly)
 	
 	resetValues()
 
 func _process(delta: float) -> void:
 	distance += (speed * delta)/1000.0
 
+func playerStartDieAnim() -> void:
+	music.died()
+	music.lowPassFilter(20500.0, 0.2)
+	pathSelection.hide()
+
 func playerDied() -> void:
 	gameUI.gameOver()
 	died.emit()
-	music.died()
 	
 	Engine.time_scale = 1.0
 
@@ -121,12 +127,21 @@ func setupPlayer() -> void:
 	player.healthComponent.healthChanged.connect(gameUI.healthBar.changed)
 	player.healthComponent.maxHealthChanged.connect(gameUI.healthBar.maxChanged)
 	player.died.connect(playerDied)
+	player.startDieAnim.connect(playerStartDieAnim)
 	
 	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
+
+func setupGameSpaceSignals() -> void:
+	anomalyManager.spawnEnemy.connect(spawnEnemy)
+	#anomalySurvived.connect(anomalyManager.anomalySurvived)
+	
+	anomalyManager.returnToPathSelection.connect(showPathSelection)
+	anomalyManager.healPlayer.connect(player.fullHeal)
 
 func resetValues() -> void:
 	Engine.time_scale = 1.0
 	
+	gameUI.anomaliesComplete = 0
 	anomalyCount = 0
 	distance = 0.0
 	fuel = 0.0
@@ -137,24 +152,41 @@ func resetValues() -> void:
 	wavesLeft = 0
 	level = 0
 	wave = -1
-
-func loadLevel(levelScene: PackedScene) -> void:
-	if !levelScene or !levelScene.can_instantiate():
-		print("Level %s not found or couldn't load" % level)
-		level -= 1
-		return
 	
-	gameUI.levelChanged(level)
+	pathSelection.reset()
+	await get_tree().create_timer(1.0).timeout
+	pathSelection.show()
+	showPathSelection()
+
+func nextAnomaly() -> void:
+	player.disableInput = false
+	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
+	music.lowPassFilter(20500.0, 1.5)
+	
+	if pathSelection.lastSelectedNode.anomaly.requireAnims:
+		anomalyIncoming.emit()
+	else:
+		pathSelection.lastSelectedNode.anomaly.trigger()
+
+#func loadLevel(levelScene: PackedScene) -> void:
+	#if !levelScene or !levelScene.can_instantiate():
+		#print("Level %s not found or couldn't load" % level)
+		#level -= 1
+		#return
+	#
+	#gameUI.levelChanged(level)
 
 func processAnomaly() -> void:
-	anomalyManager.chooseAnomaly().call()
-	anomalyManager.spawnEnemies().call()
+	pathSelection.lastSelectedNode.anomaly.trigger()
+	
+	#anomalyManager.chooseAnomaly().trigger()
+	#anomalyManager.getEnemyAnomaly().trigger()
 	anomalyProcessed.emit()
 
-func nextLevel() -> void:
-	player.nextLevel()
-	level += 1
-	loadLevel(load("res://scenes/game/levels/level_%s.tscn" % level))
+#func nextLevel() -> void:
+	#player.nextLevel()
+	#level += 1
+	#loadLevel(load("res://scenes/game/levels/level_%s.tscn" % level))
 
 func enemyDied(fuelVal: float) -> void:
 	enemyCount -= 1
@@ -174,9 +206,17 @@ func spawnEnemy(enemy: Enemy) -> void:
 
 func reAddGameSpace() -> void:
 	gameSpace = load("res://scenes/game/game_space.tscn").instantiate()
+	anomalyManager = gameSpace.anomalyManager
+	pathSelection.game = self
+	enemies = gameSpace.enemies
 	add_child(gameSpace)
 
 func showPathSelection() -> void:
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	player.disableInput = true
+	music.lowPassFilter(1000.0, 1.5)
+	gameUI.anomaliesComplete += 1
+	anomalyManager.anomalySurvived(gameUI.anomaliesComplete)
 	pathSelection.showStuff()
 
 func saveGame() -> void:
@@ -235,10 +275,11 @@ func _on_game_ui_particles_complete() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 func _on_game_ui_again_pressed() -> void:
-	resetValues()
 	reAddGameSpace()
 	player = gameSpace.get_child(0)
 	setupPlayer()
+	resetValues()
+	setupGameSpaceSignals()
 	
 	music.again()
 

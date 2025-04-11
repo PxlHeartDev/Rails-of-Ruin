@@ -2,6 +2,8 @@
 class_name Materia
 extends Node2D
 
+signal broken(pos: Vector2)
+
 enum ROTATIONMODES {
 	sin,
 	continuous,
@@ -134,5 +136,6 @@ func die() -> void:
 	breakParticles2.emitting = true
 	blocksTileMap.hide()
 	blocksTileMap.collision_enabled = false
+	broken.emit(position)
 	await breakParticles.finished
 	queue_free()

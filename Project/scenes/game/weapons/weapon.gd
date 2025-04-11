@@ -6,6 +6,7 @@ signal cdTimeUpdated(time: float, maxTime: float)
 
 @export var sprite: Sprite2D
 @export var cooldown: Timer
+@export var attackDamage: float = 1.0
 @onready var game: Node2D = get_parent().get_parent().get_parent()
 
 @export var bullet: PackedScene
@@ -26,9 +27,9 @@ func _input(event: InputEvent) -> void:
 		shot.emit()
 
 func fireBullet() -> void:
-	var b = bullet.instantiate().duplicate()
+	var b = bullet.instantiate().duplicate() as Bullet
 	b.global_position = global_position
-	b.damage = 1.0
+	b.damage = attackDamage
 	game.add_child(b)
 	b.fire(targetPos - position, false)
 

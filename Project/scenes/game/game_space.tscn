@@ -22,16 +22,19 @@ texture = ExtResource("3_tkiw3")
 sources/0 = SubResource("TileSetAtlasSource_4j704")
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_onatg"]
-vertices = PackedVector2Array(271, 31, 4289.7, 97.9688, -3595, 92.0234, -751, 31, 4278.28, -1135.13, 271, -63, -3595, -1169.86, -751, -63)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 1, 0, 5), PackedInt32Array(6, 4, 5, 7), PackedInt32Array(2, 6, 7, 3)])
+vertices = PackedVector2Array(507, 31, 4289.7, 97.9688, -3595, 92.0234, -751, 31, 4278.28, -1135.13, 507, -111, -3595, -1169.86, 353, -111, -751, -63, 262.227, -77, 353, -77, 242.219, -63)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 1, 0, 5), PackedInt32Array(6, 4, 5, 7), PackedInt32Array(3, 2, 6, 8), PackedInt32Array(8, 6, 7, 9), PackedInt32Array(7, 10, 9), PackedInt32Array(8, 9, 11)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-3626, -1201, 4309, -1166, 4321, 129, -3626, 123)])
 source_geometry_mode = 2
 source_geometry_group_name = &"nav_ob"
 agent_radius = 31.0
 
-[node name="GameSpace" type="Node2D" node_paths=PackedStringArray("audioManager")]
+[node name="GameSpace" type="Node2D" node_paths=PackedStringArray("audioManager", "anomalyManager", "enemies", "player")]
 script = ExtResource("1_3trum")
 audioManager = NodePath("AudioManager")
+anomalyManager = NodePath("AnomalyManager")
+enemies = NodePath("Enemies")
+player = NodePath("Player")
 
 [node name="Player" parent="." instance=ExtResource("1_371jw")]
 position = Vector2(0, -32)

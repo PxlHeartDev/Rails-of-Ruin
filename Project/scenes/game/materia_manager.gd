@@ -1,6 +1,8 @@
 class_name MateriaManager
 extends Node2D
 
+signal materiaBroken(pos: Vector2)
+
 var existingMateria: Dictionary[String, circle]
 @export var anomalyManager: AnomalyManager
 
@@ -35,6 +37,8 @@ func attemptSpawn(region: AnomalyManager.Region) -> Materia:
 	materia.maxPos = anomalyManager.validSpawnMax
 	materia.randomizePos()
 	materiaBounds.pos = materia.initPos
+	
+	materia.broken.connect(materiaBroken.emit)
 	
 	while !isValidSpawn(materiaBounds):
 		materia.randomizePos()

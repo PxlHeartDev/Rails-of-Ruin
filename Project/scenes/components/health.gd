@@ -25,10 +25,12 @@ func _ready() -> void:
 	healthChanged.emit(health, health)
 	maxHealthChanged.emit(maxHealth, maxHealth)
 
-
 func damage(dmg: float) -> void:
 	#var oldHealth = health
 	health -= dmg
 	if health <= 0:
 		health = 0
 		manager.die()
+
+func fullHeal() -> void:
+	health = maxHealth

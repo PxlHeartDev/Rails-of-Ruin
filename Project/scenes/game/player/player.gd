@@ -3,6 +3,7 @@ extends CharacterBody2D
 
 signal damaged(amount: float)
 signal died
+signal startDieAnim
 
 enum State {
 	IDLE,
@@ -27,6 +28,8 @@ var state := State.IDLE:
 @export var game: Node2D = get_parent()
 @export var target: Node2D
 @export var weapon: Weapon
+@export var stats: StatManager
+@export var healSound: AudioStreamPlayer2D
 
 @export_group("Timers")
 @export var iFrames: Timer
@@ -54,7 +57,15 @@ var canWallJump := false:
 			Debug.trackVal("CanWallJump", canWallJump)
 		canWallJump = val
 var justJumped := false
-var disableInput := false
+var disableInput := false:
+	set(val):
+		if val:
+			target.set_deferred("process_mode", PROCESS_MODE_DISABLED)
+			weapon.disabled = true
+		else:
+			target.set_deferred("process_mode", PROCESS_MODE_INHERIT)
+			weapon.disabled = false
+		disableInput = val
 
 func _ready() -> void:
 	target.posChanged.connect(weapon.targetChanged)
@@ -104,6 +115,8 @@ func resetCoyote() -> void:
 		coyoteFrames = COYOTE_FRAMES
 
 func getInputs() -> void:
+	if disableInput:
+		return
 	# Get movement direction
 	direction = Input.get_vector("move_left", "move_right", "move_down", "move_up")
 	# Jump
@@ -245,12 +258,18 @@ func damage(attack: Attack_Obj) -> void:
 		
 		damaged.emit(attack.damage)
 
+func fullHeal() -> void:
+	healSound.stream = load("res://assets/sfx/player/heal%s.wav" % randi_range(1, 4))
+	healSound.play()
+	healthComponent.fullHeal()
+
 func _on_i_frames_timeout() -> void:
 	hitBoxComponent.enable()
 
 func die() -> void:
 	if state == State.DIE:
 		return
+	startDieAnim.emit()
 	disableInput = true
 	weapon.disabled = true
 	state = State.DIE

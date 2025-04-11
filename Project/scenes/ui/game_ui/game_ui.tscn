@@ -351,6 +351,7 @@ size_flags_horizontal = 3
 theme_override_constants/margin_top = 69
 
 [node name="Distance" type="HBoxContainer" parent="BottomPanel/HBoxContainer/Center"]
+visible = false
 layout_mode = 2
 
 [node name="Icon" type="TextureRect" parent="BottomPanel/HBoxContainer/Center/Distance"]
@@ -557,6 +558,6 @@ bus = &"Menu SFX"
 [connection signal="pressed" from="GameOver/MarginContainer/VBoxContainer/Again" to="." method="_on_again_pressed"]
 [connection signal="pressed" from="GameOver/MarginContainer/VBoxContainer/Again" to="." method="_on_pressed"]
 [connection signal="mouse_entered" from="GameOver/MarginContainer/VBoxContainer/Quit" to="." method="_on_mouse_entered"]
-[connection signal="pressed" from="GameOver/MarginContainer/VBoxContainer/Quit" to="." method="_on_pressed"]
 [connection signal="pressed" from="GameOver/MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="GameOver/MarginContainer/VBoxContainer/Quit" to="." method="_on_pressed"]
 [connection signal="finished" from="GameOver/DeathParticles" to="." method="_on_death_particles_finished"]
