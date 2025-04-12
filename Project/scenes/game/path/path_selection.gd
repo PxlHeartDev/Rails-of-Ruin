@@ -82,7 +82,7 @@ func reset() -> void:
 			j.updateConnections()
 
 func generatePathNodes() -> void:
-	for i in range(0, 20):
+	for i in range(0, 100):
 		generateNextLayer(i)
 	for i in pathNodes.keys():
 		yOffsetNodesInLayer(i)
@@ -95,11 +95,11 @@ func generateNextLayer(curLayer: int) -> Array[PathNode]:
 	match curLayer:
 		0:
 			layerSize = 2
-		19:
+		99:
 			layerSize = 1
 		_:
-			if curLayer in range(0, 18):
-				layerSize = randi_range(1, 4)
+			#if curLayer in range(0, 99):
+			layerSize = randi_range(1, 4)
 	
 	var newNodes: Array[PathNode]
 	

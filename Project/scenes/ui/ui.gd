@@ -5,6 +5,7 @@ extends CanvasLayer
 @export var mainMenu: MarginContainer
 @export var saveSelect: MarginContainer
 @export var settings: MarginContainer
+
 @export_group("Nodes")
 @export var versionLabel: Label
 @export var bg: TextureRect
@@ -40,12 +41,12 @@ func updateBG(img: Texture2D) -> void:
 var curBG = 0
 
 func _on_bg_cycling_timeout() -> void:
-	if bgImages.size() > 1:
-		var newBGIndex = 0
-		while newBGIndex == curBG:
-			newBGIndex = randi_range(0, len(bgImages)-1)
-		curBG = newBGIndex
+	if bgImages.size() > 0:
+		curBG += 1
+		curBG = curBG % bgImages.size()
 		updateBG(bgImages[curBG])
+	else:
+		print("Err: No images found in list bgImages")
 
 func enterGame() -> void:
 	mainMenu.hide()

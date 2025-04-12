@@ -9,7 +9,8 @@ var musicList: Dictionary[String, Dictionary] = {
 	"death": {"file": "Death.wav", "volume": 0.0},
 	"plains": {"file": "Plains.wav", "volume": -10.0},
 	"plains_boss": {"file": "Plains_Boss.wav", "volume": -8.0},
-	"tundra_buss": {"file": "Tundra+Boss.wav", "volume": -12.0}
+	"tundra_boss": {"file": "Tundra_Boss.wav", "volume": -12.0},
+	"other": {"file": "OtherSong.wav", "volume": -12.0}
 }
 
 func _ready() -> void:
@@ -55,6 +56,16 @@ func lowPassFilter(freq: float = 200.0, time: float = 0.0) -> void:
 		filterTween.tween_property(eff, "cutoff_hz", freq, time)
 	else:
 		eff.cutoff_hz = freq
+
+func wave(wave: int) -> void:
+	print(wave)
+	match wave:
+		20:
+			playSong("plains_boss")
+		60:
+			playSong("tundra_boss")
+		99:
+			playSong("other")
 
 func died() -> void:
 	fadePitch(0.25, 1.6)

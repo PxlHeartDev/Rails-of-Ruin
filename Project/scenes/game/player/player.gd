@@ -62,6 +62,7 @@ var disableInput := false:
 		if val:
 			target.set_deferred("process_mode", PROCESS_MODE_DISABLED)
 			weapon.disabled = true
+			direction = Vector2.ZERO
 		else:
 			target.set_deferred("process_mode", PROCESS_MODE_INHERIT)
 			weapon.disabled = false

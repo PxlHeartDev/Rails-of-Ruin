@@ -4,6 +4,7 @@ extends Node2D
 signal returnToPathSelection
 signal spawnEnemy(enemy: Enemy)
 signal healPlayer
+signal upgradePlayer(stat: String, val: Variant)
 
 enum Region {
 	PLAINS,
@@ -23,7 +24,6 @@ func _ready() -> void:
 
 func anomalySurvived(newCount: int) -> void:
 	wave = newCount
-	print(wave)
 
 #############################
 ## Anomaly selection stuff ##
@@ -36,6 +36,7 @@ var validSpawnMax: Vector2 = Vector2(320, -180)
 var difficulty: int = 30
 
 var anomalyList: Array[Anomaly] = [
+	# name, function, sprite, weight, do animations?, max appearances
 	Anomaly.new("enemies_easy", summonEnemies.bind(1.5), "fight_e", 1.0),
 	Anomaly.new("enemies_med", summonEnemies.bind(1.7), "fight_m", 0.5),
 	Anomaly.new("enemies_hard", summonEnemies.bind(1.8), "fight_h", 0.2),
@@ -43,20 +44,25 @@ var anomalyList: Array[Anomaly] = [
 	Anomaly.new("spawn_objects", spawnMateria, "mystery", 0.5),
 ]
 
-const ENEMY_PATH = "res://scenes/game/enemies/enemies/"
+const ENEMY_PATH = "res://scenes/game/enemies/enemies/%s.tscn"
 var enemies: Array[Dictionary] = [
-	{"n": "jawn", "w": 10.0},
-	{"n": "dwain", "w": 10.0},
+	{"e": load(ENEMY_PATH % "jawn"), "w": 10.0},
+	{"e": load(ENEMY_PATH % "dwain"), "w": 8.0},
 ]
 
 var totalEnemyWeight: float
 var totalAnomalyWeight: float
 
 func calcWeights() -> void:
+	calcEnemyWeight()
+	calcAnomalyWeight()
+
+func calcEnemyWeight() -> void:
 	totalEnemyWeight = 0
 	for i in enemies:
 		totalEnemyWeight += i.w
-	
+
+func calcAnomalyWeight() -> void:
 	totalAnomalyWeight = 0
 	for i in anomalyList:
 		totalAnomalyWeight += i.weight
@@ -66,6 +72,10 @@ func chooseAnomaly() -> Anomaly:
 	var curWeight: float = 0
 	for i in anomalyList:
 		if chosen < i.weight + curWeight:
+			i.curAppearances += 1
+			if i.curAppearances == i.maxAppearances:
+				anomalyList.erase(i)
+				calcAnomalyWeight()
 			return i
 		curWeight += i.weight
 	return null
@@ -75,7 +85,7 @@ func chooseEnemy() -> Enemy:
 	var curWeight: float = 0
 	for i in enemies:
 		if chosen < i.w + curWeight:
-			return load("%s%s.tscn" % [ENEMY_PATH, i.n]).instantiate()
+			return i.e.instantiate()
 		curWeight += i.w
 	return null
 
@@ -101,6 +111,9 @@ func heal() -> void:
 	healPlayer.emit()
 	await get_tree().create_timer(1.0).timeout
 	returnToPathSelection.emit()
+
+func upgrade(stat: String, val: Variant) -> void:
+	upgradePlayer.emit(stat, val)
 
 func _on_timer_timeout() -> void:
 	pass

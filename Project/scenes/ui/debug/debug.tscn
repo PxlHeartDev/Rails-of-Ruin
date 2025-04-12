@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://da6mfogrwb6aa" path="res://scenes/ui/debug/debug.gd" id="2_7sids"]
 
 [node name="Debug" type="CanvasLayer" node_paths=PackedStringArray("debugVals", "fps", "seedLabel")]
-layer = 2
+layer = 10
 visible = false
 script = ExtResource("2_7sids")
 debugVals = NodePath("Debug/HBoxContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer")

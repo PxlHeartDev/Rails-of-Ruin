@@ -8,6 +8,7 @@ extends Node2D
 
 func _ready() -> void:
 	anomalyManager.materiaManager.materiaBroken.connect(materiaBroken)
+	anomalyManager.upgradePlayer.connect(changePlayerStat)
 
 func enemySpawned(enemy: Enemy) -> void:
 	enemy.died_sound.connect(enemyDied)

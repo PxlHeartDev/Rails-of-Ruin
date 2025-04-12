@@ -75,6 +75,9 @@ var wave: int = 0:
 		else:
 			wave = val
 			anomalySurvived.emit(val)
+			music.wave(val)
+			player.stats.setStat("fire_cd", clamp(1.0 - (val/200.0), 0.0, 1.0))
+			player.stats.setStat("maxHP", 10 + (val * 2.0))
 var wavesLeft: int = 0
 var level: int = 0
 

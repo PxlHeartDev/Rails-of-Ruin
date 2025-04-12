@@ -1,10 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://hrn80kjjh30a"]
+[gd_scene load_steps=10 format=3 uid="uid://hrn80kjjh30a"]
 
 [ext_resource type="Script" uid="uid://bu02uqhr4plgt" path="res://scenes/ui/ui.gd" id="1_s5oq1"]
-[ext_resource type="Texture2D" uid="uid://nevnuwvn7ade" path="res://assets/images/backgrounds/skull.png" id="2_w0soq"]
+[ext_resource type="Texture2D" uid="uid://dr8on1jmrlm5a" path="res://assets/images/backgrounds/train1.jpg" id="2_jcn1r"]
 [ext_resource type="Texture2D" uid="uid://c4n3qxjfxtj4p" path="res://assets/images/menu/cover.png" id="3_aebn4"]
-[ext_resource type="Texture2D" uid="uid://cvjwnwlqruy6w" path="res://assets/images/backgrounds/skull2.png" id="3_cvvfw"]
+[ext_resource type="Texture2D" uid="uid://ch51lmnt1mox8" path="res://assets/images/backgrounds/train2.jpg" id="3_uegxj"]
 [ext_resource type="Material" uid="uid://cdvxwyxsp7yhc" path="res://assets/materials/cover_wobble.tres" id="4_bh0ug"]
+[ext_resource type="Texture2D" uid="uid://dliqwd10pwxlw" path="res://assets/images/backgrounds/train3.jpg" id="4_y220t"]
+[ext_resource type="Texture2D" uid="uid://jql1oo7mgt2d" path="res://assets/images/backgrounds/train4.jpg" id="5_4kltc"]
 [ext_resource type="Theme" uid="uid://dwimkpe573wse" path="res://assets/themes/menu.tres" id="6_7b0tj"]
 
 [sub_resource type="Gradient" id="Gradient_fuotc"]
@@ -17,7 +19,7 @@ versionLabel = NodePath("Version")
 bg = NodePath("ParallaxBackground/ParallaxLayer/BG")
 fade = NodePath("Fade")
 p_layer = NodePath("ParallaxBackground/ParallaxLayer")
-bgImages = Array[Texture2D]([ExtResource("2_w0soq"), ExtResource("3_cvvfw")])
+bgImages = Array[Texture2D]([ExtResource("2_jcn1r"), ExtResource("3_uegxj"), ExtResource("4_y220t"), ExtResource("5_4kltc")])
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
@@ -36,6 +38,7 @@ offset_bottom = 540.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+texture = ExtResource("2_jcn1r")
 expand_mode = 1
 
 [node name="Fade" type="ColorRect" parent="."]
@@ -103,8 +106,19 @@ theme = ExtResource("6_7b0tj")
 text = "v0.0.1"
 horizontal_alignment = 2
 
+[node name="Image" type="Label" parent="."]
+offset_left = 834.0
+offset_top = 1.0
+offset_right = 1194.0
+offset_bottom = 99.0
+theme = ExtResource("6_7b0tj")
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 10
+text = "Generic train images
+Courtesy of Pixabay"
+
 [node name="BGCycling" type="Timer" parent="."]
-wait_time = 5.0
+wait_time = 30.0
 autostart = true
 
 [connection signal="timeout" from="BGCycling" to="." method="_on_bg_cycling_timeout"]

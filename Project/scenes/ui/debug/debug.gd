@@ -9,9 +9,7 @@ extends CanvasLayer
 @export var canJumpLabel: Label
 @export var canWallJumpLabel: Label
 
-var debugValList: Dictionary = {
-	
-}
+var debugValList: Dictionary[String, Variant] = {}
 
 var shown: bool = false
 
